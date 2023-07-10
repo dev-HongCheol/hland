@@ -18,7 +18,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - run: npm install -g yarn
       - run: yarn
-      - run: yarn build --base=/package
+      - run: yarn build --base=/hland
       - run: tar -cvf dist.tar dist
 
       - name: upload Pages Static file
