@@ -9,6 +9,7 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .use(I18NextChainedBackend)
   .init({
+    load: "languageOnly",
     backend: {
       backends: [
         HttpBackend, // if a namespace can't be loaded via normal http-backend loadPath, then the inMemoryLocalBackend will try to return the correct resources
