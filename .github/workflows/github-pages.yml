@@ -33,7 +33,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.DEPLOY_KEY }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Added environment variable for version.
         id: version
