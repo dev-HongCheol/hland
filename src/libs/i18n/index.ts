@@ -15,9 +15,7 @@ i18n
       ],
       backendOptions: [
         {
-          loadPath: `${
-            import.meta.env.VITE_FIREBASE_APIKEY
-          }/locales/{{lng}}/{{ns}}.json`,
+          loadPath: "/locales/{{lng}}/{{ns}}.json",
         },
       ],
     },
