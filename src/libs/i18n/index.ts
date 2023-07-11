@@ -13,13 +13,13 @@ i18n
       backends: [
         HttpBackend, // if a namespace can't be loaded via normal http-backend loadPath, then the inMemoryLocalBackend will try to return the correct resources
       ],
-      backendOptions: [
-        {
-          loadPath: `${
-            import.meta.env.VITE_SERVER_DOMAIN
-          }/locales/{{lng}}/{{ns}}.json`,
-        },
-      ],
+      // backendOptions: [
+      //   {
+      //     loadPath: `${
+      //       import.meta.env.VITE_SERVER_DOMAIN
+      //     }/locales/{{lng}}/{{ns}}.json`,
+      //   },
+      // ],
     },
     fallbackLng: "en",
     interpolation: {
