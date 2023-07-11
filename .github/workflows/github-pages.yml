@@ -45,7 +45,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${ GITHUB_SERVER_URL }/${ GITHUB_REPOSITORY }
+          images: ${{ gitgub.server_url }}/${{ github.repository }}
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
