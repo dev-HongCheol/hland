@@ -1,5 +1,5 @@
 name: github-page-actions
-run-name: ${{ github.actor }} is learning GitHub Actions
+run-name: GitHub Action Pages
 on:
   push:
     branches: [main]
@@ -33,7 +33,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ github.token}}
 
       - name: Added environment variable for version.
         id: version
