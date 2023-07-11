@@ -33,9 +33,9 @@ jobs:
       - name: Log in to the Container registry
         uses: docker/login-action@v2
         with:
-          registry: ${{ vars.REGISTRY }}
+          registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.ACTION_TOKEN }}
+          password: ${{ GITHUB_TOKEN }}
 
       - name: Added environment variable for version.
         id: version
@@ -47,8 +47,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ vars.REGISTRY }}/${{ github.repository }}/dev-hong
-
+          images: ${{ GITHUB_SERVER_URL }}/${{ GITHUB_REPOSITORY }}
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
