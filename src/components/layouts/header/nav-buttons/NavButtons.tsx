@@ -1,22 +1,22 @@
-import { Grid, IconButton, Link, styled } from "@mui/material";
-import { LanguageToggleButton } from "./language-toggle-button";
-import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
-import { ShoppingCartCount } from "./shopping-cart-count";
-import { useEffect, useRef, useState } from "react";
-import { ShoppingCartLayerPopup } from "./shopping-cart-layer-popup";
+import { Grid, IconButton, Link, styled } from '@mui/material';
+import { LanguageToggleButton } from './language-toggle-button';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+import { ShoppingCartCount } from './shopping-cart-count';
+import { useEffect, useRef, useState } from 'react';
+import { ShoppingCartLayerPopup } from './shopping-cart-layer-popup';
 
 type HeaderStyleProps = {
   isHeaderDense: boolean;
 };
 
 const NavLink = styled(Link, {
-  shouldForwardProp: (prop) => prop !== "isHeaderDense",
+  shouldForwardProp: (prop) => prop !== 'isHeaderDense',
 })(({ isHeaderDense }: HeaderStyleProps) => ({
-  color: `${isHeaderDense ? "#fff" : "#333"}!important`,
-  fontSize: "14px",
-  "&:hover": {
-    color: `${isHeaderDense ? "#fff" : "#123ad4"}!important`,
-    cursor: "pointer",
+  color: `${isHeaderDense ? '#fff' : '#333'}!important`,
+  fontSize: '14px',
+  '&:hover': {
+    color: `${isHeaderDense ? '#fff' : '#123ad4'}!important`,
+    cursor: 'pointer',
   },
 }));
 
@@ -36,31 +36,23 @@ const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
   useEffect(() => {
     const shoppingCartLayerPopup = ShoppingCartLayerPopupRef.current;
     if (!shoppingCartLayerPopup) return;
-    shoppingCartLayerPopup.addEventListener("mouseleave", () => {
+    shoppingCartLayerPopup.addEventListener('mouseleave', () => {
       handleHiddenShoppingCartLayerPopup();
     });
     return () => {
-      shoppingCartLayerPopup.removeEventListener(
-        "mouseleave",
-        handleHiddenShoppingCartLayerPopup
-      );
+      shoppingCartLayerPopup.removeEventListener('mouseleave', handleHiddenShoppingCartLayerPopup);
     };
   }, []);
 
   return (
-    <Grid
-      container
-      justifyContent={"end"}
-      alignItems={"center"}
-      columnSpacing={2}
-    >
+    <Grid container justifyContent={'end'} alignItems={'center'} columnSpacing={2}>
       <Grid
         item
-        xs={"auto"}
+        xs={'auto'}
         sx={{
           display: {
-            xs: "none",
-            md: "block",
+            xs: 'none',
+            md: 'block',
           },
         }}
       >
@@ -68,11 +60,11 @@ const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
       </Grid>
       <Grid
         item
-        xs={"auto"}
+        xs={'auto'}
         sx={{
           display: {
-            xs: "none",
-            md: "block",
+            xs: 'none',
+            md: 'block',
           },
         }}
       >
@@ -82,11 +74,11 @@ const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
       </Grid>
       <Grid
         item
-        xs={"auto"}
+        xs={'auto'}
         sx={{
           display: {
-            xs: "none",
-            md: "block",
+            xs: 'none',
+            md: 'block',
           },
         }}
       >
@@ -94,7 +86,7 @@ const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
           SIGN UP
         </NavLink>
       </Grid>
-      <Grid item color={`${isHeaderDense ? "#fff" : "#333"}!important`}>
+      <Grid item color={`${isHeaderDense ? '#fff' : '#333'}!important`}>
         |
       </Grid>
       <Grid item>
@@ -102,11 +94,8 @@ const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
           onMouseEnter={() => handleShopplingCartLayerToggle(true)}
           onMouseLeave={() => handleShopplingCartLayerToggle(false)}
         >
-          <Grid container alignItems={"center"}>
-            <IconButton
-              size="large"
-              sx={{ color: isHeaderDense ? "#fff" : "#333" }}
-            >
+          <Grid container alignItems={'center'}>
+            <IconButton size="large" sx={{ color: isHeaderDense ? '#fff' : '#333' }}>
               <ShoppingBagOutlinedIcon sx={{ fontSize: 30 }} />
             </IconButton>
             <ShoppingCartCount />
@@ -114,9 +103,7 @@ const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
           <ShoppingCartLayerPopup
             ref={ShoppingCartLayerPopupRef}
             isShow={isShow}
-            handleHiddenShoppingCartLayerPopup={
-              handleHiddenShoppingCartLayerPopup
-            }
+            handleHiddenShoppingCartLayerPopup={handleHiddenShoppingCartLayerPopup}
           />
         </div>
       </Grid>
