@@ -14,7 +14,7 @@ const routers = {
       description: 'find password',
 
       FIND_PWD11: {
-        path: '/find-pw11',
+        path: '/find-pw-inner',
         description: 'find password',
       },
     },
