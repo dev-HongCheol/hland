@@ -13,7 +13,7 @@ export const commonSlice = createSlice({
   name: "common",
   initialState,
   reducers: {
-    setLanguage: (state, { payload: language }: PayloadAction<"ko" | "en">) => {
+    setLanguage: (state, { payload: language }: PayloadAction<string>) => {
       state.language = language;
     },
     // incrementByAmount: (state, action: PayloadAction<number>) => {
