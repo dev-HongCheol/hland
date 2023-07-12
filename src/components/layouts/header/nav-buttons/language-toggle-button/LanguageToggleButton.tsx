@@ -1,6 +1,6 @@
 import i18n from "@libs/i18n";
 import { Box, Grid, Link, styled } from "@mui/material";
-import { useState } from "react";
+import useLanguageToggleButton from "./data/useLanguageToggleButton";
 
 type HeaderStyleProps = {
   isHeaderDense: boolean;
@@ -26,7 +26,6 @@ const LangLink = styled(Link, {
   "&:hover": {
     background: `${props.isHeaderDense ? "#fff" : "#333"} !important`,
     color: `${props.isHeaderDense ? "#333" : "#fff"} !important`,
-
     cursor: "pointer",
   },
 }));
@@ -39,22 +38,13 @@ const LangListBox = styled(Box)({
 });
 
 const LanguageToggleButton = ({ isHeaderDense }: HeaderStyleProps) => {
-  const [selectedLang] = useState("KR");
-  const langList = [
-    {
-      lable: "KO",
-      value: "ko",
-    },
-    {
-      lable: "EN",
-      value: "en",
-    },
-    {
-      lable: "CN",
-      value: "ko",
-    },
-  ];
-  const [isShowLangList, setIsShowLangList] = useState(false);
+  const {
+    selectedLang,
+    langList,
+    isShowLangList,
+    setIsShowLangList,
+    handleSetSelectedLang,
+  } = useLanguageToggleButton();
 
   return (
     <Grid container justifyContent={"end"} alignItems={"center"}>
@@ -68,17 +58,14 @@ const LanguageToggleButton = ({ isHeaderDense }: HeaderStyleProps) => {
           borderRadius: "100%",
           fontSize: "12px",
           textAlign: "center",
-          padding: "3px",
+          padding: "4px",
           marginRight: "4px",
+          fontWeight: "bold",
         }}
         onClick={() => setIsShowLangList(!isShowLangList)}
       >
-        <SelectedLangLink
-          underline="none"
-          isHeaderDense={isHeaderDense}
-          // onClick={}
-        >
-          {selectedLang}
+        <SelectedLangLink underline="none" isHeaderDense={isHeaderDense}>
+          {selectedLang.toUpperCase()}
         </SelectedLangLink>
       </Grid>
       <Grid item>
@@ -99,6 +86,7 @@ const LanguageToggleButton = ({ isHeaderDense }: HeaderStyleProps) => {
               onClick={() => {
                 i18n.changeLanguage(lang.value);
                 setIsShowLangList(!isShowLangList);
+                handleSetSelectedLang(lang.value);
               }}
             >
               {lang.lable}

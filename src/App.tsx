@@ -7,6 +7,8 @@ import { RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import AppRouter from "@libs/router/AppRouter";
 import "@libs/i18n";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 function App() {
   getFirebaseApp();
@@ -14,14 +16,16 @@ function App() {
 
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <Suspense fallback={<Spinner />}>
-          <ThemeProvider theme={muiTheme}>
-            <CssBaseline />
-            <RouterProvider router={AppRouter} />
-          </ThemeProvider>
-        </Suspense>
-      </QueryClientProvider>
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <Suspense fallback={<Spinner />}>
+            <ThemeProvider theme={muiTheme}>
+              <CssBaseline />
+              <RouterProvider router={AppRouter} />
+            </ThemeProvider>
+          </Suspense>
+        </QueryClientProvider>
+      </Provider>
     </>
   );
 }
