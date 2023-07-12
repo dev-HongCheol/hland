@@ -5,7 +5,6 @@ import Header from "../header/Header";
 const DefaultLayoutStyle = styled(Container)({
   paddingRight: "0 !important",
   paddingLeft: "0 !important",
-  minWidth: "1200px !important",
 });
 
 const DefaultLayout = ({ children }: DefaultLayoutProps) => {
