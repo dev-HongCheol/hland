@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface CommonState {
-  language: "ko" | "en";
+  language: string;
 }
 
 const initialState: CommonState = {

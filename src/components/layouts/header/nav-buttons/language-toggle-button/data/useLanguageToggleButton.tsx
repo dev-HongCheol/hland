@@ -22,7 +22,7 @@ const useLanguageToggleButton = () => {
   ];
   const [isShowLangList, setIsShowLangList] = useState(false);
 
-  type Language = "ko" | "en";
+  type Language = string;
 
   const handleSetSelectedLang = (lang: Language) => {
     dispatch(commonSlice.actions.setLanguage(lang));
