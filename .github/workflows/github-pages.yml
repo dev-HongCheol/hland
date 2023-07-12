@@ -3,6 +3,8 @@ run-name: GitHub Action Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
 jobs:
   build-and-package:
     runs-on: ubuntu-latest

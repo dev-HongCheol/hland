@@ -12,6 +12,10 @@ const Categories = () => {
       sx={{
         backgroundColor: "rgba(255,255,255,0.9)",
         borderBottom: "1px solid #e9e8e8",
+        display: {
+          xs: "none",
+          md: "flex",
+        },
       }}
     >
       {categories.map((category) => (
