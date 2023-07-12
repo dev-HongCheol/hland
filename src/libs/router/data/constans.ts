@@ -31,7 +31,7 @@ const setNestedPathProxy: ProxyHandler<RouteItem> = {
     return `${import.meta.env.VITE_SERVER_DOMAIN}${value}`;
   },
 };
-// FIXME:
+// FIXME 타입 수정 필요.
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const ROUTES = new Proxy(routers, setNestedPathProxy);
