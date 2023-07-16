@@ -1,25 +1,17 @@
-import _ from "lodash-es";
-import Categories from "./categories";
-import {
-  AppBar,
-  Box,
-  Container,
-  Toolbar,
-  Typography,
-  styled,
-} from "@mui/material";
-import useHeader from "./data/useHeader";
-import NavButtons from "./nav-buttons/NavButtons";
+import Categories from './categories';
+import { AppBar, Box, Container, Toolbar, Typography, styled } from '@mui/material';
+import useHeader from './data/useHeader';
+import NavButtons from './nav-buttons/NavButtons';
 
 const LogoTypographyStyle = styled(Typography)({
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  textDecoration: "none",
-  transitionProperty: "opacity",
-  transitionDuration: "0.1s",
-  transitionTimingFunction: "easeOut",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  textDecoration: 'none',
+  transitionProperty: 'opacity',
+  transitionDuration: '0.1s',
+  transitionTimingFunction: 'easeOut',
 });
 
 function Header() {
@@ -30,22 +22,22 @@ function Header() {
         position="fixed"
         color="transparent"
         sx={{
-          boxShadow: "none",
+          boxShadow: 'none',
           height: headerInfo.height,
-          bgcolor: headerInfo.isDense ? "black" : "white",
-          transitionProperty: "height",
-          transitionDuration: "0.4s",
+          bgcolor: headerInfo.isDense ? 'black' : 'white',
+          transitionProperty: 'height',
+          transitionDuration: '0.4s',
         }}
       >
         <Container
           maxWidth="xl"
           sx={{
-            height: "100%",
-            paddingRight: "0 !important",
-            paddingLeft: "0 !important",
+            height: '100%',
+            paddingRight: '0 !important',
+            paddingLeft: '0 !important',
           }}
         >
-          <Toolbar sx={{ height: "100%" }}>
+          <Toolbar sx={{ height: '100%' }}>
             <LogoTypographyStyle
               variant="h3"
               color="block"
