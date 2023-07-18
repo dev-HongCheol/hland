@@ -21,7 +21,7 @@ const NavLink = styled(Link, {
 }));
 
 const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
-  const [isShow, setIsShow] = useState(true);
+  const [isShow, setIsShow] = useState(false);
   const ShoppingCartLayerPopupRef = useRef<HTMLDivElement>(null);
 
   const handleShopplingCartLayerToggle = (isShow: boolean) => {
@@ -91,7 +91,9 @@ const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
       </Grid>
       <Grid item>
         <div
-          onMouseEnter={() => handleShopplingCartLayerToggle(true)}
+          onTouchStart={() => handleShopplingCartLayerToggle(true)}
+          onMouseOver={() => handleShopplingCartLayerToggle(true)}
+          onTouchEnd={() => handleShopplingCartLayerToggle(false)}
           onMouseLeave={() => handleShopplingCartLayerToggle(false)}
         >
           <Grid container alignItems={'center'}>
