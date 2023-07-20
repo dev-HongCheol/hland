@@ -572,16 +572,14 @@ const products =
     limit: 30,
   };
 
-const categories = [];
-
 const productsHandle = [
   // mainCategories
 
-  rest.get('/categories', (req, res, ctx) => {
+  rest.get('/categories', (_req, res, ctx) => {
     return res(ctx.status(200), ctx.json(products));
   }),
 
-  rest.get('/products', (req, res, ctx) => {
+  rest.get('/products', (_req, res, ctx) => {
     return res(ctx.status(200), ctx.json(products));
   }),
 

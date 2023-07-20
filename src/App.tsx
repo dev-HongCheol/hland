@@ -11,9 +11,9 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { worker } from '@libs/mocks';
 
-if (process.env.NODE_ENV === 'development') {
-  worker.start();
-}
+// if (process.env.NODE_ENV === 'development') {
+worker.start();
+// }
 function App() {
   getFirebaseApp();
   const queryClient = new QueryClient();
