@@ -7,7 +7,7 @@ type Product = {
 
 const Main = () => {
   const fetchProducts = async () => {
-    return fetch('/products').then((res) => res.json());
+    return fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/products`).then((res) => res.json());
   };
 
   // Queries
