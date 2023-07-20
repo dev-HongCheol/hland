@@ -53,9 +53,13 @@
     "gh-pages": "^5.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.3",
+    "msw": "^1.2.2",
     "prettier": "^2.8.8",
     "typescript": "^5.0.2",
     "vite": "^4.3.2",
     "vite-tsconfig-paths": "^4.2.0"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
