@@ -7,7 +7,7 @@ type Product = {
 
 const Main = () => {
   const fetchProducts = async () => {
-    return fetch('https://dummyjson.com/products').then((res) => res.json());
+    return fetch('/products').then((res) => res.json());
   };
 
   // Queries
