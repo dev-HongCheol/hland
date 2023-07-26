@@ -1,4 +1,4 @@
-import Categories from './categories';
+import { HeaderCategories } from './categories';
 import { AppBar, Box, Container, Toolbar, Typography, styled } from '@mui/material';
 import useHeader from './data/useHeader';
 import NavButtons from './nav-buttons/NavButtons';
@@ -60,7 +60,7 @@ function Header() {
 
             <NavButtons isHeaderDense={headerInfo.isDense} />
           </Toolbar>
-          <Categories />
+          <HeaderCategories />
         </Container>
       </AppBar>
     </Box>
