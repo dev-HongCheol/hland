@@ -1,14 +1,9 @@
 import { Grid } from '@mui/material';
 import CategoryItem from '../category-item';
+import { useHeaderCategories } from './data';
 
-const Categories = () => {
-  const categoriesMapper = [
-    { women: 'womens-dresses' },
-    { men: 'mens-shirts' },
-    { shoes: ['womens-shoes', 'mens-shoes'] },
-    { bag: 'womens-bags' },
-  ];
-
+const HeaderCategories = () => {
+  const { categories } = useHeaderCategories();
   return (
     <Grid
       container
@@ -23,13 +18,13 @@ const Categories = () => {
         },
       }}
     >
-      {categoriesMapper.map((category) => (
-        <Grid item key={Object.keys(category)[0]}>
-          <CategoryItem name={Object.keys(category)[0]} />
+      {Object.keys(categories).map((category) => (
+        <Grid item key={category || category[0]}>
+          <CategoryItem name={category} />
         </Grid>
       ))}
     </Grid>
   );
 };
 
-export default Categories;
+export default HeaderCategories;
