@@ -8,7 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AppRouter from '@libs/router/AppRouter';
 import '@libs/i18n';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { store } from './libs/stores';
 // import { worker } from '@libs/mocks';
 
 // if (process.env.NODE_ENV === 'development') {

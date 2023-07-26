@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "src/store";
-import { commonSlice } from ".";
+import { commonSlice } from '@libs/stores/common/createSlice';
+import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@libs/stores';
 
 const useLanguageToggleButton = () => {
   const selectedLang = useAppSelector((state) => state.common.language);
@@ -8,16 +8,16 @@ const useLanguageToggleButton = () => {
 
   const langList = [
     {
-      lable: "KO",
-      value: "ko",
+      lable: 'KO',
+      value: 'ko',
     },
     {
-      lable: "EN",
-      value: "en",
+      lable: 'EN',
+      value: 'en',
     },
     {
-      lable: "CN",
-      value: "cn",
+      lable: 'CN',
+      value: 'cn',
     },
   ];
   const [isShowLangList, setIsShowLangList] = useState(false);
