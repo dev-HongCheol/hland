@@ -1,10 +1,13 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { commonSlice } from "@components/layouts/header/nav-buttons/language-toggle-button/data";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { configureStore } from '@reduxjs/toolkit';
+
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { commonSlice } from './common';
+import { productSlice } from './product';
 
 export const store = configureStore({
   reducer: {
     common: commonSlice.reducer,
+    product: productSlice.reducer,
   },
   devTools: import.meta.env.DEV,
 });

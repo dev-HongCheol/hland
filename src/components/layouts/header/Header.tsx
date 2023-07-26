@@ -1,7 +1,7 @@
-import { HeaderCategories } from './categories';
 import { AppBar, Box, Container, Toolbar, Typography, styled } from '@mui/material';
 import useHeader from './data/useHeader';
 import NavButtons from './nav-buttons/NavButtons';
+import { HeaderCategories } from './categories';
 
 const LogoTypographyStyle = styled(Typography)({
   position: 'absolute',
