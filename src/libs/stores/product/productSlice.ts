@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import type { PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { ProductState } from './product.types';
 
 const initialState: ProductState = {
@@ -9,15 +9,17 @@ const initialState: ProductState = {
     shoes: ['womens-shoes', 'mens-shoes'],
     bag: 'womens-bags',
   },
+  subCategories: { women: [{ 드레스: ['롱 슬리브 드레스', '하프 슬리브 드레스'] }, { 상의: ['셔츠', '티셔츠'] }] },
+  selectedCategory: '',
 };
 
 export const productSlice = createSlice({
   name: 'common',
   initialState,
   reducers: {
-    // setLanguage: (state, { payload: language }: PayloadAction<string>) => {
-    //   state.language = language;
-    // },
+    setSelectedCategory: (state, { payload: selectedCategory }: PayloadAction<string>) => {
+      state.selectedCategory = selectedCategory;
+    },
     // incrementByAmount: (state, action: PayloadAction<number>) => {
     //   state.value += action.payload;
     // },
@@ -25,4 +27,4 @@ export const productSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-// export const { setLanguage } = productSlice.actions;
+export const { setSelectedCategory } = productSlice.actions;

@@ -1,3 +1,5 @@
+import { useAppDispatch } from '@libs/stores';
+import { setSelectedCategory } from '@libs/stores/product';
 import { Typography, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
@@ -6,6 +8,7 @@ export type CategoryItemProps = {
 };
 
 const CategoryItem = ({ name }: CategoryItemProps) => {
+  const dispacth = useAppDispatch();
   return (
     <Box
       mx={4}
@@ -19,7 +22,13 @@ const CategoryItem = ({ name }: CategoryItemProps) => {
       ]}
     >
       <Typography fontWeight={700} fontSize={'1.1rem'} textAlign={'center'}>
-        <Link to={name}>{name.toUpperCase()}</Link>
+        <Link
+          to={name}
+          onMouseEnter={() => dispacth(setSelectedCategory(name))}
+          onMouseLeave={() => dispacth(setSelectedCategory(''))}
+        >
+          {name.toUpperCase()}
+        </Link>
       </Typography>
     </Box>
   );

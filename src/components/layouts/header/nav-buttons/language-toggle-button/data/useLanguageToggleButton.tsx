@@ -1,6 +1,6 @@
-import { commonSlice } from '@libs/stores/common/createSlice';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@libs/stores';
+import { setLanguage } from '@libs/stores/common';
 
 const useLanguageToggleButton = () => {
   const selectedLang = useAppSelector((state) => state.common.language);
@@ -25,7 +25,7 @@ const useLanguageToggleButton = () => {
   type Language = string;
 
   const handleSetSelectedLang = (lang: Language) => {
-    dispatch(commonSlice.actions.setLanguage(lang));
+    dispatch(setLanguage(lang));
   };
 
   return {

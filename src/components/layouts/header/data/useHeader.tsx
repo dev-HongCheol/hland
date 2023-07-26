@@ -1,7 +1,8 @@
-import { getAuth } from "firebase/auth";
-import { useEffect, useState } from "react";
-import { useIdToken } from "react-firebase-hooks/auth";
-import _ from "lodash-es";
+import { getAuth } from 'firebase/auth';
+import { useEffect, useState } from 'react';
+import { useIdToken } from 'react-firebase-hooks/auth';
+import _ from 'lodash-es';
+import { useAppSelector } from '@libs/stores';
 
 const useHeader = () => {
   const auth = getAuth();
@@ -15,12 +16,13 @@ const useHeader = () => {
     isDense: false,
   });
 
+  const selectedCategory = useAppSelector((state) => state.product.selectedCategory);
+
   const windowScroll = () => {
     const scrolly = window.scrollY;
     console.log(scrolly);
     const newHeaderInfo = _.cloneDeep(headerInfo);
-    const contentEle: HTMLDivElement | null =
-      document.querySelector("#content");
+    const contentEle: HTMLDivElement | null = document.querySelector('#content');
     if (!contentEle) return;
 
     if (scrolly > headerInfo.height / 2) {
@@ -30,7 +32,7 @@ const useHeader = () => {
     } else {
       newHeaderInfo.isDense = false;
       newHeaderInfo.height = defaultHeaderHeight;
-      contentEle.style.paddingTop = "0";
+      contentEle.style.paddingTop = '0';
     }
     setHedaerInfo(newHeaderInfo);
 
@@ -38,11 +40,11 @@ const useHeader = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", windowScroll);
-    return () => window.removeEventListener("scroll", windowScroll);
+    window.addEventListener('scroll', windowScroll);
+    return () => window.removeEventListener('scroll', windowScroll);
   }, []);
 
-  return { headerInfo, categoriesHeight, user };
+  return { headerInfo, categoriesHeight, user, selectedCategory };
 };
 
 export default useHeader;

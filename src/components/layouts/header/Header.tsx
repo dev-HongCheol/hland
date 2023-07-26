@@ -2,6 +2,7 @@ import { AppBar, Box, Container, Toolbar, Typography, styled } from '@mui/materi
 import useHeader from './data/useHeader';
 import NavButtons from './nav-buttons/NavButtons';
 import { HeaderCategories } from './categories';
+import { HeaderMenu } from './menu';
 
 const LogoTypographyStyle = styled(Typography)({
   position: 'absolute',
@@ -15,7 +16,7 @@ const LogoTypographyStyle = styled(Typography)({
 });
 
 function Header() {
-  const { headerInfo, categoriesHeight } = useHeader();
+  const { headerInfo, categoriesHeight, selectedCategory } = useHeader();
   return (
     <Box display="block" height={headerInfo.height + categoriesHeight}>
       <AppBar
@@ -62,6 +63,7 @@ function Header() {
           </Toolbar>
           <HeaderCategories />
         </Container>
+        {!!selectedCategory && <HeaderMenu />}
       </AppBar>
     </Box>
   );
