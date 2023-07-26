@@ -1,20 +1,26 @@
-import { useQuery } from 'react-query';
+import { http } from '@libs/http';
+import { useQuery } from '@tanstack/react-query';
 
 type Product = {
   id: number;
   title: string;
 };
 
-const Main = () => {
-  const fetchProducts = async () => {
-    return fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/products`).then((res) => res.json());
-  };
+type ResProducts = {
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
+};
 
-  // Queries
+const Main = () => {
+  const fetchProducts = () => http.httpGet<ResProducts>('/products').then((res) => res.data);
+
   const { data, isLoading } = useQuery({
-    queryKey: ['todos'],
+    queryKey: ['products'],
     queryFn: fetchProducts,
   });
+
   console.log('isLoading', isLoading);
   return (
     <>

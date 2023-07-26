@@ -4,15 +4,15 @@ import muiTheme from '@libs/theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { Suspense } from 'react';
 import { RouterProvider } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AppRouter from '@libs/router/AppRouter';
 import '@libs/i18n';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { worker } from '@libs/mocks';
+// import { worker } from '@libs/mocks';
 
 // if (process.env.NODE_ENV === 'development') {
-worker.start();
+// worker.start();
 // }
 function App() {
   getFirebaseApp();
