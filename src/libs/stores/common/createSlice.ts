@@ -1,16 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-
-export interface CommonState {
-  language: string;
-}
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { CommonState } from './common.types';
 
 const initialState: CommonState = {
-  language: "ko",
+  language: 'ko',
 };
 
 export const commonSlice = createSlice({
-  name: "common",
+  name: 'common',
   initialState,
   reducers: {
     setLanguage: (state, { payload: language }: PayloadAction<string>) => {
