@@ -2,7 +2,12 @@ import { Grid } from '@mui/material';
 import CategoryItem from '../category-item';
 
 const Categories = () => {
-  const categories = ['WOMEN', 'MEN', 'SHOSE', 'BAG&ACC', 'LIVING', 'BEAUTY'];
+  const categoriesMapper = [
+    { women: 'womens-dresses' },
+    { men: 'mens-shirts' },
+    { shoes: ['womens-shoes', 'mens-shoes'] },
+    { bag: 'womens-bags' },
+  ];
 
   return (
     <Grid
@@ -18,9 +23,9 @@ const Categories = () => {
         },
       }}
     >
-      {categories.map((category) => (
-        <Grid item key={category}>
-          <CategoryItem name={category} />
+      {categoriesMapper.map((category) => (
+        <Grid item key={Object.keys(category)[0]}>
+          <CategoryItem name={Object.keys(category)[0]} />
         </Grid>
       ))}
     </Grid>
