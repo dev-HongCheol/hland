@@ -1,6 +1,6 @@
 import i18n from '@libs/i18n';
 import { Box, Grid, Link, styled } from '@mui/material';
-import useLanguageToggleButton from './data/useLanguageToggleButton';
+import { useLanguageToggleButton } from './data';
 
 type HeaderStyleProps = {
   isHeaderDense: boolean;
