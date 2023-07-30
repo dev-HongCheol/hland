@@ -46,42 +46,15 @@ const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
 
   return (
     <Grid container justifyContent={'end'} alignItems={'center'} columnSpacing={2}>
-      <Grid
-        item
-        xs={'auto'}
-        sx={{
-          display: {
-            xs: 'none',
-            md: 'block',
-          },
-        }}
-      >
+      <Grid item xs={'auto'}>
         <LanguageToggleButton isHeaderDense={isHeaderDense} />
       </Grid>
-      <Grid
-        item
-        xs={'auto'}
-        sx={{
-          display: {
-            xs: 'none',
-            md: 'block',
-          },
-        }}
-      >
+      <Grid item xs={'auto'}>
         <NavLink isHeaderDense={isHeaderDense} underline="none">
           LOG IN
         </NavLink>
       </Grid>
-      <Grid
-        item
-        xs={'auto'}
-        sx={{
-          display: {
-            xs: 'none',
-            md: 'block',
-          },
-        }}
-      >
+      <Grid item xs={'auto'}>
         <NavLink isHeaderDense={isHeaderDense} underline="none">
           SIGN UP
         </NavLink>
