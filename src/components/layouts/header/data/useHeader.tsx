@@ -1,42 +1,38 @@
 import { getAuth } from 'firebase/auth';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useIdToken } from 'react-firebase-hooks/auth';
 import _ from 'lodash-es';
-import { useAppSelector } from '@libs/stores';
+import { useAppDispatch, useAppSelector } from '@libs/stores';
+import { setHeaderInfo } from '@libs/stores/common';
+import { setCategoryMenu } from '@libs/stores/product';
 
 const useHeader = () => {
   const auth = getAuth();
   // const [user, loading, error] = useIdToken(auth);
   const [user] = useIdToken(auth);
 
-  const categoriesHeight = 30;
+  const categoriesHeight = 31;
   const defaultHeaderHeight = 128;
-  const [headerInfo, setHedaerInfo] = useState({
-    height: defaultHeaderHeight,
-    isDense: false,
-  });
 
-  const selectedCategory = useAppSelector((state) => state.product.selectedCategory);
+  const dispatch = useAppDispatch();
+  const { selectedCategory, categoryMenu } = useAppSelector((state) => state.product);
+  const { headerInfo } = useAppSelector((state) => state.common);
+  const headerMenuRef = useRef<HTMLDivElement>(null);
 
   const windowScroll = () => {
     const scrolly = window.scrollY;
-    console.log(scrolly);
-    const newHeaderInfo = _.cloneDeep(headerInfo);
     const contentEle: HTMLDivElement | null = document.querySelector('#content');
     if (!contentEle) return;
 
     if (scrolly > headerInfo.height / 2) {
-      newHeaderInfo.isDense = true;
-      newHeaderInfo.height = defaultHeaderHeight / 2;
+      dispatch(setHeaderInfo({ isDense: true, height: defaultHeaderHeight / 2 }));
       contentEle.style.paddingTop = `${headerInfo.height / 2}px`;
     } else {
-      newHeaderInfo.isDense = false;
-      newHeaderInfo.height = defaultHeaderHeight;
+      dispatch(setHeaderInfo({ isDense: false, height: defaultHeaderHeight }));
       contentEle.style.paddingTop = '0';
     }
-    setHedaerInfo(newHeaderInfo);
 
-    console.log(window.scrollY);
+    // console.log(window.scrollY);
   };
 
   useEffect(() => {
@@ -44,7 +40,25 @@ const useHeader = () => {
     return () => window.removeEventListener('scroll', windowScroll);
   }, []);
 
-  return { headerInfo, categoriesHeight, user, selectedCategory };
+  useEffect(() => {
+    console.log(headerInfo.isDense);
+    let topPosition = 0;
+    if (headerInfo.isDense) {
+      topPosition = categoryMenu.topPosition - defaultHeaderHeight / 2;
+    } else {
+      topPosition = categoryMenu.topPosition + defaultHeaderHeight / 2;
+    }
+    dispatch(setCategoryMenu({ ...categoryMenu, topPosition }));
+  }, [headerInfo.isDense]);
+
+  return {
+    headerInfo,
+    categoriesHeight,
+    user,
+    selectedCategory,
+    headerMenuRef,
+    categoryMenu,
+  };
 };
 
 export default useHeader;

@@ -16,7 +16,7 @@ const LogoTypographyStyle = styled(Typography)({
 });
 
 function Header() {
-  const { headerInfo, categoriesHeight, selectedCategory } = useHeader();
+  const { headerInfo, categoriesHeight, categoryMenu } = useHeader();
   return (
     <Box display="block" height={headerInfo.height + categoriesHeight}>
       <AppBar
@@ -63,7 +63,7 @@ function Header() {
           </Toolbar>
           <HeaderCategories />
         </Container>
-        {!!selectedCategory && <HeaderMenu />}
+        {categoryMenu.isShow && <HeaderMenu topPosition={categoryMenu.topPosition} />}
       </AppBar>
     </Box>
   );

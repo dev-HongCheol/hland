@@ -1,9 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { CommonState } from './common.types';
+import { CommonState, HeaderInfo } from './common.types';
 
 const initialState: CommonState = {
   language: 'ko',
+  headerInfo: {
+    height: 128,
+    isDense: false,
+  },
 };
 
 export const commonSlice = createSlice({
@@ -13,11 +17,11 @@ export const commonSlice = createSlice({
     setLanguage: (state, { payload: language }: PayloadAction<string>) => {
       state.language = language;
     },
-    // incrementByAmount: (state, action: PayloadAction<number>) => {
-    //   state.value += action.payload;
-    // },
+    setHeaderInfo: (state, { payload: headerInfo }: PayloadAction<HeaderInfo>) => {
+      state.headerInfo = { ...headerInfo };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setLanguage } = commonSlice.actions;
+export const { setLanguage, setHeaderInfo } = commonSlice.actions;

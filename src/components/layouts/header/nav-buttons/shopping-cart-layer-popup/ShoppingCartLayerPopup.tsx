@@ -11,7 +11,7 @@ import {
   ListItemText,
   styled,
 } from '@mui/material';
-import { forwardRef, useState } from 'react';
+import { ForwardedRef, forwardRef, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTranslation } from 'react-i18next';
 
@@ -27,7 +27,7 @@ type ShoppingCartLayerPopupProps = {
 };
 
 const ShoppingCartLayerPopup = forwardRef(
-  ({ isShow, handleHiddenShoppingCartLayerPopup }: ShoppingCartLayerPopupProps) => {
+  ({ isShow, handleHiddenShoppingCartLayerPopup }: ShoppingCartLayerPopupProps, ref: ForwardedRef<HTMLDivElement>) => {
     const { t } = useTranslation();
     const [checked, setChecked] = useState<number[]>([0]);
 

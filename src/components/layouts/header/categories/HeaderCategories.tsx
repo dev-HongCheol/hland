@@ -4,6 +4,7 @@ import { useHeaderCategories } from './data';
 
 const HeaderCategories = () => {
   const { categories } = useHeaderCategories();
+
   return (
     <Grid
       container
@@ -17,14 +18,14 @@ const HeaderCategories = () => {
           md: 'flex',
         },
       }}
+      spacing={0}
     >
       {Object.keys(categories).map((category) => (
-        <Grid item key={category || category[0]}>
+        <Grid item key={category} md={0.8}>
           <CategoryItem name={category} />
         </Grid>
       ))}
     </Grid>
   );
 };
-
 export default HeaderCategories;
