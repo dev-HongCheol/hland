@@ -1,7 +1,6 @@
 import { getAuth } from 'firebase/auth';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useIdToken } from 'react-firebase-hooks/auth';
-import _ from 'lodash-es';
 import { useAppDispatch, useAppSelector } from '@libs/stores';
 import { setHeaderInfo } from '@libs/stores/common';
 import { setCategoryMenu } from '@libs/stores/product';
@@ -31,8 +30,6 @@ const useHeader = () => {
       dispatch(setHeaderInfo({ isDense: false, height: defaultHeaderHeight }));
       contentEle.style.paddingTop = '0';
     }
-
-    // console.log(window.scrollY);
   };
 
   useEffect(() => {
@@ -41,7 +38,6 @@ const useHeader = () => {
   }, []);
 
   useEffect(() => {
-    console.log(headerInfo.isDense);
     let topPosition = 0;
     if (headerInfo.isDense) {
       topPosition = categoryMenu.topPosition - defaultHeaderHeight / 2;
