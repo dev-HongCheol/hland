@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
-import CategoryItem from '../category-item';
 import { useHeaderCategories } from './data';
+import { CategoryItem } from './category-item';
 
 const HeaderCategories = () => {
   const { categories } = useHeaderCategories();
@@ -18,10 +18,10 @@ const HeaderCategories = () => {
           md: 'flex',
         },
       }}
-      spacing={0}
+      columnSpacing={5}
     >
       {Object.keys(categories).map((category) => (
-        <Grid item key={category} md={0.8}>
+        <Grid item key={category} xs={'auto'}>
           <CategoryItem name={category} />
         </Grid>
       ))}

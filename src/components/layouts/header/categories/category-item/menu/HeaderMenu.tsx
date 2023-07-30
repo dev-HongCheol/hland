@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { useHeaderMenu } from './data';
 
 type HanderMenuProps = {
@@ -6,7 +6,7 @@ type HanderMenuProps = {
 };
 
 const HeaderMenu = ({ topPosition }: HanderMenuProps) => {
-  const { menuRender, headerMenuRef, handleToggleHeaderMenu } = useHeaderMenu();
+  const { menuRender, headerMenuRef } = useHeaderMenu();
 
   return (
     <div
@@ -14,23 +14,21 @@ const HeaderMenu = ({ topPosition }: HanderMenuProps) => {
       style={{
         top: topPosition,
         background: 'white',
-        // opacity: '0',
+        // opacity: '1',
         transition: '.3s ease-out',
         borderBottom: '1px solid #dddddd',
         borderTop: '1px solid #dddddd',
         position: 'absolute',
         width: '100%',
-      }}
-      onMouseEnter={() => {
-        handleToggleHeaderMenu(true);
-      }}
-      onMouseLeave={() => {
-        handleToggleHeaderMenu(false);
+        left: 0,
+        textAlign: 'center',
       }}
     >
-      <Grid container maxWidth={1536} height={400} justifyContent={'center'} mx={'auto'}>
-        {menuRender()}
-      </Grid>
+      <Box maxWidth={900} mx={'auto'}>
+        <Grid container height={400} pt={6}>
+          {menuRender()}
+        </Grid>
+      </Box>
     </div>
   );
 };

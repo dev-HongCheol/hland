@@ -11,7 +11,7 @@ const useHeader = () => {
   // const [user, loading, error] = useIdToken(auth);
   const [user] = useIdToken(auth);
 
-  const categoriesHeight = 31;
+  const categoriesHeight = 50;
   const defaultHeaderHeight = 128;
 
   const dispatch = useAppDispatch();
