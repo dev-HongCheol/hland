@@ -91,9 +91,7 @@ const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
       </Grid>
       <Grid item>
         <div
-          onTouchStart={() => handleShopplingCartLayerToggle(true)}
           onMouseOver={() => handleShopplingCartLayerToggle(true)}
-          onTouchEnd={() => handleShopplingCartLayerToggle(false)}
           onMouseLeave={() => handleShopplingCartLayerToggle(false)}
         >
           <Grid container alignItems={'center'}>
