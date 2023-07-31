@@ -30,7 +30,7 @@ const CategoryItem = ({ name }: CategoryItemProps) => {
         },
       }}
     >
-      <Link to={name}>
+      <Link to={'#'}>
         <Typography fontWeight={700} fontSize={'1rem'} textAlign={'center'} component={'span'}>
           {name.toUpperCase()}
         </Typography>
