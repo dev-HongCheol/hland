@@ -24,7 +24,7 @@ const HeaderMenu = ({ topPosition }: HanderMenuProps) => {
         textAlign: 'center',
       }}
     >
-      <Box maxWidth={900} mx={'auto'}>
+      <Box maxWidth={900} mx={'auto'} width={'90%'}>
         <Grid container height={400} pt={6}>
           {menuRender()}
         </Grid>

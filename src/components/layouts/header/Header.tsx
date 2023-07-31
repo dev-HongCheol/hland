@@ -2,6 +2,7 @@ import { AppBar, Box, Container, Toolbar, Typography, styled } from '@mui/materi
 import useHeader from './data/useHeader';
 import NavButtons from './nav-buttons/NavButtons';
 import { HeaderCategories } from './categories';
+import muiTheme from '@libs/theme';
 
 const LogoTypographyStyle = styled(Typography)({
   position: 'absolute',
@@ -16,6 +17,7 @@ const LogoTypographyStyle = styled(Typography)({
 
 function Header() {
   const { headerInfo, categoriesHeight } = useHeader();
+
   return (
     <Box display="block" height={headerInfo.height + categoriesHeight}>
       <AppBar
@@ -30,14 +32,14 @@ function Header() {
         }}
       >
         <Container
-          maxWidth="xl"
+          maxWidth={false}
           sx={{
             height: '100%',
             paddingRight: '0 !important',
             paddingLeft: '0 !important',
           }}
         >
-          <Toolbar sx={{ height: '100%' }}>
+          <Toolbar sx={{ height: '100%', maxWidth: `${muiTheme.breakpoints.values.xl}px`, margin: '0 auto' }}>
             <LogoTypographyStyle
               variant="h3"
               color="block"

@@ -68,7 +68,7 @@ const LanguageToggleButton = ({ isHeaderDense }: HeaderStyleProps) => {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            width: isShowLangList ? '145px' : '0px',
+            width: isShowLangList ? '100px' : '0px',
             height: '36px',
           }}
         >
