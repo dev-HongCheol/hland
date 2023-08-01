@@ -25,7 +25,6 @@ const CategoryItem = ({ name }: CategoryItemProps) => {
       onMouseLeave={() => {
         dispatchCategoryMenu(false);
       }}
-      onClick={() => dispacth(setSelectedCategory(name))}
       sx={{
         '&:hover': {
           borderBottom: '4px solid black',
@@ -33,7 +32,7 @@ const CategoryItem = ({ name }: CategoryItemProps) => {
         borderBottom: selectedCategory === name ? '4px solid black' : 'none',
       }}
     >
-      <Link to={'#'}>
+      <Link to={'#'} onClick={() => dispacth(setSelectedCategory(name))}>
         <Typography fontWeight={700} fontSize={'1rem'} textAlign={'center'} component={'span'}>
           {name.toUpperCase()}
         </Typography>

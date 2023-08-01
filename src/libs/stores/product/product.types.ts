@@ -20,5 +20,6 @@ export type ProductState = {
   subCategories: SubCategories;
   selectedCategory: string;
   hoverCategory: string;
+  breadcrumbs: string[];
   categoryMenu: CategoryMenu;
 };

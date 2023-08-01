@@ -33,6 +33,7 @@ const initialState: ProductState = {
   },
   selectedCategory: '',
   hoverCategory: '',
+  breadcrumbs: [],
   categoryMenu: {
     isShow: false,
     topPosition: 0,
@@ -47,16 +48,16 @@ export const productSlice = createSlice({
       state.selectedCategory = selectedCategory;
     },
     setHoverCategory: (state, { payload: hoverCategory }: PayloadAction<string>) => {
-      console.log(hoverCategory);
       state.hoverCategory = hoverCategory;
     },
     setCategoryMenu: (state, { payload: categoryMenu }: PayloadAction<CategoryMenu>) => {
-      console.log(JSON.stringify(categoryMenu));
-
       state.categoryMenu = { ...categoryMenu };
+    },
+    setBreadcrumbs: (state, { payload: breadcrumbs }: PayloadAction<string[]>) => {
+      state.breadcrumbs = breadcrumbs;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setSelectedCategory, setCategoryMenu, setHoverCategory } = productSlice.actions;
+export const { setSelectedCategory, setCategoryMenu, setHoverCategory, setBreadcrumbs } = productSlice.actions;
