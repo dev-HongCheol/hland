@@ -19,5 +19,6 @@ export type ProductState = {
   categories: Categories;
   subCategories: SubCategories;
   selectedCategory: string;
+  hoverCategory: string;
   categoryMenu: CategoryMenu;
 };

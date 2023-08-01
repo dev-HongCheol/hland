@@ -32,6 +32,7 @@ const initialState: ProductState = {
     bag: [{ 상의: ['셔츠', '티셔츠', '블라우스', '니트', '카디건', '후드', '스웨트 셔츠'] }],
   },
   selectedCategory: '',
+  hoverCategory: '',
   categoryMenu: {
     isShow: false,
     topPosition: 0,
@@ -45,6 +46,10 @@ export const productSlice = createSlice({
     setSelectedCategory: (state, { payload: selectedCategory }: PayloadAction<string>) => {
       state.selectedCategory = selectedCategory;
     },
+    setHoverCategory: (state, { payload: hoverCategory }: PayloadAction<string>) => {
+      console.log(hoverCategory);
+      state.hoverCategory = hoverCategory;
+    },
     setCategoryMenu: (state, { payload: categoryMenu }: PayloadAction<CategoryMenu>) => {
       console.log(JSON.stringify(categoryMenu));
 
@@ -54,4 +59,4 @@ export const productSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setSelectedCategory, setCategoryMenu } = productSlice.actions;
+export const { setSelectedCategory, setCategoryMenu, setHoverCategory } = productSlice.actions;

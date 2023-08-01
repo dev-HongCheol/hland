@@ -1,5 +1,5 @@
 import { useAppSelector } from '@libs/stores';
-import { ProductMenu, SubCategories } from '@libs/stores/product/product.types';
+import { ProductMenu } from '@libs/stores/product/product.types';
 import { useEffect, useState } from 'react';
 
 const useProductNavCategory = () => {

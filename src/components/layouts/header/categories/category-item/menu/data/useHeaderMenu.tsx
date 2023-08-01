@@ -11,18 +11,17 @@ const useHeaderMenu = () => {
   });
 
   const dispatch = useAppDispatch();
-  const { selectedCategory, subCategories, categoryMenu } = useAppSelector((state) => state.product);
+  const { hoverCategory, subCategories, categoryMenu } = useAppSelector((state) => state.product);
   const headerMenuRef = useRef<HTMLDivElement>(null);
 
   const handleToggleHeaderMenu = (isShow: boolean) => {
     const headerMenuDiv = headerMenuRef.current;
     if (!headerMenuDiv) return;
-    headerMenuDiv.style.opacity = isShow ? '1' : '0';
     dispatch(setCategoryMenu({ ...categoryMenu, isShow }));
   };
 
   const menuRender = () => {
-    const selectedSubCategories = subCategories[selectedCategory];
+    const selectedSubCategories = subCategories[hoverCategory];
     const menuCol = [];
     const menuLength = (selectedSubCategories || []).length;
 

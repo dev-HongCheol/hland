@@ -6,7 +6,7 @@ const useCategoryItem = () => {
   const dispacth = useAppDispatch();
   const categoryItemRef = useRef<HTMLDivElement>(null);
 
-  const { categoryMenu, selectedCategory } = useAppSelector((state) => state.product);
+  const { categoryMenu, selectedCategory, hoverCategory } = useAppSelector((state) => state.product);
 
   const dispatchCategoryMenu = (isShow: boolean) => {
     const categoryItemLink = categoryItemRef.current;
@@ -21,6 +21,7 @@ const useCategoryItem = () => {
     categoryItemRef,
     categoryMenu,
     selectedCategory,
+    hoverCategory,
   };
 };
 
