@@ -25,7 +25,6 @@ const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
   const ShoppingCartLayerPopupRef = useRef<HTMLDivElement>(null);
 
   const handleShopplingCartLayerToggle = (isShow: boolean) => {
-    // console.log(event.currentTarget.getBoundingClientRect());
     setIsShow(isShow);
   };
 

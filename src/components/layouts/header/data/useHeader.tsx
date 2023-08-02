@@ -25,10 +25,10 @@ const useHeader = () => {
 
     if (scrolly > headerInfo.height / 2) {
       dispatch(setHeaderInfo({ isDense: true, height: defaultHeaderHeight / 2 }));
-      contentEle.style.paddingTop = `${headerInfo.height / 2}px`;
+      // contentEle.style.paddingTop = `${headerInfo.height / 2}px`;
     } else {
       dispatch(setHeaderInfo({ isDense: false, height: defaultHeaderHeight }));
-      contentEle.style.paddingTop = '0';
+      // contentEle.style.paddingTop = '0';
     }
   };
 

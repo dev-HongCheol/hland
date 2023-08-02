@@ -4,13 +4,13 @@ import { CategoryMenu, ProductState } from './product.types';
 
 const initialState: ProductState = {
   categories: {
-    women: 'womens-dresses',
-    men: 'mens-shirts',
-    shoes: ['womens-shoes', 'mens-shoes'],
-    bag: 'womens-bags',
+    WOMEN: 'womens-dresses',
+    MEN: 'mens-shirts',
+    SHOSE: ['womens-shoes', 'mens-shoes'],
+    BAG: 'womens-bags',
   },
   subCategories: {
-    women: [
+    WOMEN: [
       { 상의: ['셔츠', '티셔츠', '블라우스', '니트', '카디건', '후드', '스웨트 셔츠'] },
       { 하의: ['팬츠', '레깅스'] },
       { 드레스: ['롱 슬리브 드레스', '하프 슬리브 드레스'] },
@@ -18,18 +18,18 @@ const initialState: ProductState = {
       { '비치 웨어': ['비치 웨어'] },
       { 기타: ['양말', '레깅스', '벨트', '스카프/머플러'] },
     ],
-    men: [
+    MEN: [
       { 상의: ['셔츠', '티셔츠', '블라우스', '니트', '카디건', '후드', '스웨트 셔츠'] },
       { 하의: ['팬츠', '레깅스'] },
       { 아우터: ['자켓', '코드'] },
       { '비치 웨어': ['비치 웨어'] },
       { 기타: ['양말', '레깅스', '벨트', '스카프/머플러'] },
     ],
-    shoes: [
+    SHOSE: [
       { 상의: ['셔츠', '티셔츠', '블라우스', '니트', '카디건', '후드', '스웨트 셔츠'] },
       { 기타: ['양말', '레깅스', '벨트', '스카프/머플러'] },
     ],
-    bag: [{ 상의: ['셔츠', '티셔츠', '블라우스', '니트', '카디건', '후드', '스웨트 셔츠'] }],
+    BAG: [{ 상의: ['셔츠', '티셔츠', '블라우스', '니트', '카디건', '후드', '스웨트 셔츠'] }],
   },
   selectedCategory: '',
   hoverCategory: '',
@@ -53,6 +53,9 @@ export const productSlice = createSlice({
     setCategoryMenu: (state, { payload: categoryMenu }: PayloadAction<CategoryMenu>) => {
       state.categoryMenu = { ...categoryMenu };
     },
+    toggleCategoryMenu: (state, { payload: isShow }: PayloadAction<boolean>) => {
+      state.categoryMenu.isShow = isShow;
+    },
     setBreadcrumbs: (state, { payload: breadcrumbs }: PayloadAction<string[]>) => {
       state.breadcrumbs = breadcrumbs;
     },
@@ -60,4 +63,5 @@ export const productSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setSelectedCategory, setCategoryMenu, setHoverCategory, setBreadcrumbs } = productSlice.actions;
+export const { setSelectedCategory, setCategoryMenu, setHoverCategory, setBreadcrumbs, toggleCategoryMenu } =
+  productSlice.actions;

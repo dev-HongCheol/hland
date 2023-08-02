@@ -11,6 +11,7 @@ const MainHeader = () => {
         sx={{
           borderBottom: '1px solid #eee',
         }}
+        alignItems={'center'}
       >
         <Grid>
           <MainHeaderBreadcrumbs />

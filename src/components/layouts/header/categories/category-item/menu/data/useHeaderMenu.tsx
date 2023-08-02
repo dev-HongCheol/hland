@@ -1,29 +1,19 @@
-import { useAppDispatch, useAppSelector } from '@libs/stores';
-import { setBreadcrumbs, setCategoryMenu, setSelectedCategory } from '@libs/stores/product';
-import { Grid, Link, Typography, styled } from '@mui/material';
+import { useAppSelector } from '@libs/stores';
+import { setBreadcrumbs, setSelectedCategory } from '@libs/stores/product';
+import { ProductMenu } from '@libs/stores/product/product.types';
 import { useRef } from 'react';
 
 const useHeaderMenu = () => {
-  const HeaderMenuLink = styled(Link)({
-    '&:hover': {
-      color: '#123ad4',
-    },
-  });
-
-  const dispatch = useAppDispatch();
-  const { hoverCategory, subCategories, categoryMenu, selectedCategory } = useAppSelector((state) => state.product);
+  const { hoverCategory, subCategories, selectedCategory } = useAppSelector((state) => state.product);
   const headerMenuRef = useRef<HTMLDivElement>(null);
 
-  const handleToggleHeaderMenu = (isShow: boolean) => {
-    const headerMenuDiv = headerMenuRef.current;
-    if (!headerMenuDiv) return;
-    dispatch(setCategoryMenu({ ...categoryMenu, isShow }));
+  const selectedTopMenuName = subCategories[hoverCategory];
+  const getTopMenuName = (productMenu: ProductMenu) => {
+    const topMenuName = Object.keys(productMenu)[0];
+    return topMenuName;
   };
 
-  // TEST
-  const selectedSubCategories = subCategories[hoverCategory];
-
-  const menuRender = () => {
+  /*   const menuRender = () => {
     const selectedSubCategories = subCategories[hoverCategory];
     const menuCol = [];
     const menuLength = (selectedSubCategories || []).length;
@@ -71,18 +61,15 @@ const useHeaderMenu = () => {
     }
 
     return menuCol;
-  };
+  }; */
 
   return {
-    menuRender,
     headerMenuRef,
-    handleToggleHeaderMenu,
-    selectedSubCategories,
+    selectedTopMenuName,
     selectedCategory,
-    dispatch,
     setSelectedCategory,
-    hoverCategory,
     setBreadcrumbs,
+    getTopMenuName,
   };
 };
 

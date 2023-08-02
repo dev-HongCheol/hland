@@ -12,7 +12,6 @@ const useCategoryItem = () => {
     const categoryItemLink = categoryItemRef.current;
     if (!categoryItemLink) return;
     const topPosition = categoryItemLink.getBoundingClientRect().bottom;
-
     dispacth(setCategoryMenu({ isShow, topPosition }));
   };
   return {
