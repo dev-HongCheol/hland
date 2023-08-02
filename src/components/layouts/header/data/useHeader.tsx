@@ -4,6 +4,7 @@ import { useIdToken } from 'react-firebase-hooks/auth';
 import { useAppDispatch, useAppSelector } from '@libs/stores';
 import { setHeaderInfo } from '@libs/stores/common';
 import { setCategoryMenu } from '@libs/stores/product';
+import _ from 'lodash-es';
 
 const useHeader = () => {
   const auth = getAuth();
@@ -18,7 +19,7 @@ const useHeader = () => {
   const { headerInfo } = useAppSelector((state) => state.common);
   const headerMenuRef = useRef<HTMLDivElement>(null);
 
-  const windowScroll = () => {
+  const windowScroll = _.throttle(() => {
     const scrolly = window.scrollY;
     const contentEle: HTMLDivElement | null = document.querySelector('#content');
     if (!contentEle) return;
@@ -30,7 +31,7 @@ const useHeader = () => {
       dispatch(setHeaderInfo({ isDense: false, height: defaultHeaderHeight }));
       // contentEle.style.paddingTop = '0';
     }
-  };
+  }, 50);
 
   useEffect(() => {
     window.addEventListener('scroll', windowScroll);
