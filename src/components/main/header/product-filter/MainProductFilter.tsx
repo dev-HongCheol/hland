@@ -7,7 +7,9 @@ const LangLink = styled(Link)({
   '&:hover': {
     borderRadius: '100%',
     border: '#000 1px solid !important',
+    cursor: 'pointer',
   },
+  border: '#FFF 1px solid !important',
 });
 
 const MainProductFilter = () => {
