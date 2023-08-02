@@ -44,7 +44,7 @@ const MainProductFilter = () => {
           </FormControl>
         </Box>
       </Grid>
-      <Grid item fontSize={'0.7rem'}>
+      <Grid item fontSize={'0.7rem'} sx={{ paddingTop: '3px' }}>
         DISPLAY
       </Grid>
       {[20, 40, 80].map((pageSize) => (

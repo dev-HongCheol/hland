@@ -5,7 +5,7 @@ import MainProductCategoryContainer from './MainProductNavContainer';
 
 const MainContainer = () => {
   return (
-    <Grid container direction={'column'} maxWidth={'xl'} mx={'auto'}>
+    <Grid container direction={'column'} maxWidth={'xl'} mx={'auto'} px={7}>
       <Grid item>
         <MainHeaderContainer />
       </Grid>
@@ -13,7 +13,7 @@ const MainContainer = () => {
         <Grid item xs={2}>
           <MainProductCategoryContainer />
         </Grid>
-        <Grid xs={10}>
+        <Grid item xs={10}>
           <Main />
         </Grid>
       </Grid>
