@@ -68,24 +68,33 @@ const LanguageToggleButton = ({ isHeaderDense }: HeaderStyleProps) => {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            width: isShowLangList ? '110px' : '0px',
+            width: isShowLangList ? '100px' : '0px',
             height: '36px',
           }}
         >
           {langList.map((lang) => (
-            <LangLink
+            <Box
               key={lang.value}
-              fontSize={12}
-              underline="none"
-              isHeaderDense={isHeaderDense}
-              onClick={() => {
-                i18n.changeLanguage(lang.value);
-                setIsShowLangList(!isShowLangList);
-                handleSetSelectedLang(lang.value);
+              width={32}
+              height={32}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
               }}
             >
-              {lang.lable}
-            </LangLink>
+              <LangLink
+                fontSize={12}
+                underline="none"
+                isHeaderDense={isHeaderDense}
+                onClick={() => {
+                  i18n.changeLanguage(lang.value);
+                  setIsShowLangList(!isShowLangList);
+                  handleSetSelectedLang(lang.value);
+                }}
+              >
+                {lang.lable}
+              </LangLink>
+            </Box>
           ))}
         </LangListBox>
       </Grid>
