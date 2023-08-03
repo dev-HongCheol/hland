@@ -23,6 +23,7 @@ const MainProductItem = ({ id, title, brand, price, thumbnail }: MainProductItem
           <div
             style={{
               position: 'relative',
+              height: '330px',
             }}
             onMouseEnter={() => {
               if (productOverlapLayerRef.current) {
@@ -35,7 +36,7 @@ const MainProductItem = ({ id, title, brand, price, thumbnail }: MainProductItem
               }
             }}
           >
-            <img src={thumbnail} style={{ width: '100%' }} height={330} />
+            <img src={thumbnail} style={{ width: '100%' }} height={'100%'} />
             <OverlapLayer p={2} ref={productOverlapLayerRef}>
               <Grid
                 height={'100%'}
