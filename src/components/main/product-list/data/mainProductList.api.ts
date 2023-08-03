@@ -2,7 +2,8 @@ import { http } from '@libs/http';
 import { ResProducts } from './mainProductList.types';
 
 const mainProductListApi = () => {
-  const fetchProducts = () => http.httpGet<ResProducts>('/products').then((res) => res.data);
+  const fetchProducts = (limit: number, skip: number) =>
+    http.httpGet<ResProducts>(`/products?limit=${limit}&skip=${skip}`).then((res) => res.data);
 
   return { fetchProducts };
 };

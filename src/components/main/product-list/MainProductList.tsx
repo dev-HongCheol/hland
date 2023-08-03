@@ -3,9 +3,13 @@ import { MainProductItem } from './product-item';
 import { useMainProductList } from './data';
 import { Fragment } from 'react';
 import { MainProductListPagination } from './pagination';
+import { Spinner } from '@components/layouts/spinner';
 
 const MainProductList = () => {
   const { data, isLoading } = useMainProductList();
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <Grid container direction={'column'} alignItems={'center'}>
       <Grid item>

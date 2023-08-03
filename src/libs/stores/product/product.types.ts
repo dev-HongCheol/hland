@@ -17,7 +17,8 @@ export type CategoryMenu = {
 
 export type ListOption = {
   limit: number;
-  skip: number;
+  page: number;
+  maxPage: number;
   sortColumn: string;
   sortDirection: 'asc' | 'desc';
 };

@@ -40,7 +40,8 @@ const initialState: ProductState = {
   },
   listOption: {
     limit: 20,
-    skip: 0,
+    page: 1,
+    maxPage: 0,
     sortColumn: 'id',
     sortDirection: 'asc',
   },
