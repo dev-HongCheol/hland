@@ -1,17 +1,17 @@
 import Main from '@components/main';
+import { MainHeader } from '@components/main/header';
+import { MainProductNav } from '@components/main/product-nav';
 import { Grid } from '@mui/material';
-import MainHeaderContainer from './MainHeaderContainer';
-import MainProductCategoryContainer from './MainProductNavContainer';
 
 const MainContainer = () => {
   return (
     <Grid container direction={'column'} maxWidth={'xl'} mx={'auto'} px={7}>
       <Grid item>
-        <MainHeaderContainer />
+        <MainHeader />
       </Grid>
       <Grid container>
         <Grid item xs={2}>
-          <MainProductCategoryContainer />
+          <MainProductNav />
         </Grid>
         <Grid item xs={10}>
           <Main />
