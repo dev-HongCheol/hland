@@ -3,7 +3,8 @@ import { MainProductItemProps } from './data/mainProductItem.types';
 
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import { useRef } from 'react';
+
+import { useMainProductItem } from './data';
 const OverlapLayer = styled(Box)({
   position: 'absolute',
   top: 0,
@@ -15,7 +16,8 @@ const OverlapLayer = styled(Box)({
 });
 
 const MainProductItem = ({ id, title, brand, price, thumbnail }: MainProductItemProps) => {
-  const productOverlapLayerRef = useRef<HTMLDivElement>(null);
+  const { productOverlapLayerRef, handleToggleOverlapLayer, handleClickAddCart, handleClickAddLike } =
+    useMainProductItem();
   return (
     <Box>
       <Grid container direction={'column'}>
@@ -26,14 +28,10 @@ const MainProductItem = ({ id, title, brand, price, thumbnail }: MainProductItem
               height: '330px',
             }}
             onMouseEnter={() => {
-              if (productOverlapLayerRef.current) {
-                productOverlapLayerRef.current.style.display = 'block';
-              }
+              handleToggleOverlapLayer(true);
             }}
             onMouseLeave={() => {
-              if (productOverlapLayerRef.current) {
-                productOverlapLayerRef.current.style.display = 'none';
-              }
+              handleToggleOverlapLayer(false);
             }}
           >
             <img src={thumbnail} style={{ width: '100%' }} height={'100%'} />
@@ -58,6 +56,7 @@ const MainProductItem = ({ id, title, brand, price, thumbnail }: MainProductItem
                         background: 'blue',
                       },
                     }}
+                    onClick={() => handleClickAddCart(id)}
                   >
                     <ShoppingBagOutlinedIcon />
                   </IconButton>
@@ -74,6 +73,7 @@ const MainProductItem = ({ id, title, brand, price, thumbnail }: MainProductItem
                         color: '#FFF',
                       },
                     }}
+                    onClick={() => handleClickAddLike(id)}
                   >
                     <FavoriteBorderOutlinedIcon />
                   </IconButton>
