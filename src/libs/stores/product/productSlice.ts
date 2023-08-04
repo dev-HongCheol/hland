@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { CategoryMenu, ProductState } from './product.types';
+import { CategoryMenu, ListOption, ProductState } from './product.types';
 
 const initialState: ProductState = {
   categories: {
@@ -38,6 +38,13 @@ const initialState: ProductState = {
     isShow: false,
     topPosition: 0,
   },
+  listOption: {
+    limit: 20,
+    page: 1,
+    maxPage: 0,
+    sortColumn: 'id',
+    sortDirection: 'asc',
+  },
 };
 
 export const productSlice = createSlice({
@@ -59,9 +66,18 @@ export const productSlice = createSlice({
     setBreadcrumbs: (state, { payload: breadcrumbs }: PayloadAction<string[]>) => {
       state.breadcrumbs = breadcrumbs;
     },
+    setListOption: (staet, { payload: listOption }: PayloadAction<ListOption>) => {
+      staet.listOption = listOption;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setSelectedCategory, setCategoryMenu, setHoverCategory, setBreadcrumbs, toggleCategoryMenu } =
-  productSlice.actions;
+export const {
+  setSelectedCategory,
+  setCategoryMenu,
+  setHoverCategory,
+  setBreadcrumbs,
+  toggleCategoryMenu,
+  setListOption,
+} = productSlice.actions;

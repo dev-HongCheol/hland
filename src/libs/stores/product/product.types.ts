@@ -15,6 +15,14 @@ export type CategoryMenu = {
   topPosition: number;
 };
 
+export type ListOption = {
+  limit: number;
+  page: number;
+  maxPage: number;
+  sortColumn: string;
+  sortDirection: 'asc' | 'desc';
+};
+
 export type ProductState = {
   categories: Categories;
   subCategories: SubCategories;
@@ -22,4 +30,5 @@ export type ProductState = {
   hoverCategory: string;
   breadcrumbs: string[];
   categoryMenu: CategoryMenu;
+  listOption: ListOption;
 };

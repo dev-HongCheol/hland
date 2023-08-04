@@ -16,7 +16,13 @@ import { store } from './libs/stores';
 // }
 function App() {
   getFirebaseApp();
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false, // default: true
+      },
+    },
+  });
 
   return (
     <>
