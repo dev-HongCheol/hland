@@ -3,5 +3,26 @@
     "shoppingCart": {
       "title": "장바구니1"
     }
+  },
+  "member": {
+    "join": {
+      "title": "회원가입🎉",
+      "email": "이메일",
+      "emailVaildation": "이메일 형식을 입력하세요.",
+      "emailRequired": "이메일은 필수 항목입니다.",
+
+      "password": "비밀번호",
+      "passwordRequired": "비밀번호는 필수 항목입니다.",
+
+      "passwordConfirmation": "비밀번호 확인",
+      "passwordConfirmationRequired": "비밀번호 확인은 필수 항목입니다.",
+      "passwordDoNotMatch": "비밀번호와 비밀번호 확인이 맞지 않습니다.",
+
+      "passwordMin": "비밀번호는 최소 8자 이상입니다.",
+      "passwordMax": "비밀번호는 최대 20자 이하입니다.",
+
+      "btnJoin": "가입",
+      "btnCancle": "취소"
+    }
   }
 }

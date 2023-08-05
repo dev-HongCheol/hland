@@ -1,14 +1,13 @@
-import { lazy } from "react";
-import { Outlet, createBrowserRouter } from "react-router-dom";
-import { ROUTES } from "./data";
-import AuthProvider from "@libs/hocs/auth/AuthProvider";
+import { lazy } from 'react';
+import { Outlet, createBrowserRouter } from 'react-router-dom';
+import { ROUTES } from './data';
+import AuthProvider from '@libs/hocs/auth/AuthProvider';
 
-const DefaultLayout = lazy(
-  () => import("@components/layouts/default-layout/DefaultLayout")
-);
+const DefaultLayout = lazy(() => import('@components/layouts/default-layout/DefaultLayout'));
+const MemberLayout = lazy(() => import('@components/layouts/member-layout/MemberLayout'));
 
-const MainPage = lazy(() => import("@pages/main/MainPage"));
-const LoginPage = lazy(() => import("@pages/login/LoginPage"));
+const MainPage = lazy(() => import('@pages/main/MainPage'));
+const MemberJoin = lazy(() => import('@pages/member/join/MemberJoinPage'));
 
 const AppRouter = createBrowserRouter([
   {
@@ -28,8 +27,18 @@ const AppRouter = createBrowserRouter([
     ],
   },
   {
-    path: ROUTES.LOGIN.path,
-    element: <LoginPage />,
+    path: ROUTES.MEMBER.JOIN.path,
+    element: (
+      <MemberLayout>
+        <Outlet />
+      </MemberLayout>
+    ),
+    children: [
+      {
+        path: ROUTES.MEMBER.JOIN.path,
+        element: <MemberJoin />,
+      },
+    ],
   },
 ]);
 
