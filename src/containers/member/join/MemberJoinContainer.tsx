@@ -6,17 +6,46 @@ import { Member, memberSchema } from './member.types';
 import { http } from '@libs/http';
 import { useMutation } from '@tanstack/react-query';
 
+export type ReqMemberJoin = {
+  email: string;
+  password: string;
+  returnSecureToken: true;
+};
+
+export type ResMemberJoin = {
+  kind: string;
+  idToken: string;
+  email: string;
+  refreshToken: string;
+  expiresIn: string;
+  localId: string;
+};
+
 const MemberJoinContainer = () => {
   const { t } = useTranslation();
 
-  const postMember = async (member: Member) => await http.httpPost('/v1/accounts:signUp');
+  const postMember = (member: ReqMemberJoin) => http.httpPost<ResMemberJoin>('/v1/accounts:signUp', member);
 
   const mutation = useMutation({
     mutationFn: postMember,
+    onSuccess: async (data) => {
+      console.log(data);
+    },
+    onError: async (data) => {
+      console.log('error');
+    },
   });
 
   const onSubmitMemberJoin = (member: Member) => {
     console.log(member);
+
+    const reqMemberJoin: ReqMemberJoin = {
+      email: member.email,
+      password: member.password,
+      returnSecureToken: true,
+    };
+
+    mutation.mutateAsync(reqMemberJoin);
   };
 
   const {
