@@ -22,7 +22,14 @@
       "passwordMax": "비밀번호는 최대 20자 이하입니다.",
 
       "btnJoin": "가입",
-      "btnCancle": "취소"
+      "btnCancle": "취소",
+
+      "joinSuccesss": "회원가입이 완료되었습니다.로그인 후 사용해주세요."
+    }
+  },
+  "message": {
+    "error": {
+      "EMAIL_EXISTS": "이미 가입된 메일주소입니다."
     }
   }
 }

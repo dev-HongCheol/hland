@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { ErrorRespose } from './axios.types';
 import { toast } from 'react-toastify';
+import i18n from '@libs/i18n';
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_API_SERVER,
@@ -29,7 +30,8 @@ instance.interceptors.response.use(
     const status = error.response?.status || 500;
 
     if (status >= 400 && status < 500) {
-      toast(error.response?.data.error.message);
+      toast.error(i18n.t(`message.error.${error.response?.data.error.message}`));
+      // throw new Error(error.response?.data.error.message);
     }
 
     return Promise.reject(error);

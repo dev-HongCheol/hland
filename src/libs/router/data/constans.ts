@@ -11,7 +11,7 @@ const routers = {
 
     JOIN: {
       path: '/join',
-      description: 'find password',
+      description: 'member join',
     },
     LOGIN: {
       path: '/login',

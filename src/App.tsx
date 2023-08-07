@@ -40,7 +40,7 @@ function App() {
                 closeOnClick
                 pauseOnFocusLoss
                 pauseOnHover
-                theme="light"
+                theme="colored"
               />
               <CssBaseline />
               <RouterProvider router={AppRouter} />

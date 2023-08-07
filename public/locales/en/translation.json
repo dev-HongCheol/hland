@@ -22,7 +22,14 @@
       "passwordMax": "Password can be no more than 20 characters.",
 
       "btnJoin": "JOIN",
-      "btnCancle": "CANCLE"
+      "btnCancle": "CANCLE",
+
+      "joinSuccesss": "Sign up is complete.<br>Please use it after logging in."
+    }
+  },
+  "message": {
+    "error": {
+      "EMAIL_EXISTS": "This email address has already been registered."
     }
   }
 }
