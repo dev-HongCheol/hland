@@ -21,10 +21,11 @@
       "passwordMin": "비밀번호는 최소 8자 이상입니다.",
       "passwordMax": "비밀번호는 최대 20자 이하입니다.",
 
+      "btnSendEmailVerification": "인증 메일",
       "btnJoin": "가입",
       "btnCancle": "취소",
 
-      "joinSuccesss": "회원가입이 완료되었습니다.로그인 후 사용해주세요."
+      "joinSuccesss": "회원가입이 완료되었습니다. 로그인 후 사용해주세요."
     }
   },
   "message": {

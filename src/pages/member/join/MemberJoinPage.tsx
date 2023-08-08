@@ -1,4 +1,4 @@
-import MemberJoinContainer from '@containers/member/join/MemberJoinContainer';
+import { MemberJoinContainer } from '@containers/member/join';
 
 const MemberJoinPage = () => {
   return <MemberJoinContainer />;

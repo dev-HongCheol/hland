@@ -1,4 +1,4 @@
-import { object, ref, string, InferType } from 'yup';
+import { object, ref, string, boolean } from 'yup';
 
 export const memberSchema = object().shape({
   email: string().email('member.join.emailVaildation').required('member.join.emailRequired'),
@@ -11,11 +11,17 @@ export const memberSchema = object().shape({
     .min(8, 'member.join.passwordMin')
     .max(20, 'member.join.passwordMax')
     .oneOf([ref('password')], 'member.join.passwordDoNotMatch'),
+  emailVerified: boolean().default(false),
 });
 
-export type Member = InferType<typeof memberSchema>;
+// export type Member = InferType<typeof memberSchema>;
+export type Member = {
+  email: string;
+  password: string;
+  passwordConfirmation?: string;
+};
 
-export type ReqMemberJoin = {
+export type ReqMember = {
   email: string;
   password: string;
   returnSecureToken: true;

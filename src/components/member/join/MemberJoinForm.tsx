@@ -1,9 +1,21 @@
-import { Grid, Typography, TextField } from '@mui/material';
+import { Grid, Typography, TextField, Button } from '@mui/material';
 import { MemberJoinButtons } from './button';
 import { useMemberJoinForm } from './data';
 
 const MemberJoinForm = () => {
-  const { t, onSubmitMemberJoin, register, handleSubmit, errors, reset } = useMemberJoinForm();
+  const {
+    t,
+    onSubmitMemberJoin,
+    register,
+    handleSubmit,
+    errors,
+    reset,
+    handleSendEmailVerification,
+    emailVerified,
+    setEmailVerified,
+    timer,
+    emailVerifiedCheckTime,
+  } = useMemberJoinForm();
   return (
     <form
       onSubmit={handleSubmit(onSubmitMemberJoin)}
@@ -17,15 +29,35 @@ const MemberJoinForm = () => {
         </Grid>
         <Grid container justifyContent={'center'} rowGap={3} my={4}>
           <Grid item textAlign={'center'} xs={10} md={8} lg={7}>
-            <TextField
-              id="email"
-              error={!!errors.email}
-              helperText={errors.email ? t(`${errors.email?.message}`) : ''}
-              label={t('member.join.email')}
-              variant="outlined"
-              {...register('email')}
-              fullWidth
-            />
+            <Grid container columnGap={2} alignItems={'center'}>
+              <Grid item flexGrow={1}>
+                <TextField
+                  id="email"
+                  error={!!errors.email}
+                  helperText={errors.email ? t(`${errors.email?.message}`) : ''}
+                  label={t('member.join.email')}
+                  variant="outlined"
+                  {...register('email')}
+                  onChange={(e) => {
+                    // setValue('email', e.target.value);
+                    setEmailVerified(false);
+                  }}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={'auto'} color={'p'}>
+                <Button
+                  variant="contained"
+                  color="info"
+                  sx={{ margin: 'auto 0', textTransform: 'none' }}
+                  onClick={() => handleSendEmailVerification()}
+                >
+                  {t('member.join.btnSendEmailVerification')}
+                </Button>
+                <br />
+                {emailVerifiedCheckTime >= 1 && timer}
+              </Grid>
+            </Grid>
           </Grid>
 
           <Grid item textAlign={'center'} xs={10} md={8} lg={7}>
@@ -55,7 +87,7 @@ const MemberJoinForm = () => {
           </Grid>
         </Grid>
         <Grid item textAlign={'center'}>
-          <MemberJoinButtons reset={reset} />
+          <MemberJoinButtons reset={reset} submitDisabled={emailVerified} />
         </Grid>
       </Grid>
     </form>

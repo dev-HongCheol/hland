@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import { useMemberJoinButtons } from './data';
 import { MemberJoinButtonsProps } from './data/MemberJoinButtons.types';
 
-const MemberJoinButtons = ({ reset }: MemberJoinButtonsProps) => {
+const MemberJoinButtons = ({ reset, submitDisabled }: MemberJoinButtonsProps) => {
   const { t } = useMemberJoinButtons();
   return (
     <>
@@ -13,6 +13,7 @@ const MemberJoinButtons = ({ reset }: MemberJoinButtonsProps) => {
         sx={{
           marginRight: '3rem',
         }}
+        disabled={!submitDisabled}
       >
         {t('member.join.btnJoin')}
       </Button>

@@ -6,7 +6,7 @@
   },
   "member": {
     "join": {
-      "title": "Member Join🎉",
+      "title": "Member Sign Up🎉",
       "email": "Email",
       "emailVaildation": "Please enter an email format.",
       "emailRequired": "Email is required.",
@@ -21,10 +21,11 @@
       "passwordMin": "Password must be at least 8 characters long.",
       "passwordMax": "Password can be no more than 20 characters.",
 
+      "btnSendEmailVerification": "Send Email",
       "btnJoin": "JOIN",
       "btnCancle": "CANCLE",
 
-      "joinSuccesss": "Sign up is complete.<br>Please use it after logging in."
+      "joinSuccesss": "Sign up is complete. Please use it after logging in."
     }
   },
   "message": {
