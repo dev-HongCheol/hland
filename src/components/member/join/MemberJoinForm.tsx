@@ -29,8 +29,8 @@ const MemberJoinForm = () => {
         </Grid>
         <Grid container justifyContent={'center'} rowGap={3} my={4}>
           <Grid item textAlign={'center'} xs={10} md={8} lg={7}>
-            <Grid container columnGap={2} alignItems={'center'}>
-              <Grid item flexGrow={1}>
+            <Grid container alignItems={'center'} spacing={2}>
+              <Grid item xs>
                 <TextField
                   id="email"
                   error={!!errors.email}
@@ -45,17 +45,23 @@ const MemberJoinForm = () => {
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={'auto'} color={'p'}>
+              <Grid item xs={'auto'}>
                 <Button
                   variant="contained"
                   color="info"
                   sx={{ margin: 'auto 0', textTransform: 'none' }}
                   onClick={() => handleSendEmailVerification()}
+                  fullWidth
                 >
                   {t('member.join.btnSendEmailVerification')}
                 </Button>
-                <br />
-                {emailVerifiedCheckTime >= 1 && timer}
+
+                {emailVerifiedCheckTime >= 1 && (
+                  <>
+                    <br />
+                    {timer}
+                  </>
+                )}
               </Grid>
             </Grid>
           </Grid>
