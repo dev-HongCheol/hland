@@ -5,16 +5,16 @@ const routers = {
     path: '/',
     description: 'Main Page',
   },
-  MEMBER: {
-    path: '/member',
-    description: 'member',
+  ACCOUNT: {
+    path: '/account',
+    description: 'account',
 
-    JOIN: {
-      path: '/join',
-      description: 'member join',
+    SIGN_UP: {
+      path: '/sign-up',
+      description: 'account join',
     },
-    LOGIN: {
-      path: '/login',
+    LOG_IN: {
+      path: '/log-in',
       description: 'login',
     },
   },

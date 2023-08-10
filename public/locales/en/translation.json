@@ -4,9 +4,9 @@
       "title": "Cart"
     }
   },
-  "member": {
-    "join": {
-      "title": "Member Sign Up🎉",
+  "account": {
+    "signUp": {
+      "title": "Sign Up🎉",
       "email": "Email",
       "emailVaildation": "Please enter an email format.",
       "emailRequired": "Email is required.",

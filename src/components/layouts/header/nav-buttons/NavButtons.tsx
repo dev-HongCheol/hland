@@ -50,12 +50,12 @@ const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
         <LanguageToggleButton isHeaderDense={isHeaderDense} />
       </Grid>
       <Grid item xs={'auto'}>
-        <NavLink isHeaderDense={isHeaderDense} underline="none" href={ROUTES.MEMBER.LOGIN.path}>
+        <NavLink isHeaderDense={isHeaderDense} underline="none" href={ROUTES.ACCOUNT.LOG_IN.path}>
           LOG IN
         </NavLink>
       </Grid>
       <Grid item xs={'auto'}>
-        <NavLink isHeaderDense={isHeaderDense} underline="none" href={ROUTES.MEMBER.JOIN.path}>
+        <NavLink isHeaderDense={isHeaderDense} underline="none" href={ROUTES.ACCOUNT.SIGN_UP.path}>
           SIGN UP
         </NavLink>
       </Grid>

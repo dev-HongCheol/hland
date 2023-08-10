@@ -7,7 +7,7 @@ const DefaultLayout = lazy(() => import('@components/layouts/default-layout/Defa
 const MemberLayout = lazy(() => import('@components/layouts/member-layout/MemberLayout'));
 
 const MainPage = lazy(() => import('@pages/main/MainPage'));
-const MemberJoin = lazy(() => import('@pages/member/join/MemberJoinPage'));
+const AccountSignUpPage = lazy(() => import('@pages/account/sign-up/AccountSignUpPage'));
 
 const AppRouter = createBrowserRouter([
   {
@@ -27,7 +27,7 @@ const AppRouter = createBrowserRouter([
     ],
   },
   {
-    path: ROUTES.MEMBER.JOIN.path,
+    path: ROUTES.ACCOUNT.path,
     element: (
       <MemberLayout>
         <Outlet />
@@ -35,8 +35,8 @@ const AppRouter = createBrowserRouter([
     ),
     children: [
       {
-        path: ROUTES.MEMBER.JOIN.path,
-        element: <MemberJoin />,
+        path: ROUTES.ACCOUNT.SIGN_UP.path,
+        element: <AccountSignUpPage />,
       },
     ],
   },
