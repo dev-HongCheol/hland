@@ -7,10 +7,13 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@libs/router/data';
 import { signUp } from './accountSignUpForm.api';
 import { ReqSignUp, SignUp, signUpSchema } from '.';
+import { useState } from 'react';
 
 const useAccountSignUpForm = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [emailVerified, setEmailVerified] = useState(false);
+  const [signUpGuideMsg, setSignUpguideMsg] = useState(`${t('account.signUp.guideStep1')}`);
 
   const mutation = useMutation({
     mutationFn: signUp,
@@ -38,6 +41,8 @@ const useAccountSignUpForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    getValues,
+    trigger,
   } = useForm({
     resolver: yupResolver(signUpSchema),
   });
@@ -50,6 +55,13 @@ const useAccountSignUpForm = () => {
     handleSubmit,
     errors,
     reset,
+    trigger,
+    getValues,
+
+    signUpGuideMsg,
+    setSignUpguideMsg,
+    emailVerified,
+    setEmailVerified,
   };
 };
 

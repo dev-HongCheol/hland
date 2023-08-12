@@ -25,7 +25,8 @@
       "btnJoin": "가입",
       "btnCancle": "취소",
 
-      "joinSuccesss": "회원가입이 완료되었습니다. 로그인 후 사용해주세요."
+      "joinSuccesss": "회원가입이 완료되었습니다. 로그인 후 사용해주세요.",
+      "guideStep1": "먼저 이메일 주소를 입력 후 이메일 인증을 진행해주세요."
     }
   },
   "message": {
