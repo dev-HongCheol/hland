@@ -1,4 +1,4 @@
-import { Grid, Typography, TextField } from '@mui/material';
+import { Grid, Typography, TextField, Alert, AlertTitle, AlertColor } from '@mui/material';
 import { useAccountSignUpForm } from './data';
 import { AccountSignUpButtons } from './buttons';
 import { EmailForm } from './email-form';
@@ -13,11 +13,12 @@ const AccountSignUpForm = () => {
     reset,
     trigger,
     getValues,
-    signUpGuideMsg,
-    setSignUpguideMsg,
+    signUpGuideAlert,
+    setSignUpGuideAlert,
     emailVerified,
     setEmailVerified,
   } = useAccountSignUpForm();
+
   return (
     <form
       onSubmit={handleSubmit(handleSignUp)}
@@ -29,10 +30,11 @@ const AccountSignUpForm = () => {
         <Grid item textAlign={'center'} mt={4}>
           <Typography variant={'h4'}>{t('account.signUp.title')}</Typography>
         </Grid>
-        <Grid item>
-          <Typography variant="h6" mt={5} color={'#5b5b5b'}>
-            {signUpGuideMsg}
-          </Typography>
+        <Grid item my={3}>
+          <Alert severity={signUpGuideAlert.type}>
+            <AlertTitle></AlertTitle>
+            {t(signUpGuideAlert.msg)}
+          </Alert>
         </Grid>
         <Grid container justifyContent={'center'} rowGap={3} my={4}>
           <Grid item textAlign={'center'} xs={10} md={8} lg={7}>
@@ -41,8 +43,9 @@ const AccountSignUpForm = () => {
               error={errors.email}
               trigger={trigger}
               getValues={getValues}
-              setSignUpguideMsg={setSignUpguideMsg}
+              setSignUpGuideAlert={setSignUpGuideAlert}
               setEmailVerified={setEmailVerified}
+              emailVerified={emailVerified}
             />
           </Grid>
           {emailVerified && (

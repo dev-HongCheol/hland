@@ -6,14 +6,17 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@libs/router/data';
 import { signUp } from './accountSignUpForm.api';
-import { ReqSignUp, SignUp, signUpSchema } from '.';
+import { ReqSignUp, SignUp, SignUpGuideAlert, signUpSchema } from '.';
 import { useState } from 'react';
 
 const useAccountSignUpForm = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [emailVerified, setEmailVerified] = useState(false);
-  const [signUpGuideMsg, setSignUpguideMsg] = useState(`${t('account.signUp.guideStep1')}`);
+  const [signUpGuideAlert, setSignUpGuideAlert] = useState<SignUpGuideAlert>({
+    type: 'info',
+    msg: 'account.signUp.guideMsgPlzMailVerified',
+  });
 
   const mutation = useMutation({
     mutationFn: signUp,
@@ -57,9 +60,8 @@ const useAccountSignUpForm = () => {
     reset,
     trigger,
     getValues,
-
-    signUpGuideMsg,
-    setSignUpguideMsg,
+    signUpGuideAlert,
+    setSignUpGuideAlert,
     emailVerified,
     setEmailVerified,
   };

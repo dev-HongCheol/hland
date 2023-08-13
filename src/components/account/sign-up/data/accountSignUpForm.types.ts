@@ -29,3 +29,10 @@ export type ResSignUp = {
   expiresIn: string;
   localId: string;
 };
+
+export type AlertColor = 'success' | 'info' | 'warning' | 'error';
+
+export type SignUpGuideAlert = {
+  type: AlertColor;
+  msg: string;
+};

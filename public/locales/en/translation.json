@@ -25,7 +25,11 @@
       "btnJoin": "JOIN",
       "btnCancle": "CANCLE",
 
-      "joinSuccesss": "Sign up is complete. Please use it after logging in."
+      "joinSuccesss": "회원가입이 완료되었습니다. 로그인 후 사용해주세요.",
+      "guideMsgPlzMailVerified": "First, enter your email address and then proceed with email verification",
+      "guideMsgEmailVerifiedSuccesss": "Email verification is complete.\nPlease continue to sign up",
+      "guideMsgEmailVerifiedTimeOut": "Your email verification time has expired.\nplease proceed again",
+      "guideMsgContinueMailCheck": "A verification request email has been sent to the email address you entered.\nplease check your email"
     }
   },
   "message": {
