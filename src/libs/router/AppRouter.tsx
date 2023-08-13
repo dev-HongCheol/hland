@@ -9,37 +9,42 @@ const MemberLayout = lazy(() => import('@components/layouts/member-layout/Member
 const MainPage = lazy(() => import('@pages/main/MainPage'));
 const AccountSignUpPage = lazy(() => import('@pages/account/sign-up/AccountSignUpPage'));
 
-const AppRouter = createBrowserRouter([
-  {
-    path: ROUTES.INDEX.path,
-    element: (
-      <AuthProvider>
-        <DefaultLayout>
+const AppRouter = createBrowserRouter(
+  [
+    {
+      path: ROUTES.INDEX.path,
+      element: (
+        <AuthProvider>
+          <DefaultLayout>
+            <Outlet />
+          </DefaultLayout>
+        </AuthProvider>
+      ),
+      children: [
+        {
+          index: true,
+          element: <MainPage />,
+        },
+      ],
+    },
+    {
+      path: ROUTES.ACCOUNT.path,
+      element: (
+        <MemberLayout>
           <Outlet />
-        </DefaultLayout>
-      </AuthProvider>
-    ),
-    children: [
-      {
-        index: true,
-        element: <MainPage />,
-      },
-    ],
-  },
+        </MemberLayout>
+      ),
+      children: [
+        {
+          path: ROUTES.ACCOUNT.SIGN_UP.path,
+          element: <AccountSignUpPage />,
+        },
+      ],
+    },
+  ],
   {
-    path: ROUTES.ACCOUNT.path,
-    element: (
-      <MemberLayout>
-        <Outlet />
-      </MemberLayout>
-    ),
-    children: [
-      {
-        path: ROUTES.ACCOUNT.SIGN_UP.path,
-        element: <AccountSignUpPage />,
-      },
-    ],
+    basename: import.meta.env.VITE_SERVER_DOMAIN,
   },
-]);
+);
 
 export default AppRouter;
