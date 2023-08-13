@@ -9,6 +9,8 @@ import AppRouter from '@libs/router/AppRouter';
 import '@libs/i18n';
 import { Provider } from 'react-redux';
 import { store } from './libs/stores';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import { worker } from '@libs/mocks';
 
 // if (process.env.NODE_ENV === 'development') {
@@ -30,6 +32,16 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <Suspense fallback={<Spinner />}>
             <ThemeProvider theme={muiTheme}>
+              <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                pauseOnFocusLoss
+                pauseOnHover
+                theme="colored"
+              />
               <CssBaseline />
               <RouterProvider router={AppRouter} />
             </ThemeProvider>

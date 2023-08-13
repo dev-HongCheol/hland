@@ -4,6 +4,7 @@ import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import { ShoppingCartCount } from './shopping-cart-count';
 import { useEffect, useRef, useState } from 'react';
 import { ShoppingCartLayerPopup } from './shopping-cart-layer-popup';
+import { ROUTES } from '@libs/router/data';
 
 type HeaderStyleProps = {
   isHeaderDense: boolean;
@@ -49,12 +50,12 @@ const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
         <LanguageToggleButton isHeaderDense={isHeaderDense} />
       </Grid>
       <Grid item xs={'auto'}>
-        <NavLink isHeaderDense={isHeaderDense} underline="none">
+        <NavLink isHeaderDense={isHeaderDense} underline="none" href={ROUTES.ACCOUNT.LOG_IN.path}>
           LOG IN
         </NavLink>
       </Grid>
       <Grid item xs={'auto'}>
-        <NavLink isHeaderDense={isHeaderDense} underline="none">
+        <NavLink isHeaderDense={isHeaderDense} underline="none" href={ROUTES.ACCOUNT.SIGN_UP.path}>
           SIGN UP
         </NavLink>
       </Grid>

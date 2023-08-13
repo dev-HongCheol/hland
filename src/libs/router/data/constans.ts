@@ -5,18 +5,17 @@ const routers = {
     path: '/',
     description: 'Main Page',
   },
-  LOGIN: {
-    path: '/login',
-    description: 'Login Page',
+  ACCOUNT: {
+    path: '/account',
+    description: 'account',
 
-    FIND_PWD: {
-      path: '/find-pw',
-      description: 'find password',
-
-      FIND_PWD11: {
-        path: '/find-pw-inner',
-        description: 'find password',
-      },
+    SIGN_UP: {
+      path: '/sign-up',
+      description: 'account join',
+    },
+    LOG_IN: {
+      path: '/log-in',
+      description: 'login',
     },
   },
 };
