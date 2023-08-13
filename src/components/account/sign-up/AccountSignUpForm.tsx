@@ -1,4 +1,4 @@
-import { Grid, Typography, TextField, Alert, AlertTitle, AlertColor } from '@mui/material';
+import { Grid, Typography, TextField, Alert, AlertTitle } from '@mui/material';
 import { useAccountSignUpForm } from './data';
 import { AccountSignUpButtons } from './buttons';
 import { EmailForm } from './email-form';
