@@ -27,7 +27,6 @@ const setNestedPathProxy: ProxyHandler<RouteItem> = {
       const parentPath = target.path ? target?.path : '';
       return new Proxy({ ...value, path: `${parentPath}${value.path}` }, setNestedPathProxy);
     }
-    // return `${import.meta.env.VITE_SERVER_DOMAIN}${value}`;
     return value;
   },
 };

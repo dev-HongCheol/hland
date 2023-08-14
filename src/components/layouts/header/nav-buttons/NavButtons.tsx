@@ -1,10 +1,11 @@
-import { Grid, IconButton, Link, styled } from '@mui/material';
+import { Grid, IconButton, styled } from '@mui/material';
 import { LanguageToggleButton } from './language-toggle-button';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import { ShoppingCartCount } from './shopping-cart-count';
 import { useEffect, useRef, useState } from 'react';
 import { ShoppingCartLayerPopup } from './shopping-cart-layer-popup';
 import { ROUTES } from '@libs/router/data';
+import { Link } from 'react-router-dom';
 
 type HeaderStyleProps = {
   isHeaderDense: boolean;
@@ -19,6 +20,7 @@ const NavLink = styled(Link, {
     color: `${isHeaderDense ? '#fff' : '#123ad4'}!important`,
     cursor: 'pointer',
   },
+  textDecoration: 'none',
 }));
 
 const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
@@ -50,12 +52,12 @@ const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
         <LanguageToggleButton isHeaderDense={isHeaderDense} />
       </Grid>
       <Grid item xs={'auto'}>
-        <NavLink isHeaderDense={isHeaderDense} underline="none" href={ROUTES.ACCOUNT.LOG_IN.path}>
+        <NavLink isHeaderDense={isHeaderDense} to={ROUTES.ACCOUNT.LOG_IN.path}>
           LOG IN
         </NavLink>
       </Grid>
       <Grid item xs={'auto'}>
-        <NavLink isHeaderDense={isHeaderDense} underline="none" href={ROUTES.ACCOUNT.SIGN_UP.path}>
+        <NavLink isHeaderDense={isHeaderDense} to={ROUTES.ACCOUNT.SIGN_UP.path}>
           SIGN UP
         </NavLink>
       </Grid>
