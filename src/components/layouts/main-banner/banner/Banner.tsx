@@ -9,7 +9,7 @@ const Banner = ({ url }: BannerCarouselProps) => {
     <Paper
       sx={{
         height: '400px',
-        background: `url(${import.meta.env.VITE_SERVER_DOMAIN}${url}) center center`,
+        background: `url(${url}) center center`,
       }}
     ></Paper>
   );
