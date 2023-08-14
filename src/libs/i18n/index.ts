@@ -16,7 +16,7 @@ i18n
       ],
       backendOptions: [
         {
-          loadPath: `/locales/{{lng}}/{{ns}}.json`,
+          loadPath: `${import.meta.env.VITE_SERVER_DOMAIN}/locales/{{lng}}/{{ns}}.json`,
         },
       ],
     },
