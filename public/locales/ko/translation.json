@@ -7,17 +7,15 @@
   "account": {
     "signUp": {
       "title": "회원가입🎉",
+
       "email": "이메일",
       "emailVaildation": "이메일 형식을 입력하세요.",
       "emailRequired": "이메일은 필수 항목입니다.",
-
       "password": "비밀번호",
       "passwordRequired": "비밀번호는 필수 항목입니다.",
-
       "passwordConfirmation": "비밀번호 확인",
       "passwordConfirmationRequired": "비밀번호 확인은 필수 항목입니다.",
       "passwordDoNotMatch": "비밀번호와 비밀번호 확인이 맞지 않습니다.",
-
       "passwordMin": "비밀번호는 최소 8자 이상입니다.",
       "passwordMax": "비밀번호는 최대 20자 이하입니다.",
 
@@ -25,16 +23,28 @@
       "btnJoin": "가입",
       "btnCancle": "취소",
 
-      "joinSuccesss": "회원가입이 완료되었습니다. 로그인 후 사용해주세요.",
+      "complete": "회원가입이 완료되었습니다. 로그인 후 사용해주세요.",
       "guideMsgPlzMailVerified": "먼저 이메일 주소를 입력 후 이메일 인증을 진행해주세요.",
-      "guideMsgEmailVerifiedSuccesss": "이메일 인증이 완료 되었습니다.\n회원가입을 계속 진행해주세요.",
+      "guideMsgEmailVerifiedSuccess": "이메일 인증이 완료 되었습니다.\n회원가입을 계속 진행해주세요.",
       "guideMsgEmailVerifiedTimeOut": "이메일 인증 시간이 만료되었습니다.\n다시 진행하시기 바랍니다.",
       "guideMsgContinueMailCheck": "입력하신 이메일 주소로 인증요청 메일이 발송되었습니다.\n이메일을 확인해주세요."
+    },
+    "login": {
+      "title": "로그인🎄",
+      "btnLogin": "로그인",
+
+      "email": "이메일",
+      "emailVaildation": "이메일 형식을 입력하세요.",
+      "emailRequired": "이메일은 필수 항목입니다.",
+      "password": "비밀번호",
+      "passwordRequired": "비밀번호는 필수 항목입니다."
     }
   },
   "message": {
     "error": {
-      "EMAIL_EXISTS": "이미 가입된 메일주소입니다."
+      "EMAIL_EXISTS": "이미 가입된 메일주소입니다.",
+      "EMAIL_NOT_FOUND": "존재하지 않는 이메일 입니다.",
+      "INVALID_PASSWORD": "유효하지 않는 비밀번호입니다."
     }
   }
 }
