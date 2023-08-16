@@ -11,6 +11,13 @@ const instance = axios.create({
 // 요청 인터셉터 추가하기
 instance.interceptors.request.use(
   function (config) {
+    const isAuthtUrl = config.url?.indexOf('v1/accounts') !== -1;
+    console.log(isAuthtUrl);
+
+    isAuthtUrl
+      ? (config.baseURL = 'https://identitytoolkit.googleapis.com')
+      : (config.baseURL = 'https://content-firestore.googleapis.com');
+
     config.url += `?key=${import.meta.env.VITE_FIREBASE_APIKEY}`;
     return config;
   },
