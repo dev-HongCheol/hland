@@ -8,6 +8,7 @@ const MemberLayout = lazy(() => import('@components/layouts/member-layout/Member
 
 const MainPage = lazy(() => import('@pages/main/MainPage'));
 const AccountSignUpPage = lazy(() => import('@pages/account/sign-up/AccountSignUpPage'));
+const AccountLoginPage = lazy(() => import('@pages/account/log-in/AccountLoginPage'));
 
 const AppRouter = createBrowserRouter(
   [
@@ -38,6 +39,10 @@ const AppRouter = createBrowserRouter(
         {
           path: ROUTES.ACCOUNT.SIGN_UP.path,
           element: <AccountSignUpPage />,
+        },
+        {
+          path: ROUTES.ACCOUNT.LOG_IN.path,
+          element: <AccountLoginPage />,
         },
       ],
     },

@@ -14,7 +14,6 @@ const useEmailForm = (
   const maxCheckTime = 5 * 60;
   const emailVerifiedTimerRef = useRef<NodeJS.Timer>();
   const [emailVerifiedCheckTime, setEmailVerifiedCheckTime] = useState(0);
-  const idToken = sessionStorage.getItem('idToken') || '';
 
   const timer = useCallback(() => {
     const time = maxCheckTime - emailVerifiedCheckTime;
@@ -22,13 +21,18 @@ const useEmailForm = (
   }, [emailVerifiedCheckTime, maxCheckTime]);
 
   const releaseEmailVerified = async () => {
-    if (emailVerifiedTimerRef.current || idToken) {
+    const idToken = sessionStorage.getItem('idToken') || '';
+
+    if (idToken) {
       await deleteAccount(idToken);
-      clearInterval(emailVerifiedTimerRef.current);
-      emailVerifiedTimerRef.current = undefined;
-      setEmailVerifiedCheckTime(0);
       sessionStorage.removeItem('idToken');
     }
+    if (emailVerifiedTimerRef.current) {
+      clearInterval(emailVerifiedTimerRef.current);
+      emailVerifiedTimerRef.current = undefined;
+    }
+
+    setEmailVerifiedCheckTime(0);
   };
 
   const interval = async (idToken: string) => {
@@ -37,11 +41,11 @@ const useEmailForm = (
 
       const resUser = await getAccount(idToken);
       if (resUser.data.users[0].emailVerified) {
-        releaseEmailVerified();
+        await releaseEmailVerified();
         setEmailVerified(true);
         setSignUpGuideAlert({
           type: 'success',
-          msg: 'account.signUp.guideMsgEmailVerifiedSuccesss',
+          msg: 'account.signUp.guideMsgEmailVerifiedSuccess',
         });
       }
     }, 1000);
@@ -56,11 +60,18 @@ const useEmailForm = (
         msg: 'account.signUp.guideMsgEmailVerifiedTimeOut',
       });
     }
+
+    return () => {
+      console.log('');
+    };
   }, [emailVerifiedCheckTime]);
 
   useEffect(() => {
-    console.log('unmounted');
     releaseEmailVerified();
+
+    return () => {
+      releaseEmailVerified();
+    };
   }, []);
 
   const handleSendEmailVerification = async () => {
@@ -79,10 +90,10 @@ const useEmailForm = (
 
     try {
       signUp(reqSingUp).then(async (res) => {
-        const token = res.data.idToken;
-        sessionStorage.setItem('idToken', token);
+        const idToken = res.data.idToken;
+        sessionStorage.setItem('idToken', idToken);
 
-        const resSendMail = await sendOobCode(token);
+        const resSendMail = await sendOobCode(idToken);
         if (!resSendMail.data) {
           return;
         }
@@ -91,7 +102,7 @@ const useEmailForm = (
           type: 'info',
           msg: 'account.signUp.guideMsgContinueMailCheck',
         });
-        interval(token);
+        interval(idToken);
       });
     } catch (e) {
       console.log(e);

@@ -29,7 +29,6 @@ const EmailForm = ({
     setSignUpGuideAlert,
     setEmailVerified,
   );
-  console.log('reload');
 
   return (
     <Grid container spacing={2} alignItems={'center'}>

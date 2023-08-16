@@ -21,7 +21,7 @@ const useAccountSignUpForm = () => {
   const mutation = useMutation({
     mutationFn: signUp,
     onSuccess: async () => {
-      toast.success(t('member.join.joinSuccesss'));
+      toast.success(t('account.signUp.complete'));
       navigate(ROUTES.ACCOUNT.LOG_IN.path);
     },
   });

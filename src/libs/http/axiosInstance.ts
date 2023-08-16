@@ -38,21 +38,16 @@ instance.interceptors.response.use(
   },
 );
 
-const httpGet = <T>(url: string, config?: AxiosRequestConfig<unknown> | undefined) => instance.get<T>(url, config);
+const http = {
+  get: <T>(url: string, config?: AxiosRequestConfig<unknown> | undefined) => instance.get<T>(url, config),
 
-const httpPost = <T>(url: string, data?: unknown, config?: AxiosRequestConfig<unknown> | undefined) =>
-  instance.post<T>(url, data, config);
+  post: <T>(url: string, data?: unknown, config?: AxiosRequestConfig<unknown> | undefined) =>
+    instance.post<T>(url, data, config),
 
-const httpPut = <T>(url: string, data?: unknown, config?: AxiosRequestConfig<unknown> | undefined) =>
-  instance.put<T>(url, data, config);
+  put: <T>(url: string, data?: unknown, config?: AxiosRequestConfig<unknown> | undefined) =>
+    instance.put<T>(url, data, config),
 
-const httpDelete = <T>(url: string, config?: AxiosRequestConfig<unknown> | undefined) =>
-  instance.delete<T>(url, config);
-
-export default {
-  instance,
-  httpGet,
-  httpPost,
-  httpPut,
-  httpDelete,
+  delete: <T>(url: string, config?: AxiosRequestConfig<unknown> | undefined) => instance.delete<T>(url, config),
 };
+
+export default http;

@@ -26,7 +26,7 @@ const AccountSignUpForm = () => {
         width: '100%',
       }}
     >
-      <Grid container direction="column" alignItems={'center'}>
+      <Grid container direction="column" alignItems={'center'} p={4}>
         <Grid item textAlign={'center'} mt={4}>
           <Typography variant={'h4'}>{t('account.signUp.title')}</Typography>
         </Grid>
@@ -37,7 +37,7 @@ const AccountSignUpForm = () => {
           </Alert>
         </Grid>
         <Grid container justifyContent={'center'} rowGap={3} my={4}>
-          <Grid item textAlign={'center'} xs={10} md={8} lg={7}>
+          <Grid item textAlign={'center'} xs={12} md={8} lg={7}>
             <EmailForm
               register={register}
               error={errors.email}
@@ -50,7 +50,7 @@ const AccountSignUpForm = () => {
           </Grid>
           {emailVerified && (
             <>
-              <Grid item textAlign={'center'} xs={10} md={8} lg={7}>
+              <Grid item textAlign={'center'} xs={12} md={8} lg={7}>
                 <TextField
                   id="password"
                   type="password"
@@ -63,7 +63,7 @@ const AccountSignUpForm = () => {
                 />
               </Grid>
 
-              <Grid item textAlign={'center'} xs={10} md={8} lg={7}>
+              <Grid item textAlign={'center'} xs={12} md={8} lg={7}>
                 <TextField
                   id="passwordConfirmation"
                   type="password"
