@@ -25,7 +25,8 @@
       "@components/*": ["src/components/*"],
       "@containers/*": ["src/containers/*"],
       "@libs/*": ["src/libs/*"],
-      "@pages/*": ["src/pages/*"]
+      "@pages/*": ["src/pages/*"],
+      "@utils/*": ["src/utils/*"]
     }
   },
   "include": ["src"],

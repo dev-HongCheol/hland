@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from '@libs/stores';
 import mainProductListApi from './mainProductList.api';
 import { useQuery } from '@tanstack/react-query';
 import { setListOption } from '@libs/stores/product';
+import firestoreUtil from '@utils/firestore';
 
 const useMainProductList = () => {
   const listOption = useAppSelector((state) => state.product.listOption);
@@ -11,6 +12,8 @@ const useMainProductList = () => {
   const getProductList = async () => {
     const skip = listOption.limit * (listOption.page - 1);
     const res = await fetchProducts(listOption.limit, skip);
+    console.log(firestoreUtil.toJson(res));
+
     const totalPage = res.total;
     const limitSize = res.limit;
 
