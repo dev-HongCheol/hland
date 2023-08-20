@@ -28,6 +28,7 @@
     "axios": "^1.4.0",
     "firebase": "^9.22.0",
     "firestore-parser": "^0.9.0",
+    "firestore-rest-parser": "^1.1.1",
     "i18next": "^23.2.6",
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-chained-backend": "^4.4.0",

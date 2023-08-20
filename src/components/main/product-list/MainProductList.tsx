@@ -14,7 +14,7 @@ const MainProductList = () => {
     <Grid container direction={'column'} alignItems={'center'}>
       <Grid item>
         <Grid container spacing={3} mt={1.5}>
-          {data?.products.map((product) => (
+          {(data?.products || []).map((product) => (
             <Fragment key={product.id}>
               <Grid item lg={3} md={4} sm={6} xs={12}>
                 <MainProductItem
