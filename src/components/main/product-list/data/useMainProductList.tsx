@@ -11,8 +11,10 @@ const useMainProductList = () => {
   const getProductList = async () => {
     const skip = listOption.limit * (listOption.page - 1);
     const res = await fetchProducts(listOption.limit, skip);
-    const totalPage = res.total;
-    const limitSize = res.limit;
+    /*  const totalPage = res.total;
+    const limitSize = res.limit; */
+    const totalPage = 5;
+    const limitSize = 10;
 
     const maxPage = Math.ceil(totalPage / limitSize);
     dispatch(setListOption({ ...listOption, maxPage }));

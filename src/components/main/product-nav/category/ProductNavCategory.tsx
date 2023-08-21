@@ -1,12 +1,15 @@
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { useProductNavCategory } from './data';
 
 const ProductNavCategory = () => {
-  const { selectedSubMenu } = useProductNavCategory();
+  const { selectedCategorySubs, breadcrumbs } = useProductNavCategory();
+  console.log(selectedCategorySubs);
+
   return (
     <Grid container direction={'column'}>
       {breadcrumbs.length >= 1 && (
         <Grid mb={2}>
+          {' '}
           <Typography sx={{ fontSize: '0.93rem', fontWeight: 600 }}>{breadcrumbs[0]}</Typography>
         </Grid>
       )}

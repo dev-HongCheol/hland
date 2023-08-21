@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { forwardRef, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
-import { useTranslation } from 'react-i18next';
+import i18n from '@libs/i18n';
 
 const ShoppingCartLayerPopupDiv = styled(Box)({
   position: 'absolute',
@@ -28,7 +28,7 @@ type ShoppingCartLayerPopupProps = {
 
 const ShoppingCartLayerPopup = forwardRef(
   ({ isShow, handleHiddenShoppingCartLayerPopup }: ShoppingCartLayerPopupProps) => {
-    const { t } = useTranslation();
+    const { t } = i18n;
     const [checked, setChecked] = useState<number[]>([0]);
 
     const handleToggle = (value: number) => () => {

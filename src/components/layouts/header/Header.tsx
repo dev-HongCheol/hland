@@ -4,16 +4,24 @@ import NavButtons from './nav-buttons/NavButtons';
 import { HeaderCategories } from './categories';
 import muiTheme from '@libs/theme';
 
-const LogoTypographyStyle = styled(Typography)({
+const LogoTypographyStyle = styled(Typography)(({ theme }) => ({
   position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  [theme.breakpoints.down('md')]: {
+    left: '0',
+    padding: '5%',
+    fontSize: '1.6rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    top: '50%',
+    fontSize: '3rem',
+  },
   textDecoration: 'none',
   transitionProperty: 'opacity',
   transitionDuration: '0.1s',
   transitionTimingFunction: 'easeOut',
-});
+}));
 
 function Header() {
   const { headerInfo, categoriesHeight } = useHeader();
@@ -42,19 +50,19 @@ function Header() {
           <Toolbar sx={{ height: '100%', maxWidth: `${muiTheme.breakpoints.values.xl}px`, margin: '0 auto' }}>
             <LogoTypographyStyle
               variant="h3"
-              color="block"
+              color="black"
               sx={{
-                opacity: headerInfo.isDense ? 0 : 1,
+                display: headerInfo.isDense ? 'none' : 'block',
               }}
             >
-              H.LAND
+              {headerInfo.isDense ? 'H.LAND' : 'H'}
             </LogoTypographyStyle>
 
             <LogoTypographyStyle
               variant="h3"
               color="white"
               sx={{
-                opacity: headerInfo.isDense ? 1 : 0,
+                display: headerInfo.isDense ? 'block' : 'none',
               }}
             >
               H

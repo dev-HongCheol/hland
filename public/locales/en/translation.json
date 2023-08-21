@@ -3,5 +3,48 @@
     "shoppingCart": {
       "title": "Cart"
     }
+  },
+  "account": {
+    "signUp": {
+      "title": "Sign Up🎉",
+
+      "email": "Email",
+      "emailVaildation": "Please enter an email format.",
+      "emailRequired": "Email is required.",
+      "password": "Password",
+      "passwordRequired": "Password is required.",
+      "passwordConfirmation": "Password Confirmation",
+      "passwordConfirmationRequired": "passwordConfirmation is required.",
+      "passwordDoNotMatch": "The password and verification do not match.",
+      "passwordMin": "Password must be at least 8 characters long.",
+      "passwordMax": "Password can be no more than 20 characters.",
+
+      "btnSendEmailVerification": "Send Email",
+      "btnJoin": "JOIN",
+      "btnCancle": "CANCLE",
+
+      "complete": "Sign up is complete. Please use it after logging in.",
+      "guideMsgPlzMailVerified": "First, enter your email address and then proceed with email verification",
+      "guideMsgEmailVerifiedSuccess": "Email verification is complete.\nPlease continue to sign up",
+      "guideMsgEmailVerifiedTimeOut": "Your email verification time has expired.\nplease proceed again",
+      "guideMsgContinueMailCheck": "A verification request email has been sent to the email address you entered.\nplease check your email"
+    },
+    "login": {
+      "title": "Login",
+      "btnLogin": "로그인",
+
+      "email": "Email",
+      "emailVaildation": "Please enter an email format.",
+      "emailRequired": "Email is required.",
+      "password": "Password",
+      "passwordRequired": "Password is required."
+    }
+  },
+  "message": {
+    "error": {
+      "EMAIL_EXISTS": "This email address has already been registered.",
+      "EMAIL_NOT_FOUND": "This email does not exist.",
+      "INVALID_PASSWORD": "Invalid password."
+    }
   }
 }

@@ -5,18 +5,17 @@ const routers = {
     path: '/',
     description: 'Main Page',
   },
-  LOGIN: {
-    path: '/login',
-    description: 'Login Page',
+  ACCOUNT: {
+    path: '/account',
+    description: 'account',
 
-    FIND_PWD: {
-      path: '/find-pw',
-      description: 'find password',
-
-      FIND_PWD11: {
-        path: '/find-pw-inner',
-        description: 'find password',
-      },
+    SIGN_UP: {
+      path: '/sign-up',
+      description: 'account join',
+    },
+    LOG_IN: {
+      path: '/log-in',
+      description: 'login',
     },
   },
 };
@@ -28,10 +27,10 @@ const setNestedPathProxy: ProxyHandler<RouteItem> = {
       const parentPath = target.path ? target?.path : '';
       return new Proxy({ ...value, path: `${parentPath}${value.path}` }, setNestedPathProxy);
     }
-    return `${import.meta.env.VITE_SERVER_DOMAIN}${value}`;
+    return value;
   },
 };
-// FIXME 타입 수정 필요.
+// FIXME: 타입 수정 필요.
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const ROUTES = new Proxy(routers, setNestedPathProxy);
