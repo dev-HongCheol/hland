@@ -25,7 +25,8 @@ const MainProductItem = ({ id, title, brand, price, thumbnail }: MainProductItem
           <div
             style={{
               position: 'relative',
-              height: '330px',
+              height: '100%',
+              width: '100%',
             }}
             onMouseEnter={() => {
               handleToggleOverlapLayer(true);

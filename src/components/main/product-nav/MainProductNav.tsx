@@ -1,11 +1,7 @@
 import { ProductNavCategory } from './category';
 
 const MainProductNav = () => {
-  return (
-    <>
-      <ProductNavCategory />
-    </>
-  );
+  return <ProductNavCategory />;
 };
 
 export default MainProductNav;

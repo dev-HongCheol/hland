@@ -3,7 +3,7 @@ import { HanderMenuProps, useHeaderMenu } from './data';
 import { HeaderMenuList } from './header-menu-list';
 
 const HeaderMenu = ({ topPosition }: HanderMenuProps) => {
-  const { headerMenuRef, selectedTopMenuName, getTopMenuName } = useHeaderMenu();
+  const { headerMenuRef, selectedCategorySubs } = useHeaderMenu();
 
   return (
     <div
@@ -22,11 +22,11 @@ const HeaderMenu = ({ topPosition }: HanderMenuProps) => {
     >
       <Box maxWidth={900} mx={'auto'} width={'90%'}>
         <Grid container height={400} pt={6}>
-          {selectedTopMenuName.map((productMenu) => (
+          {selectedCategorySubs?.map((subCategories) => (
             <HeaderMenuList
-              key={getTopMenuName(productMenu)}
-              topMenuName={getTopMenuName(productMenu)}
-              subMenuNames={Object.values(productMenu[getTopMenuName(productMenu)])}
+              key={subCategories.name}
+              topMenuName={subCategories.name}
+              subMenuNames={subCategories.menus}
             />
           ))}
           {/* {menuRender()} */}
