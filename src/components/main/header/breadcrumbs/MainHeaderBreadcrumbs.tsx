@@ -2,7 +2,7 @@ import { useAppSelector } from '@libs/stores';
 import { Breadcrumbs, Link, styled } from '@mui/material';
 
 const BreadcrumbsLink = styled(Link)({
-  fontSize: '0.7rem',
+  fontSize: '0.65rem',
 });
 
 const MainHeaderBreadcrumbs = () => {

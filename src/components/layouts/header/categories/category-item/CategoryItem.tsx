@@ -1,9 +1,10 @@
 import { setBreadcrumbs, setHoverCategory, setSelectedCategory } from '@libs/stores/product';
-import { Typography, styled } from '@mui/material';
+import { Typography, styled, useMediaQuery } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { HeaderMenu } from './menu';
 import { CategoryItemProps } from './data/categoryItem.types';
 import useCategoryItem from './data/useCategoryItem';
+import muiTheme from '@libs/theme';
 
 const CategoryItemDiv = styled('div')({
   textAlign: 'center',
@@ -40,7 +41,12 @@ const CategoryItem = ({ name }: CategoryItemProps) => {
           dispatchCategoryMenu(false);
         }}
       >
-        <Typography fontWeight={700} fontSize={'1rem'} textAlign={'center'} component={'span'}>
+        <Typography
+          fontWeight={700}
+          fontSize={useMediaQuery(muiTheme.breakpoints.up('md')) ? '1rem' : '0.65rem'}
+          textAlign={'center'}
+          component={'span'}
+        >
           {name.toUpperCase()}
         </Typography>
       </Link>

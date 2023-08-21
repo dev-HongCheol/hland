@@ -3,7 +3,7 @@ import { useHeaderCategories } from './data';
 import { CategoryItem } from './category-item';
 
 const HeaderCategories = () => {
-  const { categories } = useHeaderCategories();
+  const { categories, isMdMoreThenScreen } = useHeaderCategories();
 
   return (
     <Grid
@@ -14,13 +14,8 @@ const HeaderCategories = () => {
         backgroundColor: 'rgba(255,255,255,0.9)',
         borderBottom: '1px solid #e9e8e8',
       }}
-      columnSpacing={5}
+      columnSpacing={isMdMoreThenScreen ? 5 : 2}
     >
-      {/* { Object.keys(categories).map((category) => (
-        <Grid item key={category} xs={'auto'}>
-          <CategoryItem name={category} />
-        </Grid>
-      ))} */}
       {categories.map((category) => (
         <Grid item key={category.name} xs={'auto'}>
           <CategoryItem name={category.name} />

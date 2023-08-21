@@ -5,14 +5,9 @@ import muiTheme from '@libs/theme';
 import { Grid, useMediaQuery } from '@mui/material';
 
 const MainContainer = () => {
+  const isMdMoreThenScreen = useMediaQuery(muiTheme.breakpoints.up('md'));
   return (
-    <Grid
-      container
-      direction={'column'}
-      maxWidth={'xl'}
-      mx={'auto'}
-      px={useMediaQuery(muiTheme.breakpoints.up('sm')) ? 7 : 1}
-    >
+    <Grid container direction={'column'} maxWidth={'xl'} mx={'auto'} px={isMdMoreThenScreen ? 7 : 1}>
       <Grid item>
         <MainHeader />
       </Grid>
@@ -29,7 +24,7 @@ const MainContainer = () => {
         >
           <MainProductNav />
         </Grid>
-        <Grid item xs={useMediaQuery(muiTheme.breakpoints.up('sm')) ? 10 : 12}>
+        <Grid item xs={isMdMoreThenScreen ? 10 : 12}>
           <Main />
         </Grid>
       </Grid>

@@ -10,7 +10,7 @@ const HeaderMenuLink = styled(Link)({
 });
 
 const HeaderMenuList = ({ topMenuName, subMenuNames }: HeaderMenuListProps) => {
-  const { handleOnClickMenu } = useHeaderMenuList();
+  const { handleOnClickMenu, isMdMoreThenScreen } = useHeaderMenuList();
   return (
     <Grid item xs={2} textAlign={'left'}>
       <Grid container direction={'column'}>
@@ -19,7 +19,7 @@ const HeaderMenuList = ({ topMenuName, subMenuNames }: HeaderMenuListProps) => {
             <Typography
               fontWeight={800}
               component={'span'}
-              fontSize={'0.95rem'}
+              fontSize={isMdMoreThenScreen ? '0.5rem' : '0.65rem'}
               onClick={() => handleOnClickMenu([topMenuName])}
             >
               {topMenuName}
@@ -31,7 +31,7 @@ const HeaderMenuList = ({ topMenuName, subMenuNames }: HeaderMenuListProps) => {
             <HeaderMenuLink to={'#'}>
               <Typography
                 component={'span'}
-                fontSize={'0.75rem'}
+                fontSize={isMdMoreThenScreen ? '0.75rem' : '0.45rem'}
                 onClick={() => handleOnClickMenu([topMenuName, subMenuName])}
               >
                 {subMenuName}

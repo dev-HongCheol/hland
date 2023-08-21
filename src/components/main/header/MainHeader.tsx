@@ -1,7 +1,6 @@
 import { Grid } from '@mui/material';
 import { MainHeaderBreadcrumbs } from './breadcrumbs';
 import MainProductFilter from './product-filter/MainProductFilter';
-import muiTheme from '@libs/theme';
 
 const MainHeader = () => {
   return (
