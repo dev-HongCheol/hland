@@ -16,9 +16,14 @@ const HeaderCategories = () => {
       }}
       columnSpacing={5}
     >
-      {Object.keys(categories).map((category) => (
+      {/* { Object.keys(categories).map((category) => (
         <Grid item key={category} xs={'auto'}>
           <CategoryItem name={category} />
+        </Grid>
+      ))} */}
+      {categories.map((category) => (
+        <Grid item key={category.name} xs={'auto'}>
+          <CategoryItem name={category.name} />
         </Grid>
       ))}
     </Grid>

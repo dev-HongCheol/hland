@@ -9,7 +9,7 @@ const MainContainer = () => {
       <Grid item>
         <MainHeader />
       </Grid>
-      <Grid container>
+      <Grid container mt={4}>
         <Grid item xs={2}>
           <MainProductNav />
         </Grid>

@@ -1,19 +1,18 @@
 import { useAppSelector } from '@libs/stores';
-import { ProductMenu } from '@libs/stores/product/product.types';
+import { Menu } from '@libs/stores/product/product.types';
 import { useEffect, useState } from 'react';
 
 const useProductNavCategory = () => {
-  const { subCategories, selectedCategory } = useAppSelector((state) => state.product);
-
-  const [selectedSubMenu, setSelectedSubMenu] = useState<ProductMenu[]>();
+  const { categories, selectedCategory, breadcrumbs } = useAppSelector((state) => state.product);
+  const [selectedCategorySubs, setSelectedCategorySubs] = useState<Menu[]>();
 
   useEffect(() => {
-    const selectedSubMenu = subCategories[selectedCategory];
+    const _selectedCategorySubs =
+      categories.find((category) => category.name === selectedCategory)?.subCategories || [];
+    setSelectedCategorySubs(_selectedCategorySubs);
+  }, [selectedCategory, categories]);
 
-    setSelectedSubMenu(selectedSubMenu);
-  }, []);
-
-  return { selectedSubMenu };
+  return { selectedCategorySubs, breadcrumbs };
 };
 
 export default useProductNavCategory;

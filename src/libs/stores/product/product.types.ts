@@ -1,15 +1,3 @@
-export type Categories = {
-  [key: string]: string | string[];
-};
-
-export type ProductMenu = {
-  [key: string]: string[];
-};
-
-export type SubCategories = {
-  [key: string]: ProductMenu[];
-};
-
 export type CategoryMenu = {
   isShow: boolean;
   topPosition: number;
@@ -23,9 +11,18 @@ export type ListOption = {
   sortDirection: 'asc' | 'desc';
 };
 
+export type Menu = {
+  name: string;
+  menus: string[];
+};
+
+export type Category = {
+  name: string;
+  subCategories: Menu[];
+};
+
 export type ProductState = {
-  categories: Categories;
-  subCategories: SubCategories;
+  categories: Category[];
   selectedCategory: string;
   hoverCategory: string;
   breadcrumbs: string[];
