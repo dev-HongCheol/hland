@@ -58,11 +58,31 @@ const MainProductFilter = () => {
           </FormControl>
         </Box>
       </Grid>
-      <Grid item fontSize={'0.7rem'} sx={{ paddingTop: '3px' }}>
+      <Grid
+        item
+        fontSize={'0.7rem'}
+        sx={{
+          paddingTop: '3px',
+          display: {
+            md: 'block',
+            xs: 'none',
+          },
+        }}
+      >
         DISPLAY
       </Grid>
       {[12, 24, 36].map((limit) => (
-        <Grid key={limit} item sx={{ width: '27px' }}>
+        <Grid
+          key={limit}
+          item
+          sx={{
+            width: '27px',
+            display: {
+              md: 'block',
+              xs: 'none',
+            },
+          }}
+        >
           <LangLink
             underline="none"
             sx={{
