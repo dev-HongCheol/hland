@@ -3,7 +3,6 @@ import { useProductNavCategory } from './data';
 
 const ProductNavCategory = () => {
   const { selectedCategorySubs, breadcrumbs } = useProductNavCategory();
-  console.log(selectedCategorySubs);
 
   return (
     <Grid container direction={'column'}>

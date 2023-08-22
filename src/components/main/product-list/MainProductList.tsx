@@ -17,13 +17,7 @@ const MainProductList = () => {
           {data?.map((product) => (
             <Fragment key={product.id}>
               <Grid item lg={3} md={4} sm={6} xs={12}>
-                <MainProductItem
-                  id={product.id}
-                  title={product.title}
-                  brand={product.brand}
-                  price={product.price}
-                  thumbnail={product.thumbnail}
-                />
+                <MainProductItem product={product} />
               </Grid>
             </Fragment>
           ))}

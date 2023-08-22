@@ -3,8 +3,8 @@ export type CategoryMenu = {
   topPosition: number;
 };
 
-export type ListOption = {
-  limit: number;
+export type ProductListFilter = {
+  pageSize: number;
   page: number;
   maxPage: number;
   sortColumn: string;
@@ -27,5 +27,5 @@ export type ProductState = {
   hoverCategory: string;
   breadcrumbs: string[];
   categoryMenu: CategoryMenu;
-  listOption: ListOption;
+  productListFilter: ProductListFilter;
 };

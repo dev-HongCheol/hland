@@ -8,8 +8,12 @@ export type Product = {
   stock: number;
   brand: string;
   category: string;
+  subCategory: string;
+  menu: string;
   thumbnail: string;
   images: string[];
+  discountAmount: number;
+  salesQuantity: number;
 };
 
 export type ResProducts = {
@@ -17,4 +21,11 @@ export type ResProducts = {
   total: number;
   skip: number;
   limit: number;
+};
+
+export type QueryString = {
+  orderBy?: string;
+  startAt?: number;
+  endAt?: number;
+  equalTo?: unknown;
 };

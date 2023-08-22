@@ -9,15 +9,17 @@ const useMainProductList = () => {
   const dispatch = useAppDispatch();
 
   const getProductList = async () => {
-    const skip = listOption.limit * (listOption.page - 1);
-    const res = await fetchProducts(listOption.limit, skip);
-    /*  const totalPage = res.total;
-    const limitSize = res.limit; */
-    const totalPage = 5;
-    const limitSize = 10;
+    const startAt = listOption.limit * (listOption.page - 1);
+    const endAt = listOption.limit + 1;
+    const res = await fetchProducts({
+      orderBy: '"id"',
+      startAt,
+      endAt,
+    });
+    console.log(res);
 
-    const maxPage = Math.ceil(totalPage / limitSize);
-    dispatch(setListOption({ ...listOption, maxPage }));
+    // const maxPage = Math.ceil(totalPage / limitSize);
+    // dispatch(setListOption({ ...listOption, maxPage }));
     return res;
   };
 

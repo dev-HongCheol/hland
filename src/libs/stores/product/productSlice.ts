@@ -12,7 +12,7 @@ const initialState: ProductState = {
     topPosition: 0,
   },
   listOption: {
-    limit: 20,
+    pageSize: 12,
     page: 1,
     maxPage: 0,
     sortColumn: 'id',
