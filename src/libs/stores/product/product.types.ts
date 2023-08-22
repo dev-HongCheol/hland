@@ -3,12 +3,16 @@ export type CategoryMenu = {
   topPosition: number;
 };
 
-export type ProductListFilter = {
+export type Filter = {
   pageSize: number;
   page: number;
   maxPage: number;
   sortColumn: string;
   sortDirection: 'asc' | 'desc';
+  orderBy?: string;
+  startAt?: number;
+  endAt?: number;
+  equalTo?: unknown;
 };
 
 export type Menu = {
@@ -27,5 +31,5 @@ export type ProductState = {
   hoverCategory: string;
   breadcrumbs: string[];
   categoryMenu: CategoryMenu;
-  productListFilter: ProductListFilter;
+  filter: Filter;
 };

@@ -36,7 +36,7 @@ function Header() {
           height: headerInfo.height,
           bgcolor: headerInfo.isDense ? 'black' : 'white',
           transitionProperty: 'height',
-          transitionDuration: '0.4s',
+          transitionDuration: '0.3s',
         }}
       >
         <Container

@@ -31,7 +31,7 @@ const useHeader = () => {
       dispatch(setHeaderInfo({ isDense: false, height: defaultHeaderHeight }));
       // contentEle.style.paddingTop = '0';
     }
-  }, 50);
+  }, 100);
 
   useEffect(() => {
     window.addEventListener('scroll', windowScroll);

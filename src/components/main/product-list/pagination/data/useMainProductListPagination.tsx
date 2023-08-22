@@ -1,15 +1,15 @@
 import { useAppDispatch, useAppSelector } from '@libs/stores';
-import { setListOption } from '@libs/stores/product';
+import { setFilter } from '@libs/stores/product';
 
 const useMainProductListPagination = () => {
-  const { listOption } = useAppSelector((state) => state.product);
+  const { filter } = useAppSelector((state) => state.product);
   const dispatch = useAppDispatch();
 
   const handleSetPage = (_event: React.ChangeEvent<unknown>, page: number) => {
-    dispatch(setListOption({ ...listOption, page }));
+    dispatch(setFilter({ ...filter, page }));
   };
 
-  return { listOption, handleSetPage };
+  return { filter, handleSetPage };
 };
 
 export default useMainProductListPagination;

@@ -1,31 +1,47 @@
 import { useAppDispatch, useAppSelector } from '@libs/stores';
 import mainProductListApi from './mainProductList.api';
 import { useQuery } from '@tanstack/react-query';
-import { setListOption } from '@libs/stores/product';
+import { useEffect } from 'react';
+import { setFilter } from '@libs/stores/product';
+import { Filter } from '@libs/stores/product/product.types';
 
 const useMainProductList = () => {
-  const listOption = useAppSelector((state) => state.product.listOption);
+  const { filter, breadcrumbs } = useAppSelector((state) => state.product);
   const { fetchProducts } = mainProductListApi();
   const dispatch = useAppDispatch();
 
-  const getProductList = async () => {
-    const startAt = listOption.limit * (listOption.page - 1);
-    const endAt = listOption.limit + 1;
+  const getProductList = async (_filter: Filter) => {
+    console.log(_filter);
+
+    const startAt = _filter.startAt ? _filter.pageSize * (filter.page - 1) : undefined;
+    const endAt = _filter.endAt ? _filter.pageSize + 1 : undefined;
     const res = await fetchProducts({
-      orderBy: '"id"',
+      orderBy: _filter.orderBy,
+      equalTo: _filter.equalTo,
       startAt,
       endAt,
     });
-    console.log(res);
-
-    // const maxPage = Math.ceil(totalPage / limitSize);
-    // dispatch(setListOption({ ...listOption, maxPage }));
     return res;
   };
 
+  useEffect(() => {
+    console.log(breadcrumbs);
+    if (breadcrumbs.length > 0) {
+      dispatch(
+        setFilter({
+          ...filter,
+          orderBy: '"category"',
+          equalTo: `"${breadcrumbs[0]}"`,
+          startAt: undefined,
+          endAt: undefined,
+        }),
+      );
+    }
+  }, [breadcrumbs]);
+
   const { data, isLoading } = useQuery({
-    queryKey: ['products', listOption.page, listOption.limit],
-    queryFn: getProductList,
+    queryKey: ['products', filter],
+    queryFn: () => getProductList(filter),
   });
 
   return { data, isLoading };
