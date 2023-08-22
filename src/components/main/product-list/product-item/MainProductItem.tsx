@@ -15,7 +15,7 @@ const OverlapLayer = styled(Box)({
   display: 'none',
 });
 
-const MainProductItem = ({ id, title, brand, price, thumbnail }: MainProductItemProps) => {
+const MainProductItem = ({ product }: MainProductItemProps) => {
   const { productOverlapLayerRef, handleToggleOverlapLayer, handleClickAddCart, handleClickAddLike } =
     useMainProductItem();
   return (
@@ -35,7 +35,7 @@ const MainProductItem = ({ id, title, brand, price, thumbnail }: MainProductItem
               handleToggleOverlapLayer(false);
             }}
           >
-            <img src={thumbnail} style={{ width: '100%' }} height={'100%'} />
+            <img src={product.thumbnail} style={{ width: '100%' }} height={'100%'} />
             <OverlapLayer p={2} ref={productOverlapLayerRef}>
               <Grid
                 height={'100%'}
@@ -57,7 +57,7 @@ const MainProductItem = ({ id, title, brand, price, thumbnail }: MainProductItem
                         background: 'blue',
                       },
                     }}
-                    onClick={() => handleClickAddCart(id)}
+                    onClick={() => handleClickAddCart(product.id)}
                   >
                     <ShoppingBagOutlinedIcon />
                   </IconButton>
@@ -74,7 +74,7 @@ const MainProductItem = ({ id, title, brand, price, thumbnail }: MainProductItem
                         color: '#FFF',
                       },
                     }}
-                    onClick={() => handleClickAddLike(id)}
+                    onClick={() => handleClickAddLike(product.id)}
                   >
                     <FavoriteBorderOutlinedIcon />
                   </IconButton>
@@ -85,18 +85,32 @@ const MainProductItem = ({ id, title, brand, price, thumbnail }: MainProductItem
         </Grid>
         <Grid item>
           <Typography component={'p'} fontWeight={550} fontSize={'0.9rem'}>
-            {brand}
+            {product.brand}
           </Typography>
         </Grid>
         <Grid item>
           <Typography component={'p'} fontSize={'0.8rem'} letterSpacing={1} color={'#6b6b6b'}>
-            {title}
+            {product.title}
           </Typography>
         </Grid>
         <Grid item>
-          <Typography component={'p'} fontSize={'0.8rem'} letterSpacing={1} color={'#6b6b6b'}>
-            {`${price}$`}
+          <Typography
+            component={'span'}
+            fontSize={'0.8rem'}
+            letterSpacing={1}
+            color={'#6b6b6b'}
+            sx={{
+              textDecoration: product.discountAmount !== 0 ? 'line-through' : 'none',
+            }}
+          >
+            {`${product.price.toLocaleString()}원`}
           </Typography>
+
+          {product.discountAmount !== 0 && (
+            <Typography ml={1} component={'span'} fontSize={'0.8rem'} letterSpacing={1} color={'#6b6b6b'}>
+              {`${product.discountAmount.toLocaleString()}원`}
+            </Typography>
+          )}
         </Grid>
       </Grid>
     </Box>

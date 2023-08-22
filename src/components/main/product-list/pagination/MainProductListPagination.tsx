@@ -2,13 +2,13 @@ import { Stack, Pagination } from '@mui/material';
 import useMainProductListPagination from './data/useMainProductListPagination';
 
 const MainProductListPagination = () => {
-  const { listOption, handleSetPage } = useMainProductListPagination();
+  const { filter, handleSetPage } = useMainProductListPagination();
   return (
     <Stack spacing={2}>
       <Pagination
-        count={listOption.maxPage}
+        count={filter.maxPage}
         variant="outlined"
-        page={listOption.page}
+        page={filter.page}
         sx={{
           '.MuiPaginationItem-page': {
             border: 'none',

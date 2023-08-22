@@ -14,11 +14,13 @@ instance.interceptors.request.use(
     const isAuthtUrl = config.url?.indexOf('v1/accounts') !== -1;
     console.log(isAuthtUrl);
 
-    isAuthtUrl
-      ? (config.baseURL = import.meta.env.VITE_AUTH_SERVER)
-      : (config.baseURL = import.meta.env.VITE_PRODUCT_SERVER);
+    if (isAuthtUrl) {
+      config.baseURL = import.meta.env.VITE_AUTH_SERVER;
+      config.url += `?key=${import.meta.env.VITE_FIREBASE_APIKEY}`;
+    } else {
+      config.baseURL = import.meta.env.VITE_PRODUCT_SERVER;
+    }
 
-    config.url += `?key=${import.meta.env.VITE_FIREBASE_APIKEY}`;
     return config;
   },
   function (error) {
@@ -30,6 +32,9 @@ instance.interceptors.request.use(
 // 응답 인터셉터 추가하기
 instance.interceptors.response.use(
   function (response) {
+    if ((response.config.url || '').indexOf('.json') > 0) {
+      response.data = Object.values(response.data);
+    }
     return response;
   },
   function (error: AxiosError<ErrorRespose>) {

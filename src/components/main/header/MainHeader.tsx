@@ -16,6 +16,7 @@ const MainHeader = () => {
         <Grid>
           <MainHeaderBreadcrumbs />
         </Grid>
+
         <Grid>
           <MainProductFilter />
         </Grid>

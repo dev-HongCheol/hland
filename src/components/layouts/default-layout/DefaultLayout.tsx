@@ -1,7 +1,8 @@
-import { Container, Grid, styled } from '@mui/material';
+import { Container, Grid, styled, useMediaQuery } from '@mui/material';
 import { DefaultLayoutProps } from './data';
 import Header from '../header/Header';
 import { MainBanner } from '../main-banner';
+import muiTheme from '@libs/theme';
 
 const DefaultLayoutStyle = styled(Container)({
   paddingRight: '0 !important',
@@ -15,7 +16,7 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
         <Grid item xs={12}>
           <Header />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ display: useMediaQuery(muiTheme.breakpoints.up('md')) ? 'block' : 'none' }}>
           <MainBanner />
         </Grid>
         <Grid item id="content">
