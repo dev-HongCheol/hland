@@ -40,6 +40,11 @@
       "passwordRequired": "Password is required."
     }
   },
+  "product": {
+    "cartAddModal": {
+      "title": "Product option/quantity selection"
+    }
+  },
   "message": {
     "error": {
       "EMAIL_EXISTS": "This email address has already been registered.",
