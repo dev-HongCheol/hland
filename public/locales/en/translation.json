@@ -42,7 +42,13 @@
   },
   "product": {
     "cartAddModal": {
-      "title": "Product option/quantity selection"
+      "title": "Product option/quantity selection",
+      "size": "size",
+      "totalAmount": "Total Amount",
+      "won": "won",
+
+      "btnAdd": "Add Cart",
+      "btnCancle": "Cancle"
     }
   },
   "message": {

@@ -11,10 +11,9 @@ const useMainProductList = () => {
   const dispatch = useAppDispatch();
 
   const getProductList = async (_filter: Filter) => {
-    console.log(_filter);
-
-    const startAt = _filter.startAt ? _filter.pageSize * (filter.page - 1) : undefined;
+    const startAt = _filter.startAt !== undefined ? _filter.pageSize * (filter.page - 1) : undefined;
     const endAt = _filter.endAt ? _filter.pageSize + 1 : undefined;
+
     const res = await fetchProducts({
       orderBy: _filter.orderBy,
       equalTo: _filter.equalTo,
@@ -25,7 +24,6 @@ const useMainProductList = () => {
   };
 
   useEffect(() => {
-    console.log(breadcrumbs);
     if (breadcrumbs.length > 0) {
       dispatch(
         setFilter({

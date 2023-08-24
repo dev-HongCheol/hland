@@ -1,10 +1,12 @@
-import { Button, Grid, IconButton, TextField, styled } from '@mui/material';
+import { Button, Grid, IconButton, TextField, Typography, styled } from '@mui/material';
 import { ChangeEvent, useEffect } from 'react';
 import { Control, FieldValues, UseFormSetValue, useFieldArray, useForm, useWatch } from 'react-hook-form';
 import { CartAddModalForm } from '../data/cartAddModal.types';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { M } from 'node_modules/msw/lib/glossary-de6278a9';
+import { useTranslation } from 'react-i18next';
 
 export type QuantityBySizeFormProps = {
   control: Control<any>; //FIXME:타입 수정 필요
@@ -18,10 +20,20 @@ export type OrderCount = {
 };
 
 const CountNumberInput = styled('input')({
+  width: 26,
+  height: 26,
+  borderRadius: 0,
+  backgroundColor: 'black',
+  color: 'white',
+  outline: 'none',
+  border: 'none',
+  paddingLeft: '5px',
+  '&:focus-visible': {
+    borderRadius: 0,
+  },
   '&[type="number"]::-webkit-inner-spin-button': {
     WebkitAppearance: 'none',
     margin: 0,
-    color: 'red',
   },
 });
 
@@ -65,6 +77,7 @@ const QuantityBySizeForm = ({ control, size, setValue }: QuantityBySizeFormProps
     if (count > 0 && count < 100) update(index, { ...orderCounts[index], count });
   };
 
+  const { t } = useTranslation();
   return (
     <OrderCountsContainerGrid container direction={'column'} maxHeight={150} overflow={'scroll'} flexWrap={'nowrap'}>
       {(orderCounts as OrderCount[]).map((field, index) => (
@@ -79,50 +92,63 @@ const QuantityBySizeForm = ({ control, size, setValue }: QuantityBySizeFormProps
                 px={1}
                 bgcolor={'rgb(249, 249, 249)'}
               >
-                <Grid item>사이즈 : {orderCounts[index].size}</Grid>
                 <Grid item>
-                  <Button
-                    aria-label="minus"
-                    onClick={() => {
-                      handleUpdateOrderCount(index, orderCounts[index].count - 1);
-                    }}
-                    variant="outlined"
-                    sx={{
-                      minWidth: 'auto',
-                      width: 26,
-                      height: 26,
-                    }}
-                  >
-                    <RemoveIcon />
-                  </Button>
-
-                  <CountNumberInput
-                    type="number"
-                    value={orderCounts[index].count}
-                    min={1}
-                    max={99}
-                    style={{
-                      width: 26,
-                      height: 26,
-                    }}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                      handleUpdateOrderCount(index, e.target.value);
-                    }}
-                  />
-                  <Button
-                    aria-label="plus"
-                    onClick={() => {
-                      handleUpdateOrderCount(index, orderCounts[index].count + 1);
-                    }}
-                    variant="outlined"
-                    sx={{
-                      minWidth: 'auto',
-                      width: 26,
-                      height: 26,
-                    }}
-                  >
-                    <AddIcon />
-                  </Button>
+                  <Typography fontSize={'0.8rem'} component={'span'}>
+                    {t('product.cartAddModal.size')}
+                  </Typography>
+                  <Typography fontSize={'1.1rem'} component={'span'} paddingLeft={1.5} fontWeight={500}>
+                    {orderCounts[index].size}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Grid container alignItems={'center'} columnGap={0.1}>
+                    <Grid item>
+                      <IconButton
+                        aria-label="minus"
+                        onClick={() => {
+                          handleUpdateOrderCount(index, orderCounts[index].count - 1);
+                        }}
+                        sx={{
+                          minWidth: 'auto',
+                          width: 26,
+                          height: 26,
+                          borderRadius: 0,
+                          border: '1px solid rgb(150, 150, 150)',
+                        }}
+                      >
+                        <RemoveIcon fontSize="small" />
+                      </IconButton>
+                    </Grid>
+                    <Grid item>
+                      <CountNumberInput
+                        type="number"
+                        value={orderCounts[index].count}
+                        min={1}
+                        max={99}
+                        style={{}}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                          handleUpdateOrderCount(index, e.target.value);
+                        }}
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        aria-label="plus"
+                        onClick={() => {
+                          handleUpdateOrderCount(index, orderCounts[index].count + 1);
+                        }}
+                        sx={{
+                          minWidth: 'auto',
+                          width: 26,
+                          height: 26,
+                          borderRadius: 0,
+                          border: '1px solid rgb(150, 150, 150)',
+                        }}
+                      >
+                        <AddIcon />
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>

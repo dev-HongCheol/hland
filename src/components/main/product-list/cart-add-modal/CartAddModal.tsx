@@ -34,9 +34,10 @@ export type CartAddModalProps = {
 
 const CartAddModal = ({ product }: CartAddModalProps) => {
   const [open, setOpen] = useState(true);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const { t } = useTranslation();
+  const isDiscount = product.discountAmount !== 0;
+  const price = !isDiscount ? product.price : product.discountAmount;
 
   const [size, setSize] = useState('');
   const handleChange = (event: SelectChangeEvent) => {
@@ -61,7 +62,7 @@ const CartAddModal = ({ product }: CartAddModalProps) => {
 
       return preVal;
     }, 0);
-    const totalAmount = totalCount * product.price;
+    const totalAmount = totalCount * price;
     setTotalAmount(totalAmount);
     setValue('totalAmount', totalAmount);
   }, [watch('orderCounts')]);
@@ -87,7 +88,7 @@ const CartAddModal = ({ product }: CartAddModalProps) => {
             >
               <Grid container direction={'column'} gap={2}>
                 <Grid item>
-                  <Typography id="modal-modal-title" variant="h6" component="h2">
+                  <Typography id="modal-modal-title" variant="h6" letterSpacing={-0.6}>
                     {t('product.cartAddModal.title')}
                   </Typography>
                 </Grid>
@@ -118,11 +119,32 @@ const CartAddModal = ({ product }: CartAddModalProps) => {
                         )}
                         {product.title}
                       </Typography>
-                      <Typography fontSize={'0.9rem'}>{product.price.toLocaleString()}</Typography>
+                      <Typography
+                        fontSize={isDiscount ? '0.7rem' : '0.8rem'}
+                        fontWeight={isDiscount ? 0 : 600}
+                        component={'span'}
+                        sx={{
+                          textDecoration: isDiscount ? 'line-through' : 'none',
+                          color: isDiscount ? 'gray' : 'black',
+                        }}
+                      >
+                        {product.price.toLocaleString()}
+                      </Typography>
+
+                      {isDiscount && (
+                        <Typography ml={1} fontWeight={600} component={'span'} fontSize={'0.8rem'} letterSpacing={1}>
+                          {`${product.discountAmount.toLocaleString()}`}
+                        </Typography>
+                      )}
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item borderBottom={'1px solid #878585'} borderTop={'1px solid #878585'} py={2}>
+                <Grid
+                  item
+                  borderBottom={'1px solid rgb(222, 222, 222)'}
+                  borderTop={'1px solid rgb(222, 222, 222)'}
+                  py={2}
+                >
                   <FormControl fullWidth>
                     <Select
                       size="small"
@@ -141,23 +163,48 @@ const CartAddModal = ({ product }: CartAddModalProps) => {
                   </FormControl>
                 </Grid>
 
-                <Grid item borderBottom={'1px solid #878585'}>
+                <Grid item borderBottom={'1px solid rgb(222, 222, 222)'}>
                   <QuantityBySizeForm control={control} size={size} setValue={setValue} />
                 </Grid>
 
                 <Grid item>
-                  <Grid container justifyContent={'space-between'}>
+                  <Grid container justifyContent={'space-between'} alignItems={'center'}>
                     <Grid item>
-                      <Typography>총 합계 금액</Typography>
+                      <Typography fontSize={'0.75rem'}> {t('product.cartAddModal.totalAmount')}</Typography>
                     </Grid>
                     <Grid item>
-                      <Typography>{totalAmount.toLocaleString()}원</Typography>
+                      <Typography component={'span'} fontSize={'1.3rem'} fontWeight={'bold'}>
+                        {totalAmount.toLocaleString()}
+                      </Typography>
+                      {t('product.cartAddModal.won')}
                     </Grid>
                   </Grid>
                 </Grid>
 
-                <Grid item>
-                  <Button type={'submit'}>add</Button>
+                <Grid item textAlign={'center'}>
+                  <Grid container columnSpacing={1}>
+                    <Grid item xs={6}>
+                      <Button variant={'outlined'} fullWidth onClick={handleClose}>
+                        {t('product.cartAddModal.btnCancle')}
+                      </Button>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Button
+                        fullWidth
+                        type={'submit'}
+                        variant={'outlined'}
+                        sx={{
+                          background: 'black',
+                          color: 'white',
+                          '&:hover': {
+                            color: 'black',
+                          },
+                        }}
+                      >
+                        {t('product.cartAddModal.btnAdd')}
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
