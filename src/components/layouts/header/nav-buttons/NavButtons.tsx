@@ -2,14 +2,18 @@ import { Grid, IconButton, styled } from '@mui/material';
 import { LanguageToggleButton } from './language-toggle-button';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import { ShoppingCartCount } from './shopping-cart-count';
-import { useEffect, useRef, useState } from 'react';
 import { ShoppingCartLayerPopup } from './shopping-cart-layer-popup';
 import { ROUTES } from '@libs/router/data';
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '@libs/stores';
+import { setIsShowShoppingCart } from '@libs/stores/cart';
+import { useCallback } from 'react';
 
 type HeaderStyleProps = {
   isHeaderDense: boolean;
 };
+
+export type ShoppingCartDisplay = 'block' | 'none';
 
 const NavLink = styled(Link, {
   shouldForwardProp: (prop) => prop !== 'isHeaderDense',
@@ -24,27 +28,14 @@ const NavLink = styled(Link, {
 }));
 
 const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
-  const [isShow, setIsShow] = useState(false);
-  const ShoppingCartLayerPopupRef = useRef<HTMLDivElement>(null);
-
-  const handleShopplingCartLayerToggle = (isShow: boolean) => {
-    setIsShow(isShow);
+  const dispatch = useAppDispatch();
+  const handleShopplingCartToggle = (isShow: boolean) => {
+    dispatch(setIsShowShoppingCart(isShow));
   };
-
-  const handleHiddenShoppingCartLayerPopup = () => {
-    setIsShow(false);
-  };
-
-  useEffect(() => {
-    const shoppingCartLayerPopup = ShoppingCartLayerPopupRef.current;
-    if (!shoppingCartLayerPopup) return;
-    shoppingCartLayerPopup.addEventListener('mouseleave', () => {
-      handleHiddenShoppingCartLayerPopup();
-    });
-    return () => {
-      shoppingCartLayerPopup.removeEventListener('mouseleave', handleHiddenShoppingCartLayerPopup);
-    };
-  }, []);
+  const { cartList } = useAppSelector((state) => state.cart);
+  const count = useCallback(() => {
+    return cartList.length;
+  }, [cartList]);
 
   return (
     <Grid container justifyContent={'end'} alignItems={'center'} columnSpacing={2}>
@@ -65,21 +56,14 @@ const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
         |
       </Grid>
       <Grid item>
-        <div
-          onMouseOver={() => handleShopplingCartLayerToggle(true)}
-          onMouseLeave={() => handleShopplingCartLayerToggle(false)}
-        >
+        <div onMouseOver={() => handleShopplingCartToggle(true)} onMouseLeave={() => handleShopplingCartToggle(false)}>
           <Grid container alignItems={'center'}>
-            <IconButton size="large" sx={{ color: isHeaderDense ? '#fff' : '#333' }}>
+            <IconButton size="large" sx={{ color: isHeaderDense ? '#fff' : '#333', p: 0, marginRight: 2 }}>
               <ShoppingBagOutlinedIcon sx={{ fontSize: 30 }} />
             </IconButton>
-            <ShoppingCartCount />
+            <ShoppingCartCount count={count()} />
           </Grid>
-          <ShoppingCartLayerPopup
-            ref={ShoppingCartLayerPopupRef}
-            isShow={isShow}
-            handleHiddenShoppingCartLayerPopup={handleHiddenShoppingCartLayerPopup}
-          />
+          <ShoppingCartLayerPopup />
         </div>
       </Grid>
     </Grid>

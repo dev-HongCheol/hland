@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@libs/stores';
-import { setIsShowCartAddModal } from '@libs/stores/cart';
+import { setCartList, setIsShowCartAddModal, setIsShowShoppingCart } from '@libs/stores/cart';
 import { useTranslation } from 'react-i18next';
 import { Product } from '../../data';
 import { useEffect, useState } from 'react';
@@ -10,7 +10,7 @@ import { CartAddModalForm, cartAddModalSchema } from '.';
 import { toast } from 'react-toastify';
 
 const useCartAddModal = (product: Product) => {
-  const { isShowCartAddModal } = useAppSelector((state) => state.cart);
+  const { isShowCartAddModal, cartList } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
   const handleClose = () => dispatch(setIsShowCartAddModal(false));
   const { t } = useTranslation();
@@ -34,6 +34,8 @@ const useCartAddModal = (product: Product) => {
       return;
     }
     //TODO: api post 추가 필여
+    dispatch(setCartList([...cartList, cart]));
+    dispatch(setIsShowShoppingCart(true));
     handleClose();
   };
 
