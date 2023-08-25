@@ -48,7 +48,9 @@
       "won": "won",
 
       "btnAdd": "Add Cart",
-      "btnCancle": "Cancle"
+      "btnCancle": "Cancle",
+
+      "selectionRequiredMsg": "After selecting an option, select 'ADD CART'."
     }
   },
   "message": {

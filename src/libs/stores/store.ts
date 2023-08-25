@@ -3,11 +3,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { commonSlice } from './common';
 import { productSlice } from './product';
+import { cartSlice } from './cart';
 
 export const store = configureStore({
   reducer: {
     common: commonSlice.reducer,
     product: productSlice.reducer,
+    cart: cartSlice.reducer,
   },
   devTools: import.meta.env.DEV,
 });

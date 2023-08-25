@@ -48,7 +48,9 @@
       "won": "원",
 
       "btnAdd": "장바구니 담기",
-      "btnCancle": "취소"
+      "btnCancle": "취소",
+
+      "selectionRequiredMsg": "옵션을 선택 후 '장바구니 담기'를 선택해주세요."
     }
   },
   "message": {

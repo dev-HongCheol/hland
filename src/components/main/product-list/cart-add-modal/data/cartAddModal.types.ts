@@ -1,4 +1,5 @@
 import { InferType, array, number, object, string } from 'yup';
+import { Product } from '../../data';
 
 export const cartAddModalSchema = object().shape({
   // TODO: 회원정보 추가 필요
@@ -15,3 +16,7 @@ export const cartAddModalSchema = object().shape({
 });
 
 export type CartAddModalForm = InferType<typeof cartAddModalSchema>;
+
+export type CartAddModalProps = {
+  product: Product;
+};

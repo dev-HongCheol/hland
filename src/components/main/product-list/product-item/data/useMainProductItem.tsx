@@ -1,7 +1,11 @@
+import { useAppDispatch } from '@libs/stores';
 import { useRef } from 'react';
+import { Product } from '../../data';
+import { setIsShowCartAddModal, setSelectedProduct } from '@libs/stores/cart';
 
 const useMainProductItem = () => {
   const productOverlapLayerRef = useRef<HTMLDivElement>(null);
+  const dispatch = useAppDispatch();
 
   const handleToggleOverlapLayer = (isShow: boolean) => {
     if (productOverlapLayerRef.current) {
@@ -9,8 +13,9 @@ const useMainProductItem = () => {
     }
   };
 
-  const handleClickAddCart = (id: number) => {
-    console.log('handeClickAddCart', id);
+  const handleClickAddCart = (product: Product) => {
+    dispatch(setIsShowCartAddModal(true));
+    dispatch(setSelectedProduct(product));
   };
 
   const handleClickAddLike = (id: number) => {

@@ -1,17 +1,14 @@
-import { Button, Grid, IconButton, TextField, Typography, styled } from '@mui/material';
-import { ChangeEvent, useEffect } from 'react';
-import { Control, FieldValues, UseFormSetValue, useFieldArray, useForm, useWatch } from 'react-hook-form';
-import { CartAddModalForm } from '../data/cartAddModal.types';
+import { Button, Grid, IconButton, Typography, styled } from '@mui/material';
+import { ChangeEvent } from 'react';
+import { Control } from 'react-hook-form';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { M } from 'node_modules/msw/lib/glossary-de6278a9';
-import { useTranslation } from 'react-i18next';
+import { useQuantityBySizeForm } from './data';
 
 export type QuantityBySizeFormProps = {
   control: Control<any>; //FIXME:타입 수정 필요
   size: string;
-  setValue: UseFormSetValue<CartAddModalForm>;
 };
 
 export type OrderCount = {
@@ -50,34 +47,8 @@ const OrderCountsContainerGrid = styled(Grid)({
   },
 });
 
-const QuantityBySizeForm = ({ control, size, setValue }: QuantityBySizeFormProps) => {
-  const { fields, append, remove, update } = useFieldArray({
-    control,
-    name: 'orderCounts',
-  });
-  const orderCounts = useWatch<CartAddModalForm>({
-    name: 'orderCounts',
-    control,
-  }) as OrderCount[];
-
-  // 리스트에 없는 경우만 추가
-  useEffect(() => {
-    // 기본(빈) 셀릭트 박스 값인 경우 무시
-    if (!size) return;
-    const findIndex = orderCounts.findIndex((orderCount) => orderCount.size === size);
-    if (findIndex === -1) append({ size, count: 1 });
-  }, [size, append]);
-
-  useEffect(() => {
-    console.log(orderCounts);
-  }, [orderCounts]);
-
-  const handleUpdateOrderCount = (index: number, _count: number | string) => {
-    const count = Number(_count);
-    if (count > 0 && count < 100) update(index, { ...orderCounts[index], count });
-  };
-
-  const { t } = useTranslation();
+const QuantityBySizeForm = ({ control, size }: QuantityBySizeFormProps) => {
+  const { t, orderCounts, handleUpdateOrderCount, remove } = useQuantityBySizeForm(control, size);
   return (
     <OrderCountsContainerGrid container direction={'column'} maxHeight={150} overflow={'scroll'} flexWrap={'nowrap'}>
       {(orderCounts as OrderCount[]).map((field, index) => (

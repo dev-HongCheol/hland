@@ -7,6 +7,7 @@ import { Filter } from '@libs/stores/product/product.types';
 
 const useMainProductList = () => {
   const { filter, breadcrumbs } = useAppSelector((state) => state.product);
+  const { selectedProduct } = useAppSelector((state) => state.cart);
   const { fetchProducts } = mainProductListApi();
   const dispatch = useAppDispatch();
 
@@ -42,7 +43,7 @@ const useMainProductList = () => {
     queryFn: () => getProductList(filter),
   });
 
-  return { data, isLoading };
+  return { data, isLoading, selectedProduct };
 };
 
 export default useMainProductList;

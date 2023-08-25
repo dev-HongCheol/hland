@@ -1,23 +1,9 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  Grid,
-  IconButton,
-  MenuItem,
-  Modal,
-  Select,
-  SelectChangeEvent,
-  Typography,
-} from '@mui/material';
-import { useCallback, useEffect, useState } from 'react';
+import { Box, Button, FormControl, Grid, IconButton, MenuItem, Modal, Select, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { useTranslation } from 'react-i18next';
-import { useFieldArray, useForm } from 'react-hook-form';
-import { Product } from '../data';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { CartAddModalForm, cartAddModalSchema } from './data/cartAddModal.types';
+import { CartAddModalProps } from './data/cartAddModal.types';
 import { QuantityBySizeForm } from './quantity-by-size-form';
+
+import { useCartAddModal } from './data';
 
 const style = {
   position: 'absolute',
@@ -28,49 +14,23 @@ const style = {
   border: 'none',
 };
 
-export type CartAddModalProps = {
-  product: Product;
-};
-
 const CartAddModal = ({ product }: CartAddModalProps) => {
-  const [open, setOpen] = useState(true);
-  const handleClose = () => setOpen(false);
-  const { t } = useTranslation();
-  const isDiscount = product.discountAmount !== 0;
-  const price = !isDiscount ? product.price : product.discountAmount;
-
-  const [size, setSize] = useState('');
-  const handleChange = (event: SelectChangeEvent) => {
-    setSize(event.target.value as string);
-  };
-
-  const { control, handleSubmit, setValue, getValues, watch } = useForm({
-    defaultValues: { pId: product.id, orderCounts: [], totalAmount: 0 },
-    resolver: yupResolver(cartAddModalSchema),
-  });
-
-  const handleSubmitAddCart = (data: CartAddModalForm) => {
-    console.log(data);
-  };
-
-  const [totalAmount, setTotalAmount] = useState(0);
-  useEffect(() => {
-    // console.log(getValues('totalAmount'), 14412414);
-    const orderCounts = getValues('orderCounts');
-    const totalCount = orderCounts.reduce((preVal, curVal) => {
-      preVal += curVal.count;
-
-      return preVal;
-    }, 0);
-    const totalAmount = totalCount * price;
-    setTotalAmount(totalAmount);
-    setValue('totalAmount', totalAmount);
-  }, [watch('orderCounts')]);
-
+  const {
+    t,
+    isShowCartAddModal,
+    handleChange,
+    handleClose,
+    handleSubmit,
+    handleSubmitAddCart,
+    isDiscount,
+    size,
+    control,
+    totalAmount,
+  } = useCartAddModal(product);
   return (
     <Modal
       disableAutoFocus
-      open={open}
+      open={isShowCartAddModal}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
@@ -152,7 +112,7 @@ const CartAddModal = ({ product }: CartAddModalProps) => {
                       id="product-option-select"
                       value={size}
                       onChange={handleChange}
-                      defaultValue="S"
+                      defaultValue=""
                     >
                       {['S', 'M', 'L'].map((size) => (
                         <MenuItem value={size} key={size}>
@@ -164,7 +124,7 @@ const CartAddModal = ({ product }: CartAddModalProps) => {
                 </Grid>
 
                 <Grid item borderBottom={'1px solid rgb(222, 222, 222)'}>
-                  <QuantityBySizeForm control={control} size={size} setValue={setValue} />
+                  <QuantityBySizeForm control={control} size={size} />
                 </Grid>
 
                 <Grid item>
@@ -173,7 +133,7 @@ const CartAddModal = ({ product }: CartAddModalProps) => {
                       <Typography fontSize={'0.75rem'}> {t('product.cartAddModal.totalAmount')}</Typography>
                     </Grid>
                     <Grid item>
-                      <Typography component={'span'} fontSize={'1.3rem'} fontWeight={'bold'}>
+                      <Typography component={'span'} fontSize={'1.3rem'} fontWeight={'bold'} mr={1}>
                         {totalAmount.toLocaleString()}
                       </Typography>
                       {t('product.cartAddModal.won')}
