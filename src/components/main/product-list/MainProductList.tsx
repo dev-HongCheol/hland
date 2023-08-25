@@ -4,9 +4,10 @@ import { useMainProductList } from './data';
 import { Fragment } from 'react';
 import { MainProductListPagination } from './pagination';
 import { Spinner } from '@components/layouts/spinner';
+import { CartAddModal } from './cart-add-modal';
 
 const MainProductList = () => {
-  const { data, isLoading } = useMainProductList();
+  const { data, isLoading, selectedProduct } = useMainProductList();
   if (isLoading) {
     return <Spinner />;
   }
@@ -27,6 +28,8 @@ const MainProductList = () => {
       <Grid item xs={'auto'}>
         <MainProductListPagination />
       </Grid>
+
+      {selectedProduct && <CartAddModal product={selectedProduct} />}
     </Grid>
   );
 };

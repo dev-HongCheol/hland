@@ -57,7 +57,7 @@ const MainProductItem = ({ product }: MainProductItemProps) => {
                         background: 'blue',
                       },
                     }}
-                    onClick={() => handleClickAddCart(product.id)}
+                    onClick={() => handleClickAddCart(product)}
                   >
                     <ShoppingBagOutlinedIcon />
                   </IconButton>

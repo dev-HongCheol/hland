@@ -5,17 +5,17 @@ import { setFilter } from '@libs/stores/product';
 
 const useMainProductFilter = () => {
   const filter = useAppSelector((state) => state.product.filter);
-  const [age, setAge] = useState('sort'); //TODO:
+  const [sort, setSort] = useState('sort');
   const dispatch = useAppDispatch();
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
+    setSort(event.target.value as string);
   };
 
   const handleSetPageSize = (pageSize: number) => {
     dispatch(setFilter({ ...filter, pageSize }));
   };
 
-  return { filter, handleSetPageSize, handleChange, age };
+  return { filter, handleSetPageSize, handleChange, sort };
 };
 
 export default useMainProductFilter;

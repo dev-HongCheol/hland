@@ -40,6 +40,19 @@
       "passwordRequired": "비밀번호는 필수 항목입니다."
     }
   },
+  "product": {
+    "cartAddModal": {
+      "title": "상품 옵션/수량 선택",
+      "size": "사이즈",
+      "totalAmount": "총 합계 금액",
+      "won": "원",
+
+      "btnAdd": "장바구니 담기",
+      "btnCancle": "취소",
+
+      "selectionRequiredMsg": "옵션을 선택 후 '장바구니 담기'를 선택해주세요."
+    }
+  },
   "message": {
     "error": {
       "EMAIL_EXISTS": "이미 가입된 메일주소입니다.",

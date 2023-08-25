@@ -8,7 +8,7 @@ const LangLink = styled(Link)({
 });
 
 const MainProductFilter = () => {
-  const { filter, handleSetPageSize, handleChange, age } = useMainProductFilter();
+  const { filter, handleSetPageSize, handleChange, sort } = useMainProductFilter();
 
   return (
     <Grid container columnGap={1.5} alignItems={'center'}>
@@ -17,7 +17,7 @@ const MainProductFilter = () => {
           <FormControl fullWidth>
             <Select
               id="product-filter-select-label"
-              value={age}
+              value={sort}
               onChange={handleChange}
               size="small"
               sx={{
