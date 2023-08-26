@@ -1,4 +1,4 @@
-import { InferType, array, bool, boolean, number, object, string } from 'yup';
+import { InferType, array, boolean, number, object, string } from 'yup';
 import { Product } from '../../data';
 
 export const cartAddModalSchema = object().shape({

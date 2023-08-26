@@ -1,5 +1,5 @@
 import { CartAddModalForm } from '@components/main/product-list/cart-add-modal/data';
-import { Box, Grid, IconButton, Typography } from '@mui/material';
+import { Grid, IconButton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useAppDispatch, useAppSelector } from '@libs/stores';
 import { setCartProductList } from '@libs/stores/cart';
