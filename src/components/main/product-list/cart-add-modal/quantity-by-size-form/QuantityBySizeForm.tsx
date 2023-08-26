@@ -1,20 +1,10 @@
 import { Button, Grid, IconButton, Typography, styled } from '@mui/material';
 import { ChangeEvent } from 'react';
-import { Control } from 'react-hook-form';
+
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { useQuantityBySizeForm } from './data';
-
-export type QuantityBySizeFormProps = {
-  control: Control<any>; //FIXME:타입 수정 필요
-  size: string;
-};
-
-export type OrderCount = {
-  size: string;
-  count: number;
-};
+import { OrderCount, QuantityBySizeFormProps, useQuantityBySizeForm } from './data';
 
 const CountNumberInput = styled('input')({
   width: 26,

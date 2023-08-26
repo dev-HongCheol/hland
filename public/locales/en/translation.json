@@ -1,7 +1,10 @@
 {
   "header": {
     "shoppingCart": {
-      "title": "Cart"
+      "title": "Cart",
+      "selectAll": "Select All",
+      "btnShoppingBasket": "basket",
+      "btnBuyNow": "Buy Now"
     }
   },
   "account": {

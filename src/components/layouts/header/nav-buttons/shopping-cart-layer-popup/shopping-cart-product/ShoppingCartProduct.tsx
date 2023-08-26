@@ -1,31 +1,10 @@
-import { CartAddModalForm } from '@components/main/product-list/cart-add-modal/data';
 import { Grid, IconButton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { useAppDispatch, useAppSelector } from '@libs/stores';
-import { setCartProductList } from '@libs/stores/cart';
-export type ShoppingCartProductProps = {
-  cartProduct: CartAddModalForm;
-  index: number;
-  handleCheckedToggle: (index: number) => void;
-};
+import { ShoppingCartProductProps } from './data/shoppingCartProduct.types';
+import useShoppingCartProduct from './data/useShoppingCartProduct';
+
 const ShoppingCartProduct = ({ cartProduct, index, handleCheckedToggle }: ShoppingCartProductProps) => {
-  const cartProductList = useAppSelector((state) => state.cart.cartProductList);
-  const dispatch = useAppDispatch();
-
-  const handleRemoveCartPorduct = () => {
-    const findProductindex = cartProductList.findIndex(
-      (_cartProduct) => cartProduct.product.id === _cartProduct.product.id,
-    );
-
-    if (findProductindex === -1) return;
-
-    const newCartProductList = structuredClone(cartProductList);
-    newCartProductList.splice(findProductindex, 1);
-    index === 0 ? handleCheckedToggle(index) : handleCheckedToggle(index - 1);
-
-    dispatch(setCartProductList(newCartProductList));
-  };
-
+  const { handleRemoveCartPorduct } = useShoppingCartProduct(cartProduct, index, handleCheckedToggle);
   return (
     <Grid container direction={'column'}>
       <Grid item textAlign={'right'}>

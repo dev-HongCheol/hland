@@ -5,15 +5,8 @@ import { ShoppingCartCount } from './shopping-cart-count';
 import { ShoppingCartLayerPopup } from './shopping-cart-layer-popup';
 import { ROUTES } from '@libs/router/data';
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@libs/stores';
-import { setIsShowShoppingCart } from '@libs/stores/cart';
-import { useCallback } from 'react';
-
-type HeaderStyleProps = {
-  isHeaderDense: boolean;
-};
-
-export type ShoppingCartDisplay = 'block' | 'none';
+import { HeaderStyleProps } from './data/navButtons.types';
+import useNavButtons from './data/useNavButtons';
 
 const NavLink = styled(Link, {
   shouldForwardProp: (prop) => prop !== 'isHeaderDense',
@@ -28,16 +21,7 @@ const NavLink = styled(Link, {
 }));
 
 const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
-  const dispatch = useAppDispatch();
-  const handleShopplingCartToggle = (isShow: boolean) => {
-    dispatch(setIsShowShoppingCart(isShow));
-  };
-
-  const { cartProductList } = useAppSelector((state) => state.cart);
-  const count = useCallback(() => {
-    return cartProductList.length;
-  }, [cartProductList]);
-
+  const { handleShopplingCartToggle, count, cartProductList } = useNavButtons();
   return (
     <Grid container justifyContent={'end'} alignItems={'center'} columnSpacing={2}>
       <Grid item xs={'auto'}>
@@ -57,8 +41,7 @@ const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
         |
       </Grid>
       <Grid item>
-        {/* TODO:TEST onMouseLeave={() => handleShopplingCartToggle(false)}*/}
-        <div onMouseOver={() => handleShopplingCartToggle(true)}>
+        <div onMouseOver={() => handleShopplingCartToggle(true)} onMouseLeave={() => handleShopplingCartToggle(false)}>
           <Grid container alignItems={'center'}>
             <IconButton size="large" sx={{ color: isHeaderDense ? '#fff' : '#333', p: 0, marginRight: 2 }}>
               <ShoppingBagOutlinedIcon sx={{ fontSize: 30 }} />

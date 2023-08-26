@@ -11,13 +11,10 @@ import {
   ListItemText,
   styled,
 } from '@mui/material';
-import { useState, useEffect, useCallback } from 'react';
+
 import CloseIcon from '@mui/icons-material/Close';
-import i18n from '@libs/i18n';
-import { useAppDispatch, useAppSelector } from '@libs/stores';
-import { setCartProductList, setIsShowShoppingCart } from '@libs/stores/cart';
-import { CartAddModalForm } from '@components/main/product-list/cart-add-modal/data';
 import { ShoppingCartProduct } from './shopping-cart-product';
+import { ShoppingCartLayerPopupProps, useShoppingCartLayerPopup } from './data';
 
 const ShoppingCartLayerPopupDiv = styled(Box)({
   position: 'absolute',
@@ -25,61 +22,16 @@ const ShoppingCartLayerPopupDiv = styled(Box)({
   display: 'none',
 });
 
-export type ShoppingCartLayerPopupProps = {
-  cartProductList: CartAddModalForm[];
-};
-
 const ShoppingCartLayerPopup = ({ cartProductList }: ShoppingCartLayerPopupProps) => {
-  const { t } = i18n;
-  // const [checked, setChecked] = useState<number[]>([]);
-
-  const dispatch = useAppDispatch();
-  const { isShowShoppingCart } = useAppSelector((state) => state.cart);
-
-  const handleCheckedToggle = (_index: number) => () => {
-    const newCartProductList = structuredClone(cartProductList);
-    const findCartProduct = newCartProductList.find((_cartProduct, index) => index === _index);
-    if (!findCartProduct) return;
-
-    findCartProduct.checked = !findCartProduct.checked;
-    dispatch(setCartProductList(newCartProductList));
-  };
-
-  const handleShopplingCartToggle = (isShow: boolean) => {
-    if (isShowShoppingCart !== isShow) dispatch(setIsShowShoppingCart(isShow));
-  };
-
-  const [isAllChecked, setIsAllChecked] = useState(false);
-
-  const getAllChecked = useCallback(() => {
-    const _isAllChecked = cartProductList.every((cartProduct) => cartProduct.checked);
-    return _isAllChecked;
-  }, [cartProductList]);
-
-  const hanldeSetCartPorductChecked = (checked: boolean) => {
-    const newCartProductList = structuredClone(cartProductList);
-    newCartProductList.forEach((productList) => (productList.checked = checked));
-
-    dispatch(setCartProductList(newCartProductList));
-  };
-
-  const handleCartAllSelect = () => {
-    const allChecked = getAllChecked();
-    hanldeSetCartPorductChecked(!allChecked);
-    setIsAllChecked(!allChecked);
-  };
-
-  useEffect(() => {
-    setIsAllChecked(getAllChecked());
-  }, [cartProductList]);
-
+  const { t, isShowShoppingCart, handleShopplingCartToggle, handleCartAllSelect, isAllChecked, handleCheckedToggle } =
+    useShoppingCartLayerPopup(cartProductList);
   return (
     <ShoppingCartLayerPopupDiv
       sx={{
         display: isShowShoppingCart ? 'block' : 'none',
       }}
       onMouseEnter={() => handleShopplingCartToggle(true)}
-      // onMouseLeave={() => handleShopplingCartToggle(false)}//TODO:TEST
+      onMouseLeave={() => handleShopplingCartToggle(false)}
     >
       <Grid
         container
@@ -119,7 +71,7 @@ const ShoppingCartLayerPopup = ({ cartProductList }: ShoppingCartLayerPopupProps
                     }}
                   />
                 </ListItemIcon>
-                <ListItemText id={'shoppingCartTotalCheckbox'} primary={`전체선택`} />
+                <ListItemText id={'shoppingCartTotalCheckbox'} primary={t('header.shoppingCart.selectAll')} />
               </ListItemButton>
             </ListItem>
 
@@ -171,7 +123,7 @@ const ShoppingCartLayerPopup = ({ cartProductList }: ShoppingCartLayerPopupProps
                   borderRadius: 0,
                 }}
               >
-                장바구니
+                {t('header.shoppingCart.btnShoppingBasket')}
               </Button>
             </Grid>
             <Grid item xs={6}>
@@ -183,7 +135,7 @@ const ShoppingCartLayerPopup = ({ cartProductList }: ShoppingCartLayerPopupProps
                   borderRadius: 0,
                 }}
               >
-                바로구매
+                {t('header.shoppingCart.btnBuyNow')}
               </Button>
             </Grid>
           </Grid>
