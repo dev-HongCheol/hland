@@ -11,11 +11,13 @@ import {
   ListItemText,
   styled,
 } from '@mui/material';
-import { forwardRef, useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import i18n from '@libs/i18n';
 import { useAppDispatch, useAppSelector } from '@libs/stores';
 import { setIsShowShoppingCart } from '@libs/stores/cart';
+import { CartAddModalForm } from '@components/main/product-list/cart-add-modal/data';
+import { ShoppingCartProduct } from './shopping-cart-product';
 
 const ShoppingCartLayerPopupDiv = styled(Box)({
   position: 'absolute',
@@ -23,9 +25,13 @@ const ShoppingCartLayerPopupDiv = styled(Box)({
   display: 'none',
 });
 
-const ShoppingCartLayerPopup = forwardRef(() => {
+export type ShoppingCartLayerPopupProps = {
+  cartProductList: CartAddModalForm[];
+};
+
+const ShoppingCartLayerPopup = ({ cartProductList }: ShoppingCartLayerPopupProps) => {
   const { t } = i18n;
-  const [checked, setChecked] = useState<number[]>([0]);
+  const [checked, setChecked] = useState<number[]>([]);
 
   const dispatch = useAppDispatch();
   const { isShowShoppingCart } = useAppSelector((state) => state.cart);
@@ -39,7 +45,6 @@ const ShoppingCartLayerPopup = forwardRef(() => {
     } else {
       newChecked.splice(currentIndex, 1);
     }
-
     setChecked(newChecked);
   };
 
@@ -47,18 +52,46 @@ const ShoppingCartLayerPopup = forwardRef(() => {
     dispatch(setIsShowShoppingCart(isShow));
   };
 
+  const [isAllChecked, setIsAllChecked] = useState(false);
+
+  const getAllChecked = useCallback(() => {
+    return checked.length === cartProductList.length;
+  }, [checked.length, cartProductList.length]);
+
+  const handleCartAllSelect = () => {
+    const allChecked = getAllChecked();
+    setIsAllChecked(!allChecked);
+    if (allChecked) {
+      setChecked([]);
+    } else {
+      const cartIndexArray: number[] = [];
+      cartProductList.forEach((_cartProduct, index) => {
+        cartIndexArray.push(index);
+      });
+
+      setChecked(cartIndexArray);
+    }
+  };
+
+  useEffect(() => {
+    console.log(checked);
+
+    setIsAllChecked(getAllChecked());
+  }, [checked.length]);
+
   return (
     <ShoppingCartLayerPopupDiv
       sx={{
         display: isShowShoppingCart ? 'block' : 'none',
       }}
       onMouseEnter={() => handleShopplingCartToggle(true)}
-      onMouseLeave={() => handleShopplingCartToggle(false)}
+      // onMouseLeave={() => handleShopplingCartToggle(false)}//TODO:TEST
     >
       <Grid
         container
         direction={'column'}
         p={2}
+        flexWrap={'nowrap'}
         sx={{
           border: 1,
           width: '280px',
@@ -73,16 +106,18 @@ const ShoppingCartLayerPopup = forwardRef(() => {
           </IconButton>
         </Grid>
 
-        <Grid item>{t('header.shoppingCart.title')}(0)</Grid>
-        <Grid item flexGrow={1}>
-          {/* TODO: 상품 리스트 구현 필요 */}
+        <Grid item>
+          {t('header.shoppingCart.title')}({cartProductList.length})
+        </Grid>
+
+        <Grid item>
           <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
             <ListItem disablePadding>
-              <ListItemButton role={undefined} dense>
-                <ListItemIcon>
+              <ListItemButton role={undefined} dense sx={{ p: 0 }} onClick={() => handleCartAllSelect()}>
+                <ListItemIcon sx={{ minWidth: 'auto' }}>
                   <Checkbox
                     edge="start"
-                    checked
+                    checked={isAllChecked}
                     tabIndex={-1}
                     disableRipple
                     inputProps={{
@@ -94,20 +129,36 @@ const ShoppingCartLayerPopup = forwardRef(() => {
               </ListItemButton>
             </ListItem>
 
-            <ListItem disablePadding>
-              <ListItemButton role={undefined} onClick={handleToggle(1)} dense>
-                <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    checked={checked.indexOf(1) !== -1}
-                    tabIndex={-1}
-                    disableRipple
-                    inputProps={{ 'aria-labelledby': 'aria-labelledby-1' }}
-                  />
-                </ListItemIcon>
-                <ListItemText id={'aria-labelledby-1'} primary={`Line item ${1 + 1}`} />
-              </ListItemButton>
-            </ListItem>
+            <Box
+              height={263}
+              sx={{
+                overflowY: 'scroll',
+              }}
+            >
+              {cartProductList.map((cartProduct, index) => (
+                <ListItem disablePadding key={cartProduct.product.id}>
+                  <ListItemButton role={undefined} onClick={handleToggle(index)} dense sx={{ p: 0 }}>
+                    <ListItemIcon sx={{ minWidth: 'auto' }}>
+                      <Checkbox
+                        edge="start"
+                        checked={checked.indexOf(index) !== -1}
+                        tabIndex={-1}
+                        disableRipple
+                        inputProps={{ 'aria-labelledby': `aria-labelledby-${cartProduct.product.id}` }}
+                        sx={{ py: 0 }}
+                      />
+                    </ListItemIcon>
+                    <ListItemText
+                      sx={{
+                        m: 0,
+                      }}
+                      id={`aria-labelledby-${cartProduct.product.id}`}
+                      primary={<ShoppingCartProduct cartProduct={cartProduct} />}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </Box>
           </List>
         </Grid>
         <Grid item>
@@ -140,6 +191,5 @@ const ShoppingCartLayerPopup = forwardRef(() => {
       </Grid>
     </ShoppingCartLayerPopupDiv>
   );
-});
-
+};
 export default ShoppingCartLayerPopup;

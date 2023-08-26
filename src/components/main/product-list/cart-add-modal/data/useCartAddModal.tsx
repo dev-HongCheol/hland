@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@libs/stores';
-import { setCartList, setIsShowCartAddModal, setIsShowShoppingCart } from '@libs/stores/cart';
+import { setCartProductList, setIsShowCartAddModal, setIsShowShoppingCart } from '@libs/stores/cart';
 import { useTranslation } from 'react-i18next';
 import { Product } from '../../data';
 import { useEffect, useState } from 'react';
@@ -10,7 +10,7 @@ import { CartAddModalForm, cartAddModalSchema } from '.';
 import { toast } from 'react-toastify';
 
 const useCartAddModal = (product: Product) => {
-  const { isShowCartAddModal, cartList } = useAppSelector((state) => state.cart);
+  const { isShowCartAddModal, cartProductList } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
   const handleClose = () => dispatch(setIsShowCartAddModal(false));
   const { t } = useTranslation();
@@ -24,34 +24,38 @@ const useCartAddModal = (product: Product) => {
   };
 
   const { control, handleSubmit, setValue, getValues, watch, reset } = useForm({
-    defaultValues: { pId: product.id, orderCounts: [], totalAmount: 0 },
+    defaultValues: { product: { ...product }, orderCounts: [], totalAmount: 0 },
     resolver: yupResolver(cartAddModalSchema),
   });
 
-  const handleSubmitAddCart = (cart: CartAddModalForm) => {
-    if (cart.totalAmount === 0) {
+  const handleSubmitAddCart = (cartProduct: CartAddModalForm) => {
+    if (cartProduct.totalAmount === 0) {
       toast.info(t('product.cartAddModal.selectionRequiredMsg'));
       return;
     }
+
     //TODO: api post 추가 필여
-    dispatch(setCartList([...cartList, cart]));
+    dispatch(setCartProductList([...cartProductList, cartProduct]));
     dispatch(setIsShowShoppingCart(true));
     handleClose();
   };
 
+  // 모달 open - productId세팅, close - form 초기화
   useEffect(() => {
-    if (!isShowCartAddModal) {
-      setSize('');
+    if (isShowCartAddModal) {
+      setValue('product', product);
+      console.log(getValues('product'));
+    } else {
       reset();
+      setSize('');
     }
   }, [isShowCartAddModal]);
 
+  // 총 합계 금액 계산
   useEffect(() => {
-    // console.log(getValues('totalAmount'), 14412414);
     const orderCounts = getValues('orderCounts');
     const totalCount = orderCounts.reduce((preVal, curVal) => {
       preVal += curVal.count;
-
       return preVal;
     }, 0);
     const totalAmount = totalCount * price;
