@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { Control, useFieldArray, useWatch } from 'react-hook-form';
 import { CartAddModalForm } from '../../data';
-import { OrderCount } from '../QuantityBySizeForm';
 import { useEffect } from 'react';
+import { OrderCount } from '.';
 
 const useQuantityBySizeForm = (control: Control<any>, size: string) => {
   const { t } = useTranslation();

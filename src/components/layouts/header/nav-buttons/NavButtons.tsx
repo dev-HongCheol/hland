@@ -2,14 +2,11 @@ import { Grid, IconButton, styled } from '@mui/material';
 import { LanguageToggleButton } from './language-toggle-button';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import { ShoppingCartCount } from './shopping-cart-count';
-import { useEffect, useRef, useState } from 'react';
 import { ShoppingCartLayerPopup } from './shopping-cart-layer-popup';
 import { ROUTES } from '@libs/router/data';
 import { Link } from 'react-router-dom';
-
-type HeaderStyleProps = {
-  isHeaderDense: boolean;
-};
+import { HeaderStyleProps } from './data/navButtons.types';
+import useNavButtons from './data/useNavButtons';
 
 const NavLink = styled(Link, {
   shouldForwardProp: (prop) => prop !== 'isHeaderDense',
@@ -24,28 +21,7 @@ const NavLink = styled(Link, {
 }));
 
 const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
-  const [isShow, setIsShow] = useState(false);
-  const ShoppingCartLayerPopupRef = useRef<HTMLDivElement>(null);
-
-  const handleShopplingCartLayerToggle = (isShow: boolean) => {
-    setIsShow(isShow);
-  };
-
-  const handleHiddenShoppingCartLayerPopup = () => {
-    setIsShow(false);
-  };
-
-  useEffect(() => {
-    const shoppingCartLayerPopup = ShoppingCartLayerPopupRef.current;
-    if (!shoppingCartLayerPopup) return;
-    shoppingCartLayerPopup.addEventListener('mouseleave', () => {
-      handleHiddenShoppingCartLayerPopup();
-    });
-    return () => {
-      shoppingCartLayerPopup.removeEventListener('mouseleave', handleHiddenShoppingCartLayerPopup);
-    };
-  }, []);
-
+  const { handleShopplingCartToggle, count, cartProductList } = useNavButtons();
   return (
     <Grid container justifyContent={'end'} alignItems={'center'} columnSpacing={2}>
       <Grid item xs={'auto'}>
@@ -65,21 +41,14 @@ const NavButtons = ({ isHeaderDense }: HeaderStyleProps) => {
         |
       </Grid>
       <Grid item>
-        <div
-          onMouseOver={() => handleShopplingCartLayerToggle(true)}
-          onMouseLeave={() => handleShopplingCartLayerToggle(false)}
-        >
+        <div onMouseOver={() => handleShopplingCartToggle(true)} onMouseLeave={() => handleShopplingCartToggle(false)}>
           <Grid container alignItems={'center'}>
-            <IconButton size="large" sx={{ color: isHeaderDense ? '#fff' : '#333' }}>
+            <IconButton size="large" sx={{ color: isHeaderDense ? '#fff' : '#333', p: 0, marginRight: 2 }}>
               <ShoppingBagOutlinedIcon sx={{ fontSize: 30 }} />
             </IconButton>
-            <ShoppingCartCount />
+            <ShoppingCartCount count={count()} />
           </Grid>
-          <ShoppingCartLayerPopup
-            ref={ShoppingCartLayerPopupRef}
-            isShow={isShow}
-            handleHiddenShoppingCartLayerPopup={handleHiddenShoppingCartLayerPopup}
-          />
+          <ShoppingCartLayerPopup cartProductList={cartProductList} />
         </div>
       </Grid>
     </Grid>

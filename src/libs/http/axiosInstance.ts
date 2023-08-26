@@ -12,7 +12,6 @@ const instance = axios.create({
 instance.interceptors.request.use(
   function (config) {
     const isAuthtUrl = config.url?.indexOf('v1/accounts') !== -1;
-    console.log(isAuthtUrl);
 
     if (isAuthtUrl) {
       config.baseURL = import.meta.env.VITE_AUTH_SERVER;

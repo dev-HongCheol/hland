@@ -13,8 +13,11 @@ const ShoppingCartCountDiv = styled('div')({
   },
 });
 
-const ShoppingCartCount = () => {
-  return <ShoppingCartCountDiv>1</ShoppingCartCountDiv>;
+export type ShoppingCartCountProps = {
+  count: number;
+};
+const ShoppingCartCount = ({ count }: ShoppingCartCountProps) => {
+  return <ShoppingCartCountDiv>{count}</ShoppingCartCountDiv>;
 };
 
 export default ShoppingCartCount;

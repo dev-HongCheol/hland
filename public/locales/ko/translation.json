@@ -1,7 +1,10 @@
 {
   "header": {
     "shoppingCart": {
-      "title": "장바구니1"
+      "title": "장바구니",
+      "selectAll": "전체 선택",
+      "btnShoppingBasket": "장바구니",
+      "btnBuyNow": "바로구매"
     }
   },
   "account": {
