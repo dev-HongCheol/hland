@@ -1,7 +1,7 @@
 import { CartAddModalForm } from '@components/main/product-list/cart-add-modal/data/cartAddModal.types';
 import { Product } from '@components/main/product-list/data';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { CartState } from './cartSlice.tpyes';
+import { CartState, CartProductList } from './cartSlice.tpyes';
 
 const initialState: CartState = {
   selectedProduct: null,
@@ -24,7 +24,7 @@ export const cartSlice = createSlice({
     setIsShowCartAddModal: (state, { payload: isShowCartAddModal }: PayloadAction<boolean>) => {
       state.isShowCartAddModal = isShowCartAddModal;
     },
-    setCartProductList: (state, { payload: cartProductList }: PayloadAction<CartAddModalForm[]>) => {
+    setCartProductList: (state, { payload: cartProductList }: PayloadAction<CartProductList[]>) => {
       state.cartProductList = cartProductList;
     },
     setIsShowShoppingCart: (state, { payload: isShowShoppingCart }: PayloadAction<boolean>) => {

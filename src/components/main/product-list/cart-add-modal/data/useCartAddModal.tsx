@@ -24,7 +24,7 @@ const useCartAddModal = (product: Product) => {
   };
 
   const { control, handleSubmit, setValue, getValues, watch, reset } = useForm({
-    defaultValues: { product: { ...product }, orderCounts: [], totalAmount: 0 },
+    defaultValues: { product: { ...product }, orderCounts: [], totalAmount: 0, checked: false },
     resolver: yupResolver(cartAddModalSchema),
   });
 

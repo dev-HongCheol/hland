@@ -1,19 +1,40 @@
 import { CartAddModalForm } from '@components/main/product-list/cart-add-modal/data';
 import { Box, Grid, IconButton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { useAppDispatch, useAppSelector } from '@libs/stores';
+import { setCartProductList } from '@libs/stores/cart';
 export type ShoppingCartProductProps = {
   cartProduct: CartAddModalForm;
+  index: number;
+  handleCheckedToggle: (index: number) => void;
 };
-const ShoppingCartProduct = ({ cartProduct }: ShoppingCartProductProps) => {
-  //   console.log(cartProduct);
+const ShoppingCartProduct = ({ cartProduct, index, handleCheckedToggle }: ShoppingCartProductProps) => {
+  const cartProductList = useAppSelector((state) => state.cart.cartProductList);
+  const dispatch = useAppDispatch();
+
+  const handleRemoveCartPorduct = () => {
+    const findProductindex = cartProductList.findIndex(
+      (_cartProduct) => cartProduct.product.id === _cartProduct.product.id,
+    );
+
+    if (findProductindex === -1) return;
+
+    const newCartProductList = structuredClone(cartProductList);
+    newCartProductList.splice(findProductindex, 1);
+    index === 0 ? handleCheckedToggle(index) : handleCheckedToggle(index - 1);
+
+    dispatch(setCartProductList(newCartProductList));
+  };
 
   return (
     <Grid container direction={'column'}>
       <Grid item textAlign={'right'}>
         <IconButton
           aria-label="close Modal"
-          onClick={() => {
-            console.log();
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            handleRemoveCartPorduct();
           }}
           sx={{
             p: 0,

@@ -15,7 +15,7 @@ import { useState, useEffect, useCallback } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import i18n from '@libs/i18n';
 import { useAppDispatch, useAppSelector } from '@libs/stores';
-import { setIsShowShoppingCart } from '@libs/stores/cart';
+import { setCartProductList, setIsShowShoppingCart } from '@libs/stores/cart';
 import { CartAddModalForm } from '@components/main/product-list/cart-add-modal/data';
 import { ShoppingCartProduct } from './shopping-cart-product';
 
@@ -31,53 +31,47 @@ export type ShoppingCartLayerPopupProps = {
 
 const ShoppingCartLayerPopup = ({ cartProductList }: ShoppingCartLayerPopupProps) => {
   const { t } = i18n;
-  const [checked, setChecked] = useState<number[]>([]);
+  // const [checked, setChecked] = useState<number[]>([]);
 
   const dispatch = useAppDispatch();
   const { isShowShoppingCart } = useAppSelector((state) => state.cart);
 
-  const handleToggle = (value: number) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+  const handleCheckedToggle = (_index: number) => () => {
+    const newCartProductList = structuredClone(cartProductList);
+    const findCartProduct = newCartProductList.find((_cartProduct, index) => index === _index);
+    if (!findCartProduct) return;
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-    setChecked(newChecked);
+    findCartProduct.checked = !findCartProduct.checked;
+    dispatch(setCartProductList(newCartProductList));
   };
 
   const handleShopplingCartToggle = (isShow: boolean) => {
-    dispatch(setIsShowShoppingCart(isShow));
+    if (isShowShoppingCart !== isShow) dispatch(setIsShowShoppingCart(isShow));
   };
 
   const [isAllChecked, setIsAllChecked] = useState(false);
 
   const getAllChecked = useCallback(() => {
-    return checked.length === cartProductList.length;
-  }, [checked.length, cartProductList.length]);
+    const _isAllChecked = cartProductList.every((cartProduct) => cartProduct.checked);
+    return _isAllChecked;
+  }, [cartProductList]);
+
+  const hanldeSetCartPorductChecked = (checked: boolean) => {
+    const newCartProductList = structuredClone(cartProductList);
+    newCartProductList.forEach((productList) => (productList.checked = checked));
+
+    dispatch(setCartProductList(newCartProductList));
+  };
 
   const handleCartAllSelect = () => {
     const allChecked = getAllChecked();
+    hanldeSetCartPorductChecked(!allChecked);
     setIsAllChecked(!allChecked);
-    if (allChecked) {
-      setChecked([]);
-    } else {
-      const cartIndexArray: number[] = [];
-      cartProductList.forEach((_cartProduct, index) => {
-        cartIndexArray.push(index);
-      });
-
-      setChecked(cartIndexArray);
-    }
   };
 
   useEffect(() => {
-    console.log(checked);
-
     setIsAllChecked(getAllChecked());
-  }, [checked.length]);
+  }, [cartProductList]);
 
   return (
     <ShoppingCartLayerPopupDiv
@@ -137,11 +131,11 @@ const ShoppingCartLayerPopup = ({ cartProductList }: ShoppingCartLayerPopupProps
             >
               {cartProductList.map((cartProduct, index) => (
                 <ListItem disablePadding key={cartProduct.product.id}>
-                  <ListItemButton role={undefined} onClick={handleToggle(index)} dense sx={{ p: 0 }}>
+                  <ListItemButton role={undefined} onClick={handleCheckedToggle(index)} dense sx={{ p: 0 }}>
                     <ListItemIcon sx={{ minWidth: 'auto' }}>
                       <Checkbox
                         edge="start"
-                        checked={checked.indexOf(index) !== -1}
+                        checked={cartProduct.checked}
                         tabIndex={-1}
                         disableRipple
                         inputProps={{ 'aria-labelledby': `aria-labelledby-${cartProduct.product.id}` }}
@@ -153,7 +147,13 @@ const ShoppingCartLayerPopup = ({ cartProductList }: ShoppingCartLayerPopupProps
                         m: 0,
                       }}
                       id={`aria-labelledby-${cartProduct.product.id}`}
-                      primary={<ShoppingCartProduct cartProduct={cartProduct} />}
+                      primary={
+                        <ShoppingCartProduct
+                          cartProduct={cartProduct}
+                          index={index}
+                          handleCheckedToggle={handleCheckedToggle}
+                        />
+                      }
                     />
                   </ListItemButton>
                 </ListItem>
