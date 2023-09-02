@@ -4,6 +4,8 @@ import { setHeaderInfo } from '@libs/stores/common';
 import { setCategoryMenu } from '@libs/stores/product';
 import _ from 'lodash-es';
 import { useNavigate } from 'react-router-dom';
+import { useMediaQuery } from '@mui/material';
+import muiTheme from '@libs/theme';
 
 const useHeader = () => {
   const categoriesHeight = 50;
@@ -14,6 +16,8 @@ const useHeader = () => {
   const { selectedCategory, categoryMenu } = useAppSelector((state) => state.product);
   const { headerInfo } = useAppSelector((state) => state.common);
   const headerMenuRef = useRef<HTMLDivElement>(null);
+  const isMdMoreThenScreen = useMediaQuery(muiTheme.breakpoints.up('md'));
+  const logoTitle = headerInfo.isDense ? 'H' : isMdMoreThenScreen ? 'H.LAND' : 'H';
 
   const windowScroll = _.throttle(() => {
     const scrolly = window.scrollY;
@@ -51,6 +55,7 @@ const useHeader = () => {
     headerMenuRef,
     categoryMenu,
     navigate,
+    logoTitle,
   };
 };
 

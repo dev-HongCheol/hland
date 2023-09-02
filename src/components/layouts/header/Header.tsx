@@ -25,7 +25,7 @@ const LogoTypographyStyle = styled(Typography)(({ theme }) => ({
 }));
 
 function Header() {
-  const { headerInfo, categoriesHeight, navigate } = useHeader();
+  const { headerInfo, categoriesHeight, navigate, logoTitle } = useHeader();
 
   return (
     <Box display="block" height={headerInfo.height + categoriesHeight}>
@@ -51,24 +51,10 @@ function Header() {
           <Toolbar sx={{ height: '100%', maxWidth: `${muiTheme.breakpoints.values.xl}px`, margin: '0 auto' }}>
             <LogoTypographyStyle
               variant="h3"
-              color="black"
-              sx={{
-                display: headerInfo.isDense ? 'none' : 'block',
-              }}
+              color={headerInfo.isDense ? 'white' : 'black'}
               onClick={() => navigate('/')}
             >
-              {headerInfo.isDense ? 'H.LAND' : 'H'}
-            </LogoTypographyStyle>
-
-            <LogoTypographyStyle
-              variant="h3"
-              color="white"
-              sx={{
-                display: headerInfo.isDense ? 'block' : 'none',
-              }}
-              onClick={() => navigate('/')}
-            >
-              H
+              {logoTitle}
             </LogoTypographyStyle>
 
             <NavButtons isHeaderDense={headerInfo.isDense} />
