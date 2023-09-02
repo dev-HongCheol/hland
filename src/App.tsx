@@ -1,5 +1,4 @@
 import Spinner from '@components/layouts/spinner/Spinner';
-import getFirebaseApp from '@libs/firebase';
 import muiTheme from '@libs/theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { Suspense } from 'react';
@@ -17,7 +16,6 @@ import 'react-toastify/dist/ReactToastify.css';
 // worker.start();
 // }
 function App() {
-  getFirebaseApp();
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
