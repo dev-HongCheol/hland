@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import { store } from './libs/stores';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 // import { worker } from '@libs/mocks';
 
 // if (process.env.NODE_ENV === 'development') {
@@ -44,6 +45,7 @@ function App() {
               <RouterProvider router={AppRouter} />
             </ThemeProvider>
           </Suspense>
+          <ReactQueryDevtools initialIsOpen={true} />
         </QueryClientProvider>
       </Provider>
     </>
