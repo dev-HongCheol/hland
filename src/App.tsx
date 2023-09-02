@@ -1,5 +1,4 @@
 import Spinner from '@components/layouts/spinner/Spinner';
-import getFirebaseApp from '@libs/firebase';
 import muiTheme from '@libs/theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { Suspense } from 'react';
@@ -11,13 +10,13 @@ import { Provider } from 'react-redux';
 import { store } from './libs/stores';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 // import { worker } from '@libs/mocks';
 
 // if (process.env.NODE_ENV === 'development') {
 // worker.start();
 // }
 function App() {
-  getFirebaseApp();
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -46,6 +45,7 @@ function App() {
               <RouterProvider router={AppRouter} />
             </ThemeProvider>
           </Suspense>
+          <ReactQueryDevtools initialIsOpen={true} />
         </QueryClientProvider>
       </Provider>
     </>

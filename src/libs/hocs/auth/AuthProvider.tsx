@@ -1,18 +1,13 @@
 // import { ROUTES } from "@libs/router/data";
-import { getAuth } from "firebase/auth";
-// import { Navigate } from "react-router-dom";
-import { useIdToken } from "react-firebase-hooks/auth";
 
 type AuthProviderProps = {
   children: React.ReactNode;
 };
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-  const auth = getAuth();
-  // const [user, loading, error] = useIdToken(auth);
-  const [loading] = useIdToken(auth);
+  const auth = 'logined'; //sessionStorage.getItem('user');
 
-  if (loading) {
+  if (!auth) {
     return (
       <div>로그인 체크중...</div>
       /*   <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open>
