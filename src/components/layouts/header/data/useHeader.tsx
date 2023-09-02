@@ -3,11 +3,13 @@ import { useAppDispatch, useAppSelector } from '@libs/stores';
 import { setHeaderInfo } from '@libs/stores/common';
 import { setCategoryMenu } from '@libs/stores/product';
 import _ from 'lodash-es';
+import { useNavigate } from 'react-router-dom';
 
 const useHeader = () => {
   const categoriesHeight = 50;
   const defaultHeaderHeight = 128;
 
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { selectedCategory, categoryMenu } = useAppSelector((state) => state.product);
   const { headerInfo } = useAppSelector((state) => state.common);
@@ -48,6 +50,7 @@ const useHeader = () => {
     selectedCategory,
     headerMenuRef,
     categoryMenu,
+    navigate,
   };
 };
 

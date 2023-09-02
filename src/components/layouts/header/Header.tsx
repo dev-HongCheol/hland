@@ -6,6 +6,7 @@ import muiTheme from '@libs/theme';
 
 const LogoTypographyStyle = styled(Typography)(({ theme }) => ({
   position: 'absolute',
+  cursor: 'pointer',
   [theme.breakpoints.down('md')]: {
     left: '0',
     padding: '5%',
@@ -24,7 +25,7 @@ const LogoTypographyStyle = styled(Typography)(({ theme }) => ({
 }));
 
 function Header() {
-  const { headerInfo, categoriesHeight } = useHeader();
+  const { headerInfo, categoriesHeight, navigate } = useHeader();
 
   return (
     <Box display="block" height={headerInfo.height + categoriesHeight}>
@@ -54,6 +55,7 @@ function Header() {
               sx={{
                 display: headerInfo.isDense ? 'none' : 'block',
               }}
+              onClick={() => navigate('/')}
             >
               {headerInfo.isDense ? 'H.LAND' : 'H'}
             </LogoTypographyStyle>
@@ -64,6 +66,7 @@ function Header() {
               sx={{
                 display: headerInfo.isDense ? 'block' : 'none',
               }}
+              onClick={() => navigate('/')}
             >
               H
             </LogoTypographyStyle>
