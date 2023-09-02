@@ -6,6 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 import { login } from './accountLoginForm.api';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@libs/router/data';
+import { http } from '@libs/http';
 
 const useAccountLoginForm = () => {
   const { t } = useTranslation();
@@ -25,6 +26,10 @@ const useAccountLoginForm = () => {
     mutationFn: login,
     onSuccess: ({ data }) => {
       sessionStorage.setItem('user', JSON.stringify(data));
+      /* http.post('https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode', {
+        requestType: 'VERIFY_EMAIL',
+        idToken: data.idToken,
+      }); */
       navigate(ROUTES.INDEX.path);
     },
   });

@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { setFilter } from '@libs/stores/product';
 import { Filter } from '@libs/stores/product/product.types';
+import { http } from '@libs/http';
 
 const useMainProductList = () => {
   const { filter, breadcrumbs } = useAppSelector((state) => state.product);
@@ -15,11 +16,12 @@ const useMainProductList = () => {
     const startAt = _filter.startAt !== undefined ? _filter.pageSize * (filter.page - 1) : undefined;
     const endAt = _filter.endAt ? _filter.pageSize + 1 : undefined;
 
+    // TODO:testcode
     const res = await fetchProducts({
-      orderBy: _filter.orderBy,
+      /* orderBy: _filter.orderBy,
       equalTo: _filter.equalTo,
       startAt,
-      endAt,
+      endAt, */
     });
     return res;
   };

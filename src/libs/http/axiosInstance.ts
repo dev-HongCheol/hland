@@ -12,9 +12,21 @@ const instance = axios.create({
 instance.interceptors.request.use(
   function (config) {
     const isAuthtUrl = config.url?.indexOf('v1/accounts') !== -1;
+    const isFireStoreUrl = config.url?.indexOf('(default)') !== -1;
 
     if (isAuthtUrl) {
       config.baseURL = import.meta.env.VITE_AUTH_SERVER;
+      config.url += `?key=${import.meta.env.VITE_FIREBASE_APIKEY}`;
+    } else if (isFireStoreUrl) {
+      config.baseURL = import.meta.env.VITE_FIRESOTRE_SERVER;
+
+      const storageUser = sessionStorage.getItem('user');
+      if (storageUser) {
+        const user = JSON.parse(storageUser);
+
+        config.headers.Authorization = `Bearer ${user.idToken}`;
+        // config.headers['x-goog-user-project'] = 'hland-b77ce';
+      }
       config.url += `?key=${import.meta.env.VITE_FIREBASE_APIKEY}`;
     } else {
       config.baseURL = import.meta.env.VITE_PRODUCT_SERVER;

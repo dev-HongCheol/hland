@@ -1,16 +1,10 @@
-import { getAuth } from 'firebase/auth';
 import { useEffect, useRef } from 'react';
-import { useIdToken } from 'react-firebase-hooks/auth';
 import { useAppDispatch, useAppSelector } from '@libs/stores';
 import { setHeaderInfo } from '@libs/stores/common';
 import { setCategoryMenu } from '@libs/stores/product';
 import _ from 'lodash-es';
 
 const useHeader = () => {
-  const auth = getAuth();
-  // const [user, loading, error] = useIdToken(auth);
-  const [user] = useIdToken(auth);
-
   const categoriesHeight = 50;
   const defaultHeaderHeight = 128;
 
@@ -51,7 +45,6 @@ const useHeader = () => {
   return {
     headerInfo,
     categoriesHeight,
-    user,
     selectedCategory,
     headerMenuRef,
     categoryMenu,

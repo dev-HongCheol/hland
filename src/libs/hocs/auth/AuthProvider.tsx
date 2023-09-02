@@ -1,16 +1,13 @@
 // import { ROUTES } from "@libs/router/data";
-import { getAuth } from "firebase/auth";
 // import { Navigate } from "react-router-dom";
-import { useIdToken } from "react-firebase-hooks/auth";
 
 type AuthProviderProps = {
   children: React.ReactNode;
 };
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-  const auth = getAuth();
   // const [user, loading, error] = useIdToken(auth);
-  const [loading] = useIdToken(auth);
+  const loading = false;
 
   if (loading) {
     return (
