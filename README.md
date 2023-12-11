@@ -1,26 +1,20 @@
-###
+# hland
 
-### 표기법
+- Aland 쇼핑몰을 React기반으로 클론한 프로젝트입니다. (현재 해당 홈페이지 리뉴얼됨)
 
-#### 폴더명
+### 사용 기술
 
-- 모두 소문자로 표시하며`-`를 사용하여 조합
+- 프로젝트 세팅
+  - vite, typescript, mui, prettier, eslint, husky
+- 주요 라이브러리
+  - i18n, axios, firebase, redux, react-query, hook-form, yup
+- devops
+  - git, gitpages, gitub-action
 
-#### 컴포넌트
+### 구현내역
 
-- 파스칼 표기
-- 모든 단어의 앞문자를 대문자로 시작
-
-#### hook
-
-- useXxx.ts
-
-#### type
-
-- xxxTypes.ts
-- 타입정의 및 yup 스키마 정의
-
-#### 그외
-
-- 카멜 표기
-- 첫 단어를 제외한 모든 단어의 첫문자는 대문자로
+- 다국어(영어, 한글) 적용
+- 메인페이지 레이아웃
+- firebase restAPI auth 회원가입, 이메일 인증
+- 제품 리스트, 카테고리 별 제품 출력
+- 장바구니 추가/삭제
