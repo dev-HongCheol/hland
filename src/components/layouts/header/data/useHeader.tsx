@@ -1,23 +1,23 @@
-import { getAuth } from 'firebase/auth';
 import { useEffect, useRef } from 'react';
-import { useIdToken } from 'react-firebase-hooks/auth';
 import { useAppDispatch, useAppSelector } from '@libs/stores';
 import { setHeaderInfo } from '@libs/stores/common';
 import { setCategoryMenu } from '@libs/stores/product';
 import _ from 'lodash-es';
+import { useNavigate } from 'react-router-dom';
+import { useMediaQuery } from '@mui/material';
+import muiTheme from '@libs/theme';
 
 const useHeader = () => {
-  const auth = getAuth();
-  // const [user, loading, error] = useIdToken(auth);
-  const [user] = useIdToken(auth);
-
   const categoriesHeight = 50;
   const defaultHeaderHeight = 128;
 
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { selectedCategory, categoryMenu } = useAppSelector((state) => state.product);
   const { headerInfo } = useAppSelector((state) => state.common);
   const headerMenuRef = useRef<HTMLDivElement>(null);
+  const isMdMoreThenScreen = useMediaQuery(muiTheme.breakpoints.up('md'));
+  const logoTitle = headerInfo.isDense ? 'H' : isMdMoreThenScreen ? 'H.LAND' : 'H';
 
   const windowScroll = _.throttle(() => {
     const scrolly = window.scrollY;
@@ -51,10 +51,11 @@ const useHeader = () => {
   return {
     headerInfo,
     categoriesHeight,
-    user,
     selectedCategory,
     headerMenuRef,
     categoryMenu,
+    navigate,
+    logoTitle,
   };
 };
 

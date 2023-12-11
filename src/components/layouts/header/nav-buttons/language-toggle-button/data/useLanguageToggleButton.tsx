@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@libs/stores';
 import { setLanguage } from '@libs/stores/common';
+import i18n from '@libs/i18n';
 
 const useLanguageToggleButton = () => {
   const selectedLang = useAppSelector((state) => state.common.language);
@@ -21,6 +22,10 @@ const useLanguageToggleButton = () => {
     },
   ];
   const [isShowLangList, setIsShowLangList] = useState(false);
+
+  useEffect(() => {
+    dispatch(setLanguage(i18n.language));
+  }, [dispatch]);
 
   type Language = string;
 

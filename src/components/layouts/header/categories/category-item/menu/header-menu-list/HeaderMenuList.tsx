@@ -19,7 +19,7 @@ const HeaderMenuList = ({ topMenuName, subMenuNames }: HeaderMenuListProps) => {
             <Typography
               fontWeight={800}
               component={'span'}
-              fontSize={isMdMoreThenScreen ? '0.5rem' : '0.65rem'}
+              fontSize={isMdMoreThenScreen ? '0.95rem' : '0.85rem'}
               onClick={() => handleOnClickMenu([topMenuName])}
             >
               {topMenuName}
@@ -31,7 +31,8 @@ const HeaderMenuList = ({ topMenuName, subMenuNames }: HeaderMenuListProps) => {
             <HeaderMenuLink to={'#'}>
               <Typography
                 component={'span'}
-                fontSize={isMdMoreThenScreen ? '0.75rem' : '0.45rem'}
+                fontSize={isMdMoreThenScreen ? '0.85rem' : '0.45rem'}
+                letterSpacing={isMdMoreThenScreen ? 'auto' : '-0.3px'}
                 onClick={() => handleOnClickMenu([topMenuName, subMenuName])}
               >
                 {subMenuName}
